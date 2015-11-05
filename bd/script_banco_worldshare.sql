@@ -88,7 +88,7 @@ CREATE TABLE `teachers` (
   `institution` varchar(255) COLLATE latin1_general_ci NOT NULL,
   `place` varchar(255) COLLATE latin1_general_ci NOT NULL,
   `matter` varchar(255) COLLATE latin1_general_ci NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 -- --------------------------------------------------------
@@ -114,8 +114,8 @@ CREATE TABLE `users` (
   `email` varchar(255) COLLATE latin1_general_ci NOT NULL,
   `password` varchar(255) COLLATE latin1_general_ci NOT NULL,
   `name` varchar(255) COLLATE latin1_general_ci NOT NULL,
-  'phone' varchar(20) COLLATE latin1_general_ci NOT NULL,
-  'address' varchar(255) COLLATE latin1_general_ci NOT NULL
+  `phone` varchar(20) COLLATE latin1_general_ci NOT NULL,
+  `address` varchar(255) COLLATE latin1_general_ci NOT NULL,
   `registration` datetime NOT NULL,
   `role` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;

@@ -7,7 +7,8 @@
 			<th><?php echo $this->Paginator->sort('name'); ?></th>
 			<th><?php echo $this->Paginator->sort('password'); ?></th>
 			<th><?php echo $this->Paginator->sort('email'); ?></th>
-			<th><?php echo $this->Paginator->sort('username'); ?></th>
+			<th><?php echo $this->Paginator->sort('phone'); ?></th>
+			<th><?php echo $this->Paginator->sort('address'); ?></th>
 			<th><?php echo $this->Paginator->sort('registration'); ?></th>
 			<th><?php echo $this->Paginator->sort('role'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
@@ -20,7 +21,8 @@
 		<td><?php echo h($user['User']['name']); ?>&nbsp;</td>
 		<td><?php echo h($user['User']['password']); ?>&nbsp;</td>
 		<td><?php echo h($user['User']['email']); ?>&nbsp;</td>
-		<td><?php echo h($user['User']['username']); ?>&nbsp;</td>
+		<td><?php echo h($user['User']['phone']); ?>&nbsp;</td>
+		<td><?php echo h($user['User']['address']); ?>&nbsp;</td>
 		<td><?php echo h($user['User']['registration']); ?>&nbsp;</td>
 		<td><?php echo h($user['User']['role']); ?>&nbsp;</td>
 		<td class="actions">
@@ -58,5 +60,6 @@
 		<li><?php echo $this->Html->link(__('New Rating'), array('controller' => 'ratings', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Teachers'), array('controller' => 'teachers', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Teacher'), array('controller' => 'teachers', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('Logout'), array('action' => 'logout')); ?> </li>
 	</ul>
 </div>

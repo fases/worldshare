@@ -31,4 +31,25 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
+  public $components = array(
+'Session',
+ 'Auth' => array(
+     'authenticate' => array(
+           'Form' => array(
+               'fields' => array('username' => 'email')
+           )
+       ),
+    'authorize' => 'Controller',
+     'loginAction' => array('controller' => 'users', 'action' => 'login'),
+    'loginRedirect' => array('controller' => 'users', 'action' => 'index'),
+   'logoutRedirect' => array('controller' => 'users', 'action' => 'login'),
+    'authError' => 'Você não tem permissão para acessar.',
+  )
+
+);
+
+public function isAuthorized($user) {
+
+   return true;
+ }
 }

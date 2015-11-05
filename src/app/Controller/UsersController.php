@@ -15,6 +15,13 @@ class UsersController extends AppController {
  */
 	public $components = array('Paginator');
 
+
+	public function beforeFilter() {
+        //parent::beforeFilter();
+        $this->Auth->allow('add', 'logout');
+  }
+
+
 /**
  * index method
  *
@@ -47,12 +54,11 @@ class UsersController extends AppController {
  */
 	public function add() {
 		if ($this->request->is('post')) {
-			$this->User->create();
-			if ($this->User->save($this->request->data)) {
-				$this->Flash->success(__('The user has been saved.'));
-				return $this->redirect(array('action' => 'index'));
-			} else {
-				$this->Flash->error(__('The user could not be saved. Please, try again.'));
+          if ($this->User->save($this->request->data)) {
+              $this->Session->setFlash('Your information has been saved.');
+              //Login automático após o cadastro
+              $this->Auth->login();
+							$this->redirect(array('controller' => 'users', 'action' => 'index'));
 			}
 		}
 	}
@@ -101,4 +107,22 @@ class UsersController extends AppController {
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
+
+	public function login() {
+	//	debug($this->request->data); die();
+		 if($this->Session->check('Auth.User')){
+			 $this->redirect($this->Auth->redirect());
+		 } else {
+			 if (!$this->request->is('get')) {
+					if ($this->Auth->login()) {
+						 $this->redirect($this->Auth->redirect());
+					} else {
+						 $this->Session->setFlash(__('Invalid email or password, try again'));
+					}
+			 }
+		 }
+	}
+	 public function logout() {
+			 $this->redirect($this->Auth->logout());
+	 }
 }
