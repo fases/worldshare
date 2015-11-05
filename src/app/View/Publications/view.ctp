@@ -31,6 +31,11 @@
 			<?php echo $this->Html->link($publication['Type']['name'], array('controller' => 'types', 'action' => 'view', $publication['Type']['id'])); ?>
 			&nbsp;
 		</dd>
+		<dt><?php echo __('Matter'); ?></dt>
+		<dd>
+			<?php echo $this->Html->link($publication['Matter']['name'], array('controller' => 'matters', 'action' => 'view', $publication['Matter']['id'])); ?>
+			&nbsp;
+		</dd>
 		<dt><?php echo __('Status'); ?></dt>
 		<dd>
 			<?php echo h($publication['Publication']['status']); ?>
@@ -46,6 +51,11 @@
 			<?php echo h($publication['Publication']['text_review']); ?>
 			&nbsp;
 		</dd>
+		<dt><?php echo __('Old Publication'); ?></dt>
+		<dd>
+			<?php echo h($publication['Publication']['old_publication']); ?>
+			&nbsp;
+		</dd>
 	</dl>
 </div>
 <div class="actions">
@@ -59,6 +69,8 @@
 		<li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Types'), array('controller' => 'types', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Type'), array('controller' => 'types', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Matters'), array('controller' => 'matters', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Matter'), array('controller' => 'matters', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Teachers'), array('controller' => 'teachers', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Teacher'), array('controller' => 'teachers', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Attachments'), array('controller' => 'attachments', 'action' => 'index')); ?> </li>

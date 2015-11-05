@@ -5,8 +5,8 @@
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
 			<th><?php echo $this->Paginator->sort('institution'); ?></th>
+			<th><?php echo $this->Paginator->sort('matter_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('place'); ?></th>
-			<th><?php echo $this->Paginator->sort('matter'); ?></th>
 			<th><?php echo $this->Paginator->sort('user_id'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
@@ -16,8 +16,10 @@
 	<tr>
 		<td><?php echo h($teacher['Teacher']['id']); ?>&nbsp;</td>
 		<td><?php echo h($teacher['Teacher']['institution']); ?>&nbsp;</td>
+		<td>
+			<?php echo $this->Html->link($teacher['Matter']['name'], array('controller' => 'matters', 'action' => 'view', $teacher['Matter']['id'])); ?>
+		</td>
 		<td><?php echo h($teacher['Teacher']['place']); ?>&nbsp;</td>
-		<td><?php echo h($teacher['Teacher']['matter']); ?>&nbsp;</td>
 		<td>
 			<?php echo $this->Html->link($teacher['User']['name'], array('controller' => 'users', 'action' => 'view', $teacher['User']['id'])); ?>
 		</td>
@@ -48,6 +50,8 @@
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
 		<li><?php echo $this->Html->link(__('New Teacher'), array('action' => 'add')); ?></li>
+		<li><?php echo $this->Html->link(__('List Matters'), array('controller' => 'matters', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Matter'), array('controller' => 'matters', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Publications'), array('controller' => 'publications', 'action' => 'index')); ?> </li>

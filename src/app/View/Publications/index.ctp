@@ -9,9 +9,11 @@
 			<th><?php echo $this->Paginator->sort('text_publication'); ?></th>
 			<th><?php echo $this->Paginator->sort('user_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('type_id'); ?></th>
+			<th><?php echo $this->Paginator->sort('matter_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('status'); ?></th>
 			<th><?php echo $this->Paginator->sort('teacher_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('text_review'); ?></th>
+			<th><?php echo $this->Paginator->sort('old_publication'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
 	</thead>
@@ -28,11 +30,15 @@
 		<td>
 			<?php echo $this->Html->link($publication['Type']['name'], array('controller' => 'types', 'action' => 'view', $publication['Type']['id'])); ?>
 		</td>
+		<td>
+			<?php echo $this->Html->link($publication['Matter']['name'], array('controller' => 'matters', 'action' => 'view', $publication['Matter']['id'])); ?>
+		</td>
 		<td><?php echo h($publication['Publication']['status']); ?>&nbsp;</td>
 		<td>
 			<?php echo $this->Html->link($publication['Teacher']['id'], array('controller' => 'teachers', 'action' => 'view', $publication['Teacher']['id'])); ?>
 		</td>
 		<td><?php echo h($publication['Publication']['text_review']); ?>&nbsp;</td>
+		<td><?php echo h($publication['Publication']['old_publication']); ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $publication['Publication']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $publication['Publication']['id'])); ?>
@@ -64,6 +70,8 @@
 		<li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Types'), array('controller' => 'types', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Type'), array('controller' => 'types', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Matters'), array('controller' => 'matters', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Matter'), array('controller' => 'matters', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Teachers'), array('controller' => 'teachers', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Teacher'), array('controller' => 'teachers', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Attachments'), array('controller' => 'attachments', 'action' => 'index')); ?> </li>

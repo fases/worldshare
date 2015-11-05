@@ -16,6 +16,7 @@ class RatingsControllerTest extends ControllerTestCase {
 		'app.user',
 		'app.publication',
 		'app.type',
+		'app.matter',
 		'app.teacher',
 		'app.attachment',
 		'app.comment'

@@ -11,13 +11,12 @@ class AttachmentFixture extends CakeTestFixture {
  */
 	public $fields = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'key' => 'primary'),
-		'file' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 5000, 'collate' => 'latin1_general_ci', 'charset' => 'latin1'),
+		'file' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 5000, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
 		'publication_id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'key' => 'index'),
 		'indexes' => array(
-			'PRIMARY' => array('column' => 'id', 'unique' => 1),
-			'fk_publication2' => array('column' => 'publication_id', 'unique' => 0)
+			'fk_attachments_publications' => array('column' => 'publication_id', 'unique' => 0)
 		),
-		'tableParameters' => array('charset' => 'latin1', 'collate' => 'latin1_general_ci', 'engine' => 'InnoDB')
+		'tableParameters' => array('charset' => 'latin1', 'collate' => 'latin1_swedish_ci', 'engine' => 'InnoDB')
 	);
 
 /**

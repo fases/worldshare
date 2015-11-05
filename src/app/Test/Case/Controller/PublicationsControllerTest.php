@@ -15,6 +15,7 @@ class PublicationsControllerTest extends ControllerTestCase {
 		'app.publication',
 		'app.user',
 		'app.type',
+		'app.matter',
 		'app.teacher',
 		'app.attachment',
 		'app.comment',

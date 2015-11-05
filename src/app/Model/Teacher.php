@@ -3,6 +3,7 @@ App::uses('AppModel', 'Model');
 /**
  * Teacher Model
  *
+ * @property Matter $Matter
  * @property User $User
  * @property Publication $Publication
  */
@@ -24,9 +25,9 @@ class Teacher extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'place' => array(
-			'notBlank' => array(
-				'rule' => array('notBlank'),
+		'matter_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -34,7 +35,7 @@ class Teacher extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'matter' => array(
+		'place' => array(
 			'notBlank' => array(
 				'rule' => array('notBlank'),
 				//'message' => 'Your custom message here',
@@ -56,7 +57,7 @@ class Teacher extends AppModel {
 		),
 	);
 
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
+	// The Associations below have been created with all possible keys, those that are not needed can be removed
 
 /**
  * belongsTo associations
@@ -64,6 +65,13 @@ class Teacher extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
+		'Matter' => array(
+			'className' => 'Matter',
+			'foreignKey' => 'matter_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
 		'User' => array(
 			'className' => 'User',
 			'foreignKey' => 'user_id',

@@ -55,8 +55,9 @@ class TeachersController extends AppController {
 				$this->Flash->error(__('The teacher could not be saved. Please, try again.'));
 			}
 		}
+		$matters = $this->Teacher->Matter->find('list');
 		$users = $this->Teacher->User->find('list');
-		$this->set(compact('users'));
+		$this->set(compact('matters', 'users'));
 	}
 
 /**
@@ -81,8 +82,9 @@ class TeachersController extends AppController {
 			$options = array('conditions' => array('Teacher.' . $this->Teacher->primaryKey => $id));
 			$this->request->data = $this->Teacher->find('first', $options);
 		}
+		$matters = $this->Teacher->Matter->find('list');
 		$users = $this->Teacher->User->find('list');
-		$this->set(compact('users'));
+		$this->set(compact('matters', 'users'));
 	}
 
 /**

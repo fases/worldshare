@@ -18,6 +18,9 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
+//setLocale(LC_ALL, 'deu');
+//Configure::write('Config.language', 'deu');
+
 /**
  * CakePHP Debug Level:
  *
@@ -147,13 +150,11 @@
  * Enables:
  *	`admin_index()` and `/admin/controller/index`
  *	`manager_index()` and `/manager/controller/index`
- *
  */
 	//Configure::write('Routing.prefixes', array('admin'));
 
 /**
  * Turn off all caching application-wide.
- *
  */
 	//Configure::write('Cache.disable', true);
 
@@ -164,7 +165,6 @@
  * public $cacheAction inside your controllers to define caching settings.
  * You can either set it controller-wide by setting public $cacheAction = true,
  * or in each action using $this->cacheAction = true.
- *
  */
 	//Configure::write('Cache.check', true);
 
@@ -213,7 +213,6 @@
  *
  * To use database sessions, run the app/Config/Schema/sessions.php schema using
  * the cake shell command: cake schema create Sessions
- *
  */
 	Configure::write('Session', array(
 		'defaults' => 'php'
@@ -222,12 +221,12 @@
 /**
  * A random string used in security hashing methods.
  */
-	Configure::write('Security.salt', 'Oi8sjk98JfIxfs2guVoUubWwvniR2G0FgaC9mi');
+	Configure::write('Security.salt', 'DYhG93b0q8hsjadheyalqlkwo7G0FgaC9mi');
 
 /**
  * A random numeric string (digits only) used to encrypt/decrypt strings.
  */
-	Configure::write('Security.cipherSeed', '08958709657453542496749683645');
+	Configure::write('Security.cipherSeed', '768593096574535424967485483645');
 
 /**
  * Apply timestamps with the last modified time to static assets (js, css, images).

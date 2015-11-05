@@ -15,6 +15,7 @@ class TypeTest extends CakeTestCase {
 		'app.type',
 		'app.publication',
 		'app.user',
+		'app.matter',
 		'app.teacher',
 		'app.attachment',
 		'app.comment',

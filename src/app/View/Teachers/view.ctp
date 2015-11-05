@@ -11,14 +11,14 @@
 			<?php echo h($teacher['Teacher']['institution']); ?>
 			&nbsp;
 		</dd>
+		<dt><?php echo __('Matter'); ?></dt>
+		<dd>
+			<?php echo $this->Html->link($teacher['Matter']['name'], array('controller' => 'matters', 'action' => 'view', $teacher['Matter']['id'])); ?>
+			&nbsp;
+		</dd>
 		<dt><?php echo __('Place'); ?></dt>
 		<dd>
 			<?php echo h($teacher['Teacher']['place']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Matter'); ?></dt>
-		<dd>
-			<?php echo h($teacher['Teacher']['matter']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('User'); ?></dt>
@@ -35,6 +35,8 @@
 		<li><?php echo $this->Form->postLink(__('Delete Teacher'), array('action' => 'delete', $teacher['Teacher']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $teacher['Teacher']['id']))); ?> </li>
 		<li><?php echo $this->Html->link(__('List Teachers'), array('action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Teacher'), array('action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Matters'), array('controller' => 'matters', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Matter'), array('controller' => 'matters', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Publications'), array('controller' => 'publications', 'action' => 'index')); ?> </li>
@@ -52,9 +54,11 @@
 		<th><?php echo __('Text Publication'); ?></th>
 		<th><?php echo __('User Id'); ?></th>
 		<th><?php echo __('Type Id'); ?></th>
+		<th><?php echo __('Matter Id'); ?></th>
 		<th><?php echo __('Status'); ?></th>
 		<th><?php echo __('Teacher Id'); ?></th>
 		<th><?php echo __('Text Review'); ?></th>
+		<th><?php echo __('Old Publication'); ?></th>
 		<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
 	<?php foreach ($teacher['Publication'] as $publication): ?>
@@ -65,9 +69,11 @@
 			<td><?php echo $publication['text_publication']; ?></td>
 			<td><?php echo $publication['user_id']; ?></td>
 			<td><?php echo $publication['type_id']; ?></td>
+			<td><?php echo $publication['matter_id']; ?></td>
 			<td><?php echo $publication['status']; ?></td>
 			<td><?php echo $publication['teacher_id']; ?></td>
 			<td><?php echo $publication['text_review']; ?></td>
+			<td><?php echo $publication['old_publication']; ?></td>
 			<td class="actions">
 				<?php echo $this->Html->link(__('View'), array('controller' => 'publications', 'action' => 'view', $publication['id'])); ?>
 				<?php echo $this->Html->link(__('Edit'), array('controller' => 'publications', 'action' => 'edit', $publication['id'])); ?>

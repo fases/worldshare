@@ -40,9 +40,11 @@
 		<th><?php echo __('Text Publication'); ?></th>
 		<th><?php echo __('User Id'); ?></th>
 		<th><?php echo __('Type Id'); ?></th>
+		<th><?php echo __('Matter Id'); ?></th>
 		<th><?php echo __('Status'); ?></th>
 		<th><?php echo __('Teacher Id'); ?></th>
 		<th><?php echo __('Text Review'); ?></th>
+		<th><?php echo __('Old Publication'); ?></th>
 		<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
 	<?php foreach ($type['Publication'] as $publication): ?>
@@ -53,9 +55,11 @@
 			<td><?php echo $publication['text_publication']; ?></td>
 			<td><?php echo $publication['user_id']; ?></td>
 			<td><?php echo $publication['type_id']; ?></td>
+			<td><?php echo $publication['matter_id']; ?></td>
 			<td><?php echo $publication['status']; ?></td>
 			<td><?php echo $publication['teacher_id']; ?></td>
 			<td><?php echo $publication['text_review']; ?></td>
+			<td><?php echo $publication['old_publication']; ?></td>
 			<td class="actions">
 				<?php echo $this->Html->link(__('View'), array('controller' => 'publications', 'action' => 'view', $publication['id'])); ?>
 				<?php echo $this->Html->link(__('Edit'), array('controller' => 'publications', 'action' => 'edit', $publication['id'])); ?>

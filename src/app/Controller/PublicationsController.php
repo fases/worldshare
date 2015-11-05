@@ -57,8 +57,9 @@ class PublicationsController extends AppController {
 		}
 		$users = $this->Publication->User->find('list');
 		$types = $this->Publication->Type->find('list');
+		$matters = $this->Publication->Matter->find('list');
 		$teachers = $this->Publication->Teacher->find('list');
-		$this->set(compact('users', 'types', 'teachers'));
+		$this->set(compact('users', 'types', 'matters', 'teachers'));
 	}
 
 /**
@@ -85,8 +86,9 @@ class PublicationsController extends AppController {
 		}
 		$users = $this->Publication->User->find('list');
 		$types = $this->Publication->Type->find('list');
+		$matters = $this->Publication->Matter->find('list');
 		$teachers = $this->Publication->Teacher->find('list');
-		$this->set(compact('users', 'types', 'teachers'));
+		$this->set(compact('users', 'types', 'matters', 'teachers'));
 	}
 
 /**

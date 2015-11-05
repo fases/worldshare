@@ -13,8 +13,9 @@ class TeachersControllerTest extends ControllerTestCase {
  */
 	public $fixtures = array(
 		'app.teacher',
-		'app.user',
+		'app.matter',
 		'app.publication',
+		'app.user',
 		'app.type',
 		'app.attachment',
 		'app.comment',

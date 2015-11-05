@@ -5,6 +5,7 @@ App::uses('AppModel', 'Model');
  *
  * @property User $User
  * @property Type $Type
+ * @property Matter $Matter
  * @property Teacher $Teacher
  * @property Attachment $Attachment
  * @property Comment $Comment
@@ -38,6 +39,16 @@ class Publication extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
+		'text_publication' => array(
+			'notBlank' => array(
+				'rule' => array('notBlank'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
 		'user_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
@@ -58,6 +69,16 @@ class Publication extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
+		'matter_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
 		'status' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
@@ -68,9 +89,29 @@ class Publication extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
+		'teacher_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'text_review' => array(
+			'notBlank' => array(
+				'rule' => array('notBlank'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
 	);
 
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
+	// The Associations below have been created with all possible keys, those that are not needed can be removed
 
 /**
  * belongsTo associations
@@ -88,6 +129,13 @@ class Publication extends AppModel {
 		'Type' => array(
 			'className' => 'Type',
 			'foreignKey' => 'type_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'Matter' => array(
+			'className' => 'Matter',
+			'foreignKey' => 'matter_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
