@@ -24,7 +24,7 @@
 		<td><?php echo h($user['User']['phone']); ?>&nbsp;</td>
 		<td><?php echo h($user['User']['address']); ?>&nbsp;</td>
 		<td><?php echo h($user['User']['registration']); ?>&nbsp;</td>
-		<td><?php echo h($user['User']['role']); ?>&nbsp;</td>
+		<td><?php echo h($user['User']['role'] == 0?'Student':'Professor'); ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $user['User']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $user['User']['id'])); ?>

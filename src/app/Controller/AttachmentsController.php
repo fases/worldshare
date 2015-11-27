@@ -49,10 +49,10 @@ class AttachmentsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Attachment->create();
 			if ($this->Attachment->save($this->request->data)) {
-				$this->Flash->success(__('The attachment has been saved.'));
+				$this->Session->setFlash(__('The attachment has been saved.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Flash->error(__('The attachment could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The attachment could not be saved. Please, try again.'));
 			}
 		}
 		$publications = $this->Attachment->Publication->find('list');
@@ -72,10 +72,10 @@ class AttachmentsController extends AppController {
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Attachment->save($this->request->data)) {
-				$this->Flash->success(__('The attachment has been saved.'));
+				$this->Session->setFlash(__('The attachment has been saved.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Flash->error(__('The attachment could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The attachment could not be saved. Please, try again.'));
 			}
 		} else {
 			$options = array('conditions' => array('Attachment.' . $this->Attachment->primaryKey => $id));
@@ -99,9 +99,9 @@ class AttachmentsController extends AppController {
 		}
 		$this->request->allowMethod('post', 'delete');
 		if ($this->Attachment->delete()) {
-			$this->Flash->success(__('The attachment has been deleted.'));
+			$this->Session->setFlash(__('The attachment has been deleted.'));
 		} else {
-			$this->Flash->error(__('The attachment could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('The attachment could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}

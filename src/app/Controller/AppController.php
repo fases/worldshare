@@ -41,7 +41,7 @@ class AppController extends Controller {
        ),
     'authorize' => 'Controller',
      'loginAction' => array('controller' => 'users', 'action' => 'login'),
-    'loginRedirect' => array('controller' => 'users', 'action' => 'index'),
+    'loginRedirect' => array('controller' => 'publications', 'action' => 'index'),
    'logoutRedirect' => array('controller' => 'users', 'action' => 'login'),
     'authError' => 'Você não tem permissão para acessar.',
   )

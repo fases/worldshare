@@ -6,13 +6,13 @@
 		echo $this->Form->input('registration');
 		echo $this->Form->input('title');
 		echo $this->Form->input('text_publication');
-		echo $this->Form->input('user_id');
+		//echo $this->Form->input('user_id');
 		echo $this->Form->input('type_id');
 		echo $this->Form->input('matter_id');
-		echo $this->Form->input('status');
-		echo $this->Form->input('teacher_id');
-		echo $this->Form->input('text_review');
-		echo $this->Form->input('old_publication');
+		//echo $this->Form->input('status');
+		//echo $this->Form->input('teacher_id');
+		//echo $this->Form->input('text_review');
+		//echo $this->Form->input('old_publication');
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>

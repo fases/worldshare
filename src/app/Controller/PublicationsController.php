@@ -21,8 +21,9 @@ class PublicationsController extends AppController {
  * @return void
  */
 	public function index() {
-		$this->Publication->recursive = 0;
-		$this->set('publications', $this->Paginator->paginate());
+//		$this->Publication->recursive = 0;
+//		$this->set('publications', $this->Paginator->paginate());
+        $this->set('publications', $this->Publication->find('all', array('conditions' => array("Publication.status" => 1))));
 	}
 
 /**
@@ -48,11 +49,13 @@ class PublicationsController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Publication->create();
+            $this->request->data['Publication']['user_id'] = $this->Auth->user('id');
+            
 			if ($this->Publication->save($this->request->data)) {
-				$this->Flash->success(__('The publication has been saved.'));
+				$this->Session->setFlash(__('The publication has been saved.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Flash->error(__('The publication could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The publication could not be saved. Please, try again.'));
 			}
 		}
 		$users = $this->Publication->User->find('list');
@@ -60,6 +63,10 @@ class PublicationsController extends AppController {
 		$matters = $this->Publication->Matter->find('list');
 		$teachers = $this->Publication->Teacher->find('list');
 		$this->set(compact('users', 'types', 'matters', 'teachers'));
+                                                     
+        
+       
+        
 	}
 
 /**
@@ -75,10 +82,10 @@ class PublicationsController extends AppController {
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Publication->save($this->request->data)) {
-				$this->Flash->success(__('The publication has been saved.'));
+				$this->Session->setFlash(__('The publication has been saved.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Flash->error(__('The publication could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The publication could not be saved. Please, try again.'));
 			}
 		} else {
 			$options = array('conditions' => array('Publication.' . $this->Publication->primaryKey => $id));
@@ -97,7 +104,8 @@ class PublicationsController extends AppController {
  * @throws NotFoundException
  * @param string $id
  * @return void
- */
+ */  
+    
 	public function delete($id = null) {
 		$this->Publication->id = $id;
 		if (!$this->Publication->exists()) {
@@ -105,10 +113,57 @@ class PublicationsController extends AppController {
 		}
 		$this->request->allowMethod('post', 'delete');
 		if ($this->Publication->delete()) {
-			$this->Flash->success(__('The publication has been deleted.'));
+			$this->Session->setFlash(__('The publication has been deleted.'));
 		} else {
-			$this->Flash->error(__('The publication could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('The publication could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
+    
+    public function review($id = null){
+        if (!$this->Publication->exists($id)) {
+			throw new NotFoundException(__('Invalid publication'));
+		}
+        if($this->Auth->user('role') != 1){
+           $this->Session->setFlash(__('Você não tem permissão para acessar essa funcionalidade'));
+           return $this->redirect(array('action' => 'index'));
+        }else{
+            
+            $this->loadModel('Teacher');
+            $options = array('conditions' => array('Teacher.user_id' => $this->Auth->user('id')));
+            $teacher = $this->Teacher->find('first', $options);
+            $this->request->data['Publication']['teacher_id'] = $teacher['Teacher']['id'];
+        
+        // Definir STATUS da publicação
+            /*
+                0- Não avaliada
+                1- aprovada
+                2- impropria/não aprovada
+            */
+		if ($this->request->is(array('post', 'put'))) {
+			if ($this->Publication->save($this->request->data)) {
+				$this->Session->setFlash(__('The publication has been saved.'));
+				return $this->redirect(array('action' => 'index'));
+			} else {
+				$this->Session->setFlash(__('The publication could not be saved. Please, try again.'));
+			}
+		} else {
+			$options = array('conditions' => array('Publication.' . $this->Publication->primaryKey => $id));
+			$this->request->data = $this->Publication->find('first', $options);
+		}
+        }
+		$users = $this->Publication->User->find('list');
+		$types = $this->Publication->Type->find('list');
+		$matters = $this->Publication->Matter->find('list');
+		$teachers = $this->Publication->Teacher->find('list');
+		$this->set(compact('users', 'types', 'matters', 'teachers'));
+    }
+    
+    public function noavaliable(){
+        $this->set('publications', $this->Publication->find('all', array('conditions' => array("Publication.status" => 0))));
+    }
+    
+    public function profile(){
+        $this->set('publications', $this->Publication->find('all', array('conditions' => array("Publication.user_id" => $this->Auth->user('id')))));
+    }
 }

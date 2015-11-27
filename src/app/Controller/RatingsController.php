@@ -49,10 +49,10 @@ class RatingsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Rating->create();
 			if ($this->Rating->save($this->request->data)) {
-				$this->Flash->success(__('The rating has been saved.'));
+				$this->Session->setFlash(__('The rating has been saved.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Flash->error(__('The rating could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The rating could not be saved. Please, try again.'));
 			}
 		}
 		$users = $this->Rating->User->find('list');
@@ -73,10 +73,10 @@ class RatingsController extends AppController {
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Rating->save($this->request->data)) {
-				$this->Flash->success(__('The rating has been saved.'));
+				$this->Session->setFlash(__('The rating has been saved.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Flash->error(__('The rating could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The rating could not be saved. Please, try again.'));
 			}
 		} else {
 			$options = array('conditions' => array('Rating.' . $this->Rating->primaryKey => $id));
@@ -101,9 +101,9 @@ class RatingsController extends AppController {
 		}
 		$this->request->allowMethod('post', 'delete');
 		if ($this->Rating->delete()) {
-			$this->Flash->success(__('The rating has been deleted.'));
+			$this->Session->setFlash(__('The rating has been deleted.'));
 		} else {
-			$this->Flash->error(__('The rating could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('The rating could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}

@@ -66,7 +66,7 @@ CREATE TABLE `matters` (
 
 CREATE TABLE `publications` (
   `id` int(11) NOT NULL,
-  `registration` datetime NOT NULL,
+  `registration` datetime DEFAULT NULL,
   `title` varchar(500) COLLATE latin1_general_ci NOT NULL,
   `text_publication` varchar(5000) COLLATE latin1_general_ci NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -125,12 +125,13 @@ CREATE TABLE `types` (
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) COLLATE latin1_general_ci NOT NULL,
-  `password` varchar(255) COLLATE latin1_general_ci NOT NULL,
   `email` varchar(255) COLLATE latin1_general_ci NOT NULL,
-  `username` varchar(255) COLLATE latin1_general_ci NOT NULL,
-  `role` int(11) NOT NULL,
-  `registration` datetime NOT NULL
+  `password` varchar(255) COLLATE latin1_general_ci NOT NULL,
+  `name` varchar(255) COLLATE latin1_general_ci NOT NULL,
+  `phone` varchar(20) COLLATE latin1_general_ci NOT NULL,
+  `address` varchar(255) COLLATE latin1_general_ci NOT NULL,
+  `registration` datetime NOT NULL,
+  `role` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --

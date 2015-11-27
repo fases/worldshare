@@ -3,13 +3,13 @@
 	<fieldset>
 		<legend><?php echo __('Edit User'); ?></legend>
 	<?php
-		echo $this->Form->input('id');
-		echo $this->Form->input('name');
-		echo $this->Form->input('password');
 		echo $this->Form->input('email');
-		echo $this->Form->input('username');
+		echo $this->Form->input('password');
+		echo $this->Form->input('name');
+		echo $this->Form->input('phone');
+		echo $this->Form->input('address');
 		echo $this->Form->input('registration');
-		echo $this->Form->input('role');
+	echo $this->Form->input('role', array('options' => array("Student","Teacher")));
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>

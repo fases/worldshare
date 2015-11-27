@@ -49,10 +49,10 @@ class TeachersController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Teacher->create();
 			if ($this->Teacher->save($this->request->data)) {
-				$this->Flash->success(__('The teacher has been saved.'));
+				$this->Session->setFlash(__('The teacher has been saved.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Flash->error(__('The teacher could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The teacher could not be saved. Please, try again.'));
 			}
 		}
 		$matters = $this->Teacher->Matter->find('list');
@@ -73,10 +73,10 @@ class TeachersController extends AppController {
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Teacher->save($this->request->data)) {
-				$this->Flash->success(__('The teacher has been saved.'));
+				$this->Session->setFlash(__('The teacher has been saved.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Flash->error(__('The teacher could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The teacher could not be saved. Please, try again.'));
 			}
 		} else {
 			$options = array('conditions' => array('Teacher.' . $this->Teacher->primaryKey => $id));
@@ -101,9 +101,9 @@ class TeachersController extends AppController {
 		}
 		$this->request->allowMethod('post', 'delete');
 		if ($this->Teacher->delete()) {
-			$this->Flash->success(__('The teacher has been deleted.'));
+			$this->Session->setFlash(__('The teacher has been deleted.'));
 		} else {
-			$this->Flash->error(__('The teacher could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('The teacher could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
