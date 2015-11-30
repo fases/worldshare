@@ -138,7 +138,8 @@ class PublicationsController extends AppController {
             /*
                 0- Não avaliada
                 1- aprovada
-                2- impropria/não aprovada
+                2- Reprovada
+                3- impropria
             */
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Publication->save($this->request->data)) {
@@ -160,10 +161,41 @@ class PublicationsController extends AppController {
     }
     
     public function noavaliable(){
-        $this->set('publications', $this->Publication->find('all', array('conditions' => array("Publication.status" => 0))));
+        //se for aluno ele traz apanes as não avaliadas do próprio aluno
+        if($this->Auth->user('role') != 1){
+           $this->set('publications', $this->Publication->find('all', array('conditions' => array("Publication.user_id" => $this->Auth->user('id'), "Publication.status" => 0)))); 
+           
+        }else{
+            //senão, traz todas as publicações não avaliadas
+            $this->set('publications', $this->Publication->find('all', array('conditions' => array("Publication.status" => 0)))); 
+        }
+       
     }
     
     public function profile(){
         $this->set('publications', $this->Publication->find('all', array('conditions' => array("Publication.user_id" => $this->Auth->user('id')))));
     }
+    public function disapproved(){
+          //se for aluno ele traz apanes as reprovado do próprio aluno
+          if($this->Auth->user('role') != 1){
+           $this->set('publications', $this->Publication->find('all', array('conditions' => array("Publication.user_id" => $this->Auth->user('id'), "Publication.status" => 2)))); 
+           
+        }else{
+            //senão, traz todas as publicações reprovadas
+            $this->set('publications', $this->Publication->find('all', array('conditions' => array("Publication.status" => 2)))); 
+        }
+    }
+    
+     public function inappropriate(){
+         //se for aluno ele traz apanes as impróprias do próprio aluno
+          if($this->Auth->user('role') != 1){
+           $this->set('publications', $this->Publication->find('all', array('conditions' => array("Publication.user_id" => $this->Auth->user('id'), "Publication.status" => 3)))); 
+         
+        }else{
+            //senão, traz todas as publicações improprias
+            $this->set('publications', $this->Publication->find('all', array('conditions' => array("Publication.status" => 3)))); 
+        }
+    }
+    
+    
 }

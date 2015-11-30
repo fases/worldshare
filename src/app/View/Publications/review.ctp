@@ -5,7 +5,7 @@
 	<?php
 		echo $this->Form->input('id');
 		echo $this->Form->input('registration');
-		echo $this->Form->input('status', array('label' => 'Avaliable', 'options' => array("Não avaliada", "Aprovada", "Imprópria")));
+		echo $this->Form->input('status', array('label' => 'Avaliable', 'options' => array("Não avaliada", "Aprovada", "Reprovada", "Imprópria")));
 		echo $this->Form->input('text_review');
 		echo $this->Form->input('old_publication');
 	?>
