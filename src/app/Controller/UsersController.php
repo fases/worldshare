@@ -32,6 +32,15 @@ class UsersController extends AppController {
 		$this->set('users', $this->Paginator->paginate());
 	}
 
+
+	public function teachers() {
+		$this->set('teachers', $this->User->find('all',array('conditions' => array('User.role' => 1))));
+	}
+
+
+	public function students() {
+		$this->set('students', $this->User->find('all',array('conditions' => array('User.role' => 0))));
+	}
 /**
  * view method
  *

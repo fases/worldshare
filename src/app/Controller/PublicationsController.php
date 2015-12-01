@@ -163,8 +163,7 @@ class PublicationsController extends AppController {
     public function noavaliable(){
         //se for aluno ele traz apanes as não avaliadas do próprio aluno
         if($this->Auth->user('role') != 1){
-           $this->set('publications', $this->Publication->find('all', array('conditions' => array("Publication.user_id" => $this->Auth->user('id'), "Publication.status" => 0)))); 
-           
+           $this->set('publications', $this->Publication->find('all', array('conditions' => array("Publication.user_id" => $this->Auth->user('id'), "Publication.status" => 0))));    
         }else{
             //senão, traz todas as publicações não avaliadas
             $this->set('publications', $this->Publication->find('all', array('conditions' => array("Publication.status" => 0)))); 
