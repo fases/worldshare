@@ -71,6 +71,11 @@ class TeachersController extends AppController {
 		if (!$this->Teacher->exists($id)) {
 			throw new NotFoundException(__('Invalid teacher'));
 		}
+		/* $options = array('conditions' => array('Teacher.user_id' => $this->Auth->user('id')));
+		$user = $this->Teacher->find('first',$options);
+		if($this->Auth->user('role') != 3){
+			return $this->redirect(array('controller' => 'publications','action' => 'profile'));
+		}*/
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Teacher->save($this->request->data)) {
 				$this->Session->setFlash(__('The teacher has been saved.'));

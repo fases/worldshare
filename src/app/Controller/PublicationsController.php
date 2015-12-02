@@ -107,11 +107,13 @@ class PublicationsController extends AppController {
  */  
     
 	public function delete($id = null) {
-		$this->Publication->id = $id;
+		$this->Publication->id = $id;		
 		if (!$this->Publication->exists()) {
-			throw new NotFoundException(__('Invalid publication'));
+			// throw new NotFoundException(__('Invalid publication'));
+			$this->Session->setFlash(__('The publication is invalid.'));
+			$this->redirect(array('action' => 'index'));
 		}
-		$this->request->allowMethod('post', 'delete');
+		$this->request->allowMethod('post','get','delete'); //Permite também a exclusão da publicação via GET[].
 		if ($this->Publication->delete()) {
 			$this->Session->setFlash(__('The publication has been deleted.'));
 		} else {
@@ -128,7 +130,6 @@ class PublicationsController extends AppController {
            $this->Session->setFlash(__('Você não tem permissão para acessar essa funcionalidade'));
            return $this->redirect(array('action' => 'index'));
         }else{
-            
             $this->loadModel('Teacher');
             $options = array('conditions' => array('Teacher.user_id' => $this->Auth->user('id')));
             $teacher = $this->Teacher->find('first', $options);
@@ -136,15 +137,22 @@ class PublicationsController extends AppController {
         
         // Definir STATUS da publicação
             /*
-                0- Não avaliada
-                1- aprovada
-                2- Reprovada
-                3- impropria
+                0- Não avaliada ->publication/noavaliable
+                1- aprovada -> publication/index
+                2- Reprovada -> publication/disapproved
+                3- impropria -> delete
             */
+         
 		if ($this->request->is(array('post', 'put'))) {
+			$status = $this->request->data['Publication']['status'];
 			if ($this->Publication->save($this->request->data)) {
-				$this->Session->setFlash(__('The publication has been saved.'));
-				return $this->redirect(array('action' => 'index'));
+				if($status == 3){
+					return $this->redirect(array('action' => 'delete',$id));
+					//return $this->Publication->delete($id);	
+				}else{
+					$this->Session->setFlash(__('The publication has been saved.'));
+					return $this->redirect(array('action' => 'index'));
+				}
 			} else {
 				$this->Session->setFlash(__('The publication could not be saved. Please, try again.'));
 			}
