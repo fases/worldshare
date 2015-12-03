@@ -63,14 +63,52 @@ class UsersController extends AppController {
  */
 	public function add() {
 		if ($this->request->is('post')) {
+			$infor ='Your information has been saved.';
+			$email = $this->request->data['User']['email'];
+			$pos = strripos($email, '@');
+			$term = substr($email, $pos, strlen($email));
+			if($term == "@ifrn.edu.br"){
+				$this->request->data['User']['ativo'] = 0;
+				$this->request->data['User']['role'] = 1;
+				$infor = 'Você se cadastrou como professor, confirme seu email!';
+				// $this->confi($email); 
+				// pra enviar o email de confirmação	
+			}else{
+				$this->request->data['User']['ativo'] = 1;
+				$this->request->data['User']['role'] = 0;
+				$infor = 'Você se cadastrou como aluno.';
+
+			}
           if ($this->User->save($this->request->data)) {
-              $this->Session->setFlash('Your information has been saved.');
+
+              $this->Session->setFlash($infor);
               //Login automático após o cadastro
               $this->Auth->login();
-							$this->redirect(array('controller' => 'users', 'action' => 'index'));
+			 $this->redirect(array('controller' => 'users', 'action' => 'index'));
 			}
 		}
 	}
+
+	public function confi($email, $codigo_veri = null){
+		if($codigo_veri == null){
+		    $codigo_veri = md5($email).md5(md5(substr($email, 1, 3)));
+			$link = 'localhost/worldshare/src/users/confi/'.$email.'/'.$codigo_veri;
+			echo $link;
+			// aqui deve mandar o email com o link
+			// exit();
+		}else{
+			//se vim pra cá é prq é o link mandado pro usuário e ele clicou em confirmar
+			 $codigo_veri2 = md5(md5($email).md5(md5(substr($email, 1, 3))));
+			 if($codigo_veri === $codigo_veri2){
+			 	echo "validado com sucesso";
+			 	// aqui vai alterar no banco o user com esse email para ativo
+			 }else{
+			 	echo "link inválido";
+			 }
+			 // exit();
+		}
+	}
+
 
 /**
  * edit method
