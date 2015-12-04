@@ -22,6 +22,10 @@ class User extends AppModel {
        }
      return true;
  }
+// `email`= ''
+ // public function validate_pro($email){
+ // 	$this->query("UPDATE `users` SET `ativo`=1 WHERE 1 ");
+ // }
 
  public $validate = array(
  		'email' => array(

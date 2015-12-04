@@ -70,9 +70,8 @@ class UsersController extends AppController {
 			if($term == "@ifrn.edu.br"){
 				$this->request->data['User']['ativo'] = 0;
 				$this->request->data['User']['role'] = 1;
-				$infor = 'Você se cadastrou como professor, confirme seu email!';
-				// $this->confi($email); 
-				// pra enviar o email de confirmação	
+				$infor = 'Você se cadastrou como professor, confirme seu email!    localhost/worldshare/src/users/confi/'.$email.'/'.md5(md5($email).md5(md5(substr($email, 1, 3))));
+				$this->confi($email); 
 			}else{
 				$this->request->data['User']['ativo'] = 1;
 				$this->request->data['User']['role'] = 0;
@@ -88,22 +87,28 @@ class UsersController extends AppController {
 			}
 		}
 	}
-
+// localhost/worldshare/src/users/confi/aaaa@ifrn.edu.br/0d5c7838b8bd35d8bb962ea994e8b8bad4fbb7d8d5603db43ac2094f5955787c
 	public function confi($email, $codigo_veri = null){
 		if($codigo_veri == null){
-		    $codigo_veri = md5($email).md5(md5(substr($email, 1, 3)));
+		    $codigo_veri = md5(md5($email).md5(md5(substr($email, 1, 3))));
 			$link = 'localhost/worldshare/src/users/confi/'.$email.'/'.$codigo_veri;
 			echo $link;
+			echo "Foi mandado um link para seu email.";
+			// exit();
 			// aqui deve mandar o email com o link
 			// exit();
 		}else{
 			//se vim pra cá é prq é o link mandado pro usuário e ele clicou em confirmar
 			 $codigo_veri2 = md5(md5($email).md5(md5(substr($email, 1, 3))));
-			 if($codigo_veri === $codigo_veri2){
+			 if($codigo_veri == $codigo_veri2){
 			 	echo "validado com sucesso";
+			 	$this->User->query("UPDATE `users` SET `ativo`=1 WHERE `email` = '".$email."';");
+			 	// exit();
 			 	// aqui vai alterar no banco o user com esse email para ativo
 			 }else{
-			 	echo "link inválido";
+			 	echo "link inválido<br>";
+			 	// echo $codigo_veri2.'<br>';
+			 	// echo $codigo_veri.'<br>';
 			 }
 			 // exit();
 		}
