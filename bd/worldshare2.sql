@@ -155,7 +155,8 @@ INSERT INTO `types` (`id`, `name`, `description`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(11) NOT NULL,
+  `ativo` int(1) NOT NULL DEFAULT '0',
+`id` int(11) NOT NULL,
   `email` varchar(255) COLLATE latin1_general_ci NOT NULL,
   `password` varchar(255) COLLATE latin1_general_ci NOT NULL,
   `name` varchar(255) COLLATE latin1_general_ci NOT NULL,
@@ -163,17 +164,23 @@ CREATE TABLE IF NOT EXISTS `users` (
   `address` varchar(255) COLLATE latin1_general_ci NOT NULL,
   `registration` datetime NOT NULL,
   `role` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=11 ;
 
 --
 -- Extraindo dados da tabela `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `password`, `name`, `phone`, `address`, `registration`, `role`) VALUES
-(1, 'diego@gmail.com', 'e76f46ed29f2374b0cb229d0681e327729096edb', 'Diego Costa', '987767676', 'Rua JerusalÃ©m', '2015-11-25 17:32:00', 1),
-(2, 'luana@gmail.com', 'e76f46ed29f2374b0cb229d0681e327729096edb', 'Luana', '988562776', 'Rua Camboriu', '2015-11-25 17:34:00', 0),
-(3, 'alba@gmail.com', 'e76f46ed29f2374b0cb229d0681e327729096edb', 'Alba', '98854-7643', 'Mor Gouveia', '2015-11-25 19:28:00', 1);
-
+INSERT INTO `users` (`ativo`, `id`, `email`, `password`, `name`, `phone`, `address`, `registration`, `role`) VALUES
+(0, 1, 'diego@gmail.com', 'e76f46ed29f2374b0cb229d0681e327729096edb', 'Diego Costa', '987767676', 'Rua JerusalÃ©m', '2015-11-25 17:32:00', 1),
+(0, 2, 'luana@gmail.com', 'e76f46ed29f2374b0cb229d0681e327729096edb', 'Luana', '988562776', 'Rua Camboriu', '2015-11-25 17:34:00', 0),
+(0, 3, 'alba@gmail.com', 'e76f46ed29f2374b0cb229d0681e327729096edb', 'Alba', '98854-7643', 'Mor Gouveia', '2015-11-25 19:28:00', 1),
+(0, 4, 'a@gmail.com', '5afcaf36c681892dbc659b7799f820058f06ab0b', 'a', 'a', 'a', '2015-04-03 10:56:00', 0),
+(0, 5, 'asda@gmail.com', '5afcaf36c681892dbc659b7799f820058f06ab0b', 'a', 'a', 'a', '2015-04-03 23:00:00', 0),
+(0, 6, 'asda@gmail.com', 'fefcc0d095c40274b0d1fd41e23c8afcb2bdd299', 'a', 'a', 'a', '2015-04-03 23:00:00', 0),
+(1, 7, 'ass@gmail.com', '5afcaf36c681892dbc659b7799f820058f06ab0b', 'aaa', 's', 'aa', '2015-12-03 23:49:00', 0),
+(0, 8, 'sa@ifrn.edu.br', '5afcaf36c681892dbc659b7799f820058f06ab0b', 'k', 's', 'k', '2015-12-03 23:51:00', 1),
+(0, 9, 'sa@ifrn.edu.br', 'fefcc0d095c40274b0d1fd41e23c8afcb2bdd299', 'k', 's', 'k', '2015-12-03 23:51:00', 1),
+(1, 10, 'sa@ifrn.edu.brsasa', 'c7a845e6f5a3104214953f2d47cc55e4989bbc3c', 'k', 's', 'k', '2015-12-03 23:51:00', 0);
 --
 -- Indexes for dumped tables
 --
