@@ -126,6 +126,7 @@ class UsersController extends AppController {
 		if (!$this->User->exists($id)) {
 			throw new NotFoundException(__('Invalid user'));
 		}
+        if($this->Auth->user('id') == $id){
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->User->save($this->request->data)) {
 				$this->Session->setFlash(__('The user has been saved.'));
@@ -137,7 +138,11 @@ class UsersController extends AppController {
 			$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
 			$this->request->data = $this->User->find('first', $options);
 		}
-	}
+	}else{
+           $this->Session->setFlash(__('Você não tem permissão para modificar outro usuário.'));
+				return $this->redirect(array('action' => 'index')); 
+        }
+}
 
 /**
  * delete method
@@ -151,6 +156,7 @@ class UsersController extends AppController {
 		if (!$this->User->exists()) {
 			throw new NotFoundException(__('Invalid user'));
 		}
+        if($this->Auth->user('id') == $id){
 		$this->request->allowMethod('post', 'delete');
 		if ($this->User->delete()) {
 			$this->Session->setFlash(__('The user has been deleted.'));
@@ -158,7 +164,11 @@ class UsersController extends AppController {
 			$this->Session->setFlash(__('The user could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
-	}
+	}else{
+           $this->Session->setFlash(__('Você não tem permissão para apagar outro usuário.'));
+				return $this->redirect(array('action' => 'index')); 
+        }
+    }
 
 	public function login() {
 	//	debug($this->request->data); die();

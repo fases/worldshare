@@ -51,7 +51,14 @@ class PublicationsController extends AppController {
 			$this->Publication->create();
             $this->request->data['Publication']['user_id'] = $this->Auth->user('id');
             
-			if ($this->Publication->save($this->request->data)) {
+            // Faz com q as publicações dos professores não precisem ser verificadas     
+            if( $this->Auth->user('role') == 1){
+                     
+                 $this->request->data['Publication']['status'] = 1;
+                     
+                 }
+            
+            if ($this->Publication->save($this->request->data)) {
 				$this->Session->setFlash(__('The publication has been saved.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
@@ -80,6 +87,9 @@ class PublicationsController extends AppController {
 		if (!$this->Publication->exists($id)) {
 			throw new NotFoundException(__('Invalid publication'));
 		}
+        //apenas o proprietário da publicação pode editar tal
+        if($this->Auth->user('id') == ['Publication']['User']){    
+        
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Publication->save($this->request->data)) {
 				$this->Session->setFlash(__('The publication has been saved.'));
@@ -91,6 +101,10 @@ class PublicationsController extends AppController {
 			$options = array('conditions' => array('Publication.' . $this->Publication->primaryKey => $id));
 			$this->request->data = $this->Publication->find('first', $options);
 		}
+        }else{
+              $this->Session->setFlash(__('Você não tem permissão para modificar a publicação de outro usuário.'));
+				return $this->redirect(array('action' => 'index')); 
+        }
 		$users = $this->Publication->User->find('list');
 		$types = $this->Publication->Type->find('list');
 		$matters = $this->Publication->Matter->find('list');
@@ -113,6 +127,7 @@ class PublicationsController extends AppController {
 			$this->Session->setFlash(__('The publication is invalid.'));
 			$this->redirect(array('action' => 'index'));
 		}
+        if($this->Auth->user('id') == ['Publication']['User']){  
 		$this->request->allowMethod('post','get','delete'); //Permite também a exclusão da publicação via GET[].
 		if ($this->Publication->delete()) {
 			$this->Session->setFlash(__('The publication has been deleted.'));
@@ -120,7 +135,11 @@ class PublicationsController extends AppController {
 			$this->Session->setFlash(__('The publication could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
-	}
+	}else{
+              $this->Session->setFlash(__('Você não tem permissão para apagar a publicação de outro usuário.'));
+				return $this->redirect(array('action' => 'index')); 
+        }
+    }
     
     public function review($id = null){
         if (!$this->Publication->exists($id)) {
