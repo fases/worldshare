@@ -5,7 +5,7 @@
 	<?php
 		echo $this->Form->input('registration');
 		echo $this->Form->input('title');
-		echo $this->Form->input('text_publication');
+		echo $this->Form->input('text_publication',array('rows' => '5'));
 		//echo $this->Form->input('user_id');
 		echo $this->Form->input('type_id');
 		echo $this->Form->input('matter_id');

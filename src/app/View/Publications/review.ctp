@@ -6,8 +6,8 @@
 		echo $this->Form->input('id');
 		echo $this->Form->input('registration');
 		echo $this->Form->input('status', array('label' => 'Avaliable', 'options' => array("Não avaliada", "Aprovada", "Reprovada", "Imprópria")));
-		echo $this->Form->input('text_review');
-		echo $this->Form->input('old_publication');
+		echo $this->Form->input('text_review',array('rows' => '5'));
+		// echo $this->Form->input('old_publication');
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>

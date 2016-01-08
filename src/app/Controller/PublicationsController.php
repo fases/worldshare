@@ -21,9 +21,16 @@ class PublicationsController extends AppController {
  * @return void
  */
 	public function index() {
-//		$this->Publication->recursive = 0;
-//		$this->set('publications', $this->Paginator->paginate());
-        $this->set('publications', $this->Publication->find('all', array('conditions' => array("Publication.status" => 1))));
+	$options = array(
+      	'conditions' => array('Publication.status' => 1),
+        'order' => array('Publication.registration' => 'DESC'),
+      	'limit' => 30
+    );
+    $this->paginate = $options;
+    // Consulta com resultados paginados
+    $publications = $this->paginate('Publication');
+    // Envia os dados pra view
+    $this->set('publications', $publications);
 	}
 
 /**
@@ -50,13 +57,12 @@ class PublicationsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Publication->create();
             $this->request->data['Publication']['user_id'] = $this->Auth->user('id');
-            
-            // Faz com q as publicações dos professores não precisem ser verificadas     
+            // Faz com que as publicações dos professores não precisem ser verificadas     
             if( $this->Auth->user('role') == 1){
-                     
                  $this->request->data['Publication']['status'] = 1;
-                     
-                 }
+            }else{
+
+            }
             
             if ($this->Publication->save($this->request->data)) {
 				$this->Session->setFlash(__('The publication has been saved.'));
@@ -120,35 +126,45 @@ class PublicationsController extends AppController {
  * @return void
  */  
     
-	public function delete($id = null) {
+	public function delete($id = null,$impropria = false) {
 		$this->Publication->id = $id;		
 		if (!$this->Publication->exists()) {
 			// throw new NotFoundException(__('Invalid publication'));
 			$this->Session->setFlash(__('The publication is invalid.'));
 			$this->redirect(array('action' => 'index'));
 		}
-        if($this->Auth->user('id') == ['Publication']['User']){  
-		$this->request->allowMethod('post','get','delete'); //Permite também a exclusão da publicação via GET[].
-		if ($this->Publication->delete()) {
-			$this->Session->setFlash(__('The publication has been deleted.'));
-		} else {
-			$this->Session->setFlash(__('The publication could not be deleted. Please, try again.'));
-		}
-		return $this->redirect(array('action' => 'index'));
-	}else{
+        if($this->Auth->user('id') == ['Publication']['User'] || $impropria == true){  
+			$this->request->allowMethod('post','get','delete'); //Permite também a exclusão da publicação via GET[].
+			if ($this->Publication->delete()) {
+				if($impropria == true){
+					$this->Session->setFlash(__('A publicação foi excluída do sistema.'));		
+				}
+				$this->Session->setFlash(__('The publication has been deleted.'));
+			} else {
+				$this->Session->setFlash(__('The publication could not be deleted. Please, try again.'));
+			}
+			return $this->redirect(array('action' => 'index'));
+		}else{
               $this->Session->setFlash(__('Você não tem permissão para apagar a publicação de outro usuário.'));
-				return $this->redirect(array('action' => 'index')); 
+			  return $this->redirect(array('action' => 'index')); 
         }
     }
     
     public function review($id = null){
         if (!$this->Publication->exists($id)) {
-			throw new NotFoundException(__('Invalid publication'));
+			throw new NotFoundException(__('Publicação Inválida'));
 		}
-        if($this->Auth->user('role') != 1){
+        if($this->Auth->user('role') != 0){
            $this->Session->setFlash(__('Você não tem permissão para acessar essa funcionalidade'));
            return $this->redirect(array('action' => 'index'));
-        }else{
+        }
+        $status = $this->Publication->find('first',array('fields' => array('Publication.status'),'conditions' => array('Publication.id' => $id)));
+        $status_atual = $status['Publication']['status'];
+        //Verifica se a publicação já foi avaliada
+        if($status_atual != 0){
+        	$this->Session->setFlash(__('A publicação já foi avaliada!'));
+           return $this->redirect(array('action' => 'index'));	
+        }
             $this->loadModel('Teacher');
             $options = array('conditions' => array('Teacher.user_id' => $this->Auth->user('id')));
             $teacher = $this->Teacher->find('first', $options);
@@ -166,7 +182,7 @@ class PublicationsController extends AppController {
 			$status = $this->request->data['Publication']['status'];
 			if ($this->Publication->save($this->request->data)) {
 				if($status == 3){
-					return $this->redirect(array('action' => 'delete',$id));
+					return $this->redirect(array('action' => 'delete',$id,true));
 					//return $this->Publication->delete($id);	
 				}else{
 					$this->Session->setFlash(__('The publication has been saved.'));
@@ -179,17 +195,11 @@ class PublicationsController extends AppController {
 			$options = array('conditions' => array('Publication.' . $this->Publication->primaryKey => $id));
 			$this->request->data = $this->Publication->find('first', $options);
 		}
-        }
-		$users = $this->Publication->User->find('list');
-		$types = $this->Publication->Type->find('list');
-		$matters = $this->Publication->Matter->find('list');
-		$teachers = $this->Publication->Teacher->find('list');
-		$this->set(compact('users', 'types', 'matters', 'teachers'));
     }
     
     public function noavaliable(){
         //se for aluno ele traz apanes as não avaliadas do próprio aluno
-        if($this->Auth->user('role') != 1){
+        if($this->Auth->user('role') === 0){
            $this->set('publications', $this->Publication->find('all', array('conditions' => array("Publication.user_id" => $this->Auth->user('id'), "Publication.status" => 0))));    
         }else{
             //senão, traz todas as publicações não avaliadas
