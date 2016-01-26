@@ -45,7 +45,18 @@ class TeachersController extends AppController {
  *
  * @return void
  */
-	public function add() {
+	public function add($id = null) {
+		$this->loadModel('User');
+		$this->User->id = $id;
+		if (!$this->User->exists($id)) {
+			$this->Session->setFlash('Usuário inválido');
+			return $this->redirect(array('controller' => 'publications','action' => 'index'));
+		}
+		$options = array('conditions' => array('Teacher.user_id' => $this->Auth->user('id')));
+		$user = $this->Teacher->find('first',$options);
+		if($this->Auth->user('role') == 0 || is_null($user['Teacher']['id'])){ //Não permite que alunos editem
+			return $this->redirect(array('controller' => 'publications','action' => 'profile'));
+		}
 		if ($this->request->is('post')) {
 			$this->Teacher->create();
 			if ($this->Teacher->save($this->request->data)) {
@@ -68,14 +79,17 @@ class TeachersController extends AppController {
  * @return void
  */
 	public function edit($id = null) {
+		$this->Teacher->id = $id;
 		if (!$this->Teacher->exists($id)) {
-			throw new NotFoundException(__('Invalid teacher'));
+			$this->Session->setFlash('Usuário inválido');
+			return $this->redirect(array('controller' => 'publications','action' => 'index'));	
 		}
-		/* $options = array('conditions' => array('Teacher.user_id' => $this->Auth->user('id')));
+		$options = array('conditions' => array('Teacher.user_id' => $this->Auth->user('id')));
 		$user = $this->Teacher->find('first',$options);
-		if($this->Auth->user('role') != 3){
+		if($this->Auth->user('role') == 0 || is_null($user['Teacher']['user_id']) || $user['Teacher']['user_id'] != $id){ 
+		//Não permite que alunos editem, ou outros usuários diferentes
 			return $this->redirect(array('controller' => 'publications','action' => 'profile'));
-		}*/
+		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Teacher->save($this->request->data)) {
 				$this->Session->setFlash(__('The teacher has been saved.'));

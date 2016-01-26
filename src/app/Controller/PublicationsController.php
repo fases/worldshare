@@ -94,8 +94,8 @@ class PublicationsController extends AppController {
 			throw new NotFoundException(__('Invalid publication'));
 		}
         //apenas o proprietário da publicação pode editar tal
-        if($this->Auth->user('id') == ['Publication']['User']){    
-        
+        $user = $this->Publication->find('first',array('conditions' => array('Publication.id' => $id)));
+        if($this->Auth->user('id') == $user['Publication']['user_id']){    
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Publication->save($this->request->data)) {
 				$this->Session->setFlash(__('The publication has been saved.'));
@@ -133,7 +133,8 @@ class PublicationsController extends AppController {
 			$this->Session->setFlash(__('The publication is invalid.'));
 			$this->redirect(array('action' => 'index'));
 		}
-        if($this->Auth->user('id') == ['Publication']['User'] || $impropria == true){  
+		$user = $this->Publication->find('first',array('conditions' => array('Publication.id' => $id)));
+        if($this->Auth->user('id') == $user['Publication']['user_id'] || $impropria == true){  
 			$this->request->allowMethod('post','get','delete'); //Permite também a exclusão da publicação via GET[].
 			if ($this->Publication->delete()) {
 				if($impropria == true){

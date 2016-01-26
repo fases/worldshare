@@ -1,19 +1,19 @@
 <div class="users form">
 <?php echo $this->Form->create('User'); ?>
 	<fieldset>
-		<legend><?php echo __('Add User'); ?></legend>
+		<legend><?php echo __('Adicionar Usuário'); ?></legend>
 	<?php
 		echo $this->Form->input('email');
 		echo $this->Form->input('ativo', array('type' => 'hidden','value'=>'0'));
-		echo $this->Form->input('password');
-		echo $this->Form->input('name');
-		echo $this->Form->input('phone');
-		echo $this->Form->input('address');
+		echo $this->Form->input('password',array('label' => 'Senha'));
+		echo $this->Form->input('name',array('label' => 'Nome'));
+		echo $this->Form->input('phone',array('label' => 'Telefone'));
+		echo $this->Form->input('address',array('label' =>'Matrícula'));
 		echo $this->Form->input('registration');
-	echo $this->Form->input('role', array('options' => array("Student","Teacher")));
+		echo $this->Form->input('role', array('options' => array("Student","Teacher")));
 	?>
 	</fieldset>
-<?php echo $this->Form->end(__('Submit')); ?>
+<?php echo $this->Form->end(__('Registrar')); ?>
 </div>
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>

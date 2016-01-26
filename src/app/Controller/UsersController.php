@@ -63,7 +63,7 @@ class UsersController extends AppController {
  */
 	public function add() {
 		if ($this->request->is('post')) {
-			$infor ='Your information has been saved.';
+			/*$infor ='Your information has been saved.';
 			$email = $this->request->data['User']['email'];
 			$pos = strripos($email, '@');
 			$term = substr($email, $pos, strlen($email));
@@ -77,13 +77,14 @@ class UsersController extends AppController {
 				$this->request->data['User']['role'] = 0;
 				$infor = 'Você se cadastrou como aluno.';
 
-			}
+			}*/
           if ($this->User->save($this->request->data)) {
-
-              $this->Session->setFlash($infor);
+              $this->Session->setFlash('O usuário foi cadastrado com sucesso!');
               //Login automático após o cadastro
               $this->Auth->login();
-			 $this->redirect(array('controller' => 'users', 'action' => 'index'));
+              if($this->Auth->user('role') == 1){ // Professor
+			  	$this->redirect(array('controller' => 'teachers', 'action' => 'add',$this->Auth->user('id')));	
+              }
 			}
 		}
 	}
@@ -123,26 +124,25 @@ class UsersController extends AppController {
  * @return void
  */
 	public function edit($id = null) {
-		if (!$this->User->exists($id)) {
-			throw new NotFoundException(__('Invalid user'));
-		}
-        if($this->Auth->user('id') == $id){
-		if ($this->request->is(array('post', 'put'))) {
-			if ($this->User->save($this->request->data)) {
-				$this->Session->setFlash(__('The user has been saved.'));
-				return $this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
-			}
-		} else {
-			$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
-			$this->request->data = $this->User->find('first', $options);
-		}
-	}else{
-           $this->Session->setFlash(__('Você não tem permissão para modificar outro usuário.'));
-				return $this->redirect(array('action' => 'index')); 
+		$this->User->id = $id;
+        if (!$this->User->exists()) {
+            $this->Session->setFlash("Usuário escolhido é inválido!");
+            $this->redirect(array('action' => 'index'));
         }
-}
+        if ($this->request->is('get')) {
+            $this->request->data = $this->User->findById($id);
+        } else {
+            if($this->Auth->user('id') == $id){
+            	if ($this->User->save($this->request->data)) {
+                	$this->Session->setFlash('A edição foi realizada com sucesso!');
+                	$this->redirect(array('action' => 'index'));
+            	}
+        	}else{
+           		$this->Session->setFlash(__('Você não tem permissão para modificar dados de outro usuário.'));
+				return $this->redirect(array('action' => 'index')); 
+        	}
+        }
+	}
 
 /**
  * delete method
