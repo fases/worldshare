@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.2.2
+-- version 4.2.7.1
 -- http://www.phpmyadmin.net
 --
--- Servidor: 127.0.0.1
--- Tempo de Geração: 
--- Versão do Servidor: 5.5.27
--- Versão do PHP: 5.4.7
+-- Host: 127.0.0.1
+-- Generation Time: 29-Jan-2016 às 21:50
+-- Versão do servidor: 5.5.39
+-- PHP Version: 5.4.31
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Banco de Dados: `worldshare`
+-- Database: `worldshare`
 --
 
 -- --------------------------------------------------------
@@ -27,11 +27,17 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `attachments` (
-  `id` int(11) NOT NULL,
+`id` int(11) NOT NULL,
   `file` varchar(5000) NOT NULL,
-  `publication_id` int(11) NOT NULL,
-  KEY `fk_attachments_publications` (`publication_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `publication_id` int(11) NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Extraindo dados da tabela `attachments`
+--
+
+INSERT INTO `attachments` (`id`, `file`, `publication_id`) VALUES
+(1, '/src/files/anexos/Sem tÃ­tulo.jpg', 18);
 
 -- --------------------------------------------------------
 
@@ -40,14 +46,11 @@ CREATE TABLE IF NOT EXISTS `attachments` (
 --
 
 CREATE TABLE IF NOT EXISTS `comments` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `publication_id` int(11) NOT NULL,
   `schedule` datetime NOT NULL,
-  `text` varchar(500) COLLATE latin1_general_ci NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_comments_users` (`user_id`),
-  KEY `fk_comments_publications` (`publication_id`)
+  `text` varchar(500) COLLATE latin1_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -57,10 +60,9 @@ CREATE TABLE IF NOT EXISTS `comments` (
 --
 
 CREATE TABLE IF NOT EXISTS `matters` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `name` varchar(255) COLLATE latin1_general_ci NOT NULL,
-  `description` varchar(255) COLLATE latin1_general_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `description` varchar(255) COLLATE latin1_general_ci DEFAULT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=8 ;
 
 --
@@ -81,7 +83,7 @@ INSERT INTO `matters` (`id`, `name`, `description`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `publications` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `registration` datetime NOT NULL,
   `title` varchar(500) COLLATE latin1_general_ci NOT NULL,
   `text_publication` varchar(5000) COLLATE latin1_general_ci NOT NULL,
@@ -91,13 +93,8 @@ CREATE TABLE IF NOT EXISTS `publications` (
   `status` int(11) NOT NULL,
   `teacher_id` int(11) DEFAULT NULL,
   `text_review` varchar(50000) COLLATE latin1_general_ci NOT NULL,
-  `old_publication` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_publications_users` (`user_id`),
-  KEY `fk_publications_types` (`type_id`),
-  KEY `fk_publications_matters` (`matter_id`),
-  KEY `fk_publications_teachers` (`teacher_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=9 ;
+  `old_publication` int(11) DEFAULT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=20 ;
 
 --
 -- Extraindo dados da tabela `publications`
@@ -105,7 +102,17 @@ CREATE TABLE IF NOT EXISTS `publications` (
 
 INSERT INTO `publications` (`id`, `registration`, `title`, `text_publication`, `user_id`, `type_id`, `matter_id`, `status`, `teacher_id`, `text_review`, `old_publication`) VALUES
 (7, '2016-01-27 11:47:00', 'Backup', 'Backup de Banco de Dados', 9, 5, 3, 0, NULL, '', NULL),
-(8, '2016-01-27 12:23:00', 'Descobrimento do Brasil', 'MÃºsica sobre o descobrimento', 6, 5, 5, 1, NULL, '', NULL);
+(8, '2016-01-27 12:23:00', 'Descobrimento do Brasil', 'MÃºsica sobre o descobrimento', 6, 5, 5, 1, NULL, '', NULL),
+(9, '2016-01-29 21:17:00', 'Trem das Onze', 'Alguma coisa', 4, 2, 4, 1, NULL, '', NULL),
+(11, '2016-01-29 21:21:00', 'Novo', 'um', 4, 2, 4, 1, NULL, '', NULL),
+(12, '2016-01-29 21:27:00', 'nada', 'nadinha', 4, 2, 3, 1, NULL, '', NULL),
+(13, '2016-01-29 21:30:00', 'nada', 'asdksak', 4, 2, 3, 1, NULL, '', NULL),
+(14, '2016-01-29 21:31:00', 'uma', 'duas', 4, 2, 3, 1, NULL, '', NULL),
+(15, '2016-01-29 21:32:00', 'italia', 'alemanha', 4, 2, 3, 1, NULL, '', NULL),
+(16, '2016-01-29 21:37:00', 'dad', 'ada', 4, 2, 5, 1, NULL, '', NULL),
+(17, '2016-01-29 21:39:00', 'adasda', 'asdasd', 4, 4, 3, 1, NULL, '', NULL),
+(18, '2016-01-29 21:39:00', 'adasda', 'asdasd', 4, 4, 3, 1, NULL, '', NULL),
+(19, '2016-01-29 21:42:00', 'Verbos no passado', 'Trabajada', 4, 2, 4, 1, NULL, '', NULL);
 
 -- --------------------------------------------------------
 
@@ -114,13 +121,10 @@ INSERT INTO `publications` (`id`, `registration`, `title`, `text_publication`, `
 --
 
 CREATE TABLE IF NOT EXISTS `ratings` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `publication_id` int(11) NOT NULL,
-  `stars` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_ratings_users` (`user_id`),
-  KEY `fk_ratings_publication` (`publication_id`)
+  `stars` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -130,15 +134,12 @@ CREATE TABLE IF NOT EXISTS `ratings` (
 --
 
 CREATE TABLE IF NOT EXISTS `teachers` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `institution` varchar(255) COLLATE latin1_general_ci NOT NULL,
   `matter_id` int(11) NOT NULL,
   `place` varchar(255) COLLATE latin1_general_ci NOT NULL,
-  `user_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_teachers_users` (`user_id`),
-  KEY `fk_teachers_matters` (`matter_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=3 ;
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -147,10 +148,9 @@ CREATE TABLE IF NOT EXISTS `teachers` (
 --
 
 CREATE TABLE IF NOT EXISTS `types` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `name` varchar(255) COLLATE latin1_general_ci NOT NULL,
-  `description` varchar(255) COLLATE latin1_general_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `description` varchar(255) COLLATE latin1_general_ci DEFAULT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=6 ;
 
 --
@@ -171,15 +171,14 @@ INSERT INTO `types` (`id`, `name`, `description`) VALUES
 
 CREATE TABLE IF NOT EXISTS `users` (
   `ativo` int(1) NOT NULL DEFAULT '0',
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `email` varchar(255) COLLATE latin1_general_ci NOT NULL,
   `password` varchar(255) COLLATE latin1_general_ci NOT NULL,
   `name` varchar(255) COLLATE latin1_general_ci NOT NULL,
   `phone` varchar(20) COLLATE latin1_general_ci NOT NULL,
   `address` varchar(255) COLLATE latin1_general_ci NOT NULL,
   `registration` datetime NOT NULL,
-  `role` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `role` int(11) NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=10 ;
 
 --
@@ -195,44 +194,140 @@ INSERT INTO `users` (`ativo`, `id`, `email`, `password`, `name`, `phone`, `addre
 (0, 9, 'fernando.alves@academico.ifrn.edu.br', 'e04ec20910b3ef5600fbbe59a6dc86ca2818d087', 'Fernando Alves', '984848545', '201345878456', '2016-01-27 11:39:00', 0);
 
 --
--- Restrições para as tabelas dumpadas
+-- Indexes for dumped tables
 --
 
 --
--- Restrições para a tabela `attachments`
+-- Indexes for table `attachments`
 --
 ALTER TABLE `attachments`
-  ADD CONSTRAINT `fk_attachments_publications` FOREIGN KEY (`publication_id`) REFERENCES `publications` (`id`);
+ ADD PRIMARY KEY (`id`), ADD KEY `fk_attachments_publications` (`publication_id`);
 
 --
--- Restrições para a tabela `comments`
+-- Indexes for table `comments`
 --
 ALTER TABLE `comments`
-  ADD CONSTRAINT `fk_comments_publications` FOREIGN KEY (`publication_id`) REFERENCES `publications` (`id`),
-  ADD CONSTRAINT `fk_comments_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+ ADD PRIMARY KEY (`id`), ADD KEY `fk_comments_users` (`user_id`), ADD KEY `fk_comments_publications` (`publication_id`);
 
 --
--- Restrições para a tabela `publications`
+-- Indexes for table `matters`
+--
+ALTER TABLE `matters`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `publications`
 --
 ALTER TABLE `publications`
-  ADD CONSTRAINT `fk_publications_matters` FOREIGN KEY (`matter_id`) REFERENCES `matters` (`id`),
-  ADD CONSTRAINT `fk_publications_teachers` FOREIGN KEY (`teacher_id`) REFERENCES `teachers` (`id`),
-  ADD CONSTRAINT `fk_publications_types` FOREIGN KEY (`type_id`) REFERENCES `types` (`id`),
-  ADD CONSTRAINT `fk_publications_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+ ADD PRIMARY KEY (`id`), ADD KEY `fk_publications_users` (`user_id`), ADD KEY `fk_publications_types` (`type_id`), ADD KEY `fk_publications_matters` (`matter_id`), ADD KEY `fk_publications_teachers` (`teacher_id`);
 
 --
--- Restrições para a tabela `ratings`
+-- Indexes for table `ratings`
 --
 ALTER TABLE `ratings`
-  ADD CONSTRAINT `fk_ratings_publication` FOREIGN KEY (`publication_id`) REFERENCES `publications` (`id`),
-  ADD CONSTRAINT `fk_ratings_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+ ADD PRIMARY KEY (`id`), ADD KEY `fk_ratings_users` (`user_id`), ADD KEY `fk_ratings_publication` (`publication_id`);
 
 --
--- Restrições para a tabela `teachers`
+-- Indexes for table `teachers`
 --
 ALTER TABLE `teachers`
-  ADD CONSTRAINT `fk_teachers_matters` FOREIGN KEY (`matter_id`) REFERENCES `matters` (`id`),
-  ADD CONSTRAINT `fk_teachers_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+ ADD PRIMARY KEY (`id`), ADD KEY `fk_teachers_users` (`user_id`), ADD KEY `fk_teachers_matters` (`matter_id`);
+
+--
+-- Indexes for table `types`
+--
+ALTER TABLE `types`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `attachments`
+--
+ALTER TABLE `attachments`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `comments`
+--
+ALTER TABLE `comments`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `matters`
+--
+ALTER TABLE `matters`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `publications`
+--
+ALTER TABLE `publications`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
+--
+-- AUTO_INCREMENT for table `ratings`
+--
+ALTER TABLE `ratings`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `teachers`
+--
+ALTER TABLE `teachers`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `types`
+--
+ALTER TABLE `types`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Limitadores para a tabela `attachments`
+--
+ALTER TABLE `attachments`
+ADD CONSTRAINT `fk_attachments_publications` FOREIGN KEY (`publication_id`) REFERENCES `publications` (`id`);
+
+--
+-- Limitadores para a tabela `comments`
+--
+ALTER TABLE `comments`
+ADD CONSTRAINT `fk_comments_publications` FOREIGN KEY (`publication_id`) REFERENCES `publications` (`id`),
+ADD CONSTRAINT `fk_comments_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Limitadores para a tabela `publications`
+--
+ALTER TABLE `publications`
+ADD CONSTRAINT `fk_publications_matters` FOREIGN KEY (`matter_id`) REFERENCES `matters` (`id`),
+ADD CONSTRAINT `fk_publications_teachers` FOREIGN KEY (`teacher_id`) REFERENCES `teachers` (`id`),
+ADD CONSTRAINT `fk_publications_types` FOREIGN KEY (`type_id`) REFERENCES `types` (`id`),
+ADD CONSTRAINT `fk_publications_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Limitadores para a tabela `ratings`
+--
+ALTER TABLE `ratings`
+ADD CONSTRAINT `fk_ratings_publication` FOREIGN KEY (`publication_id`) REFERENCES `publications` (`id`),
+ADD CONSTRAINT `fk_ratings_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Limitadores para a tabela `teachers`
+--
+ALTER TABLE `teachers`
+ADD CONSTRAINT `fk_teachers_matters` FOREIGN KEY (`matter_id`) REFERENCES `matters` (`id`),
+ADD CONSTRAINT `fk_teachers_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

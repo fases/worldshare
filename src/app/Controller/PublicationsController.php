@@ -13,7 +13,7 @@ class PublicationsController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator');
+	public $components = array('Paginator','Upload');
 
 /**
  * index method
@@ -60,26 +60,36 @@ class PublicationsController extends AppController {
             // Faz com que as publicações dos professores não precisem ser verificadas     
             if( $this->Auth->user('role') == 1){
                  $this->request->data['Publication']['status'] = 1;
-            }else{
-
             }
-            
-            if ($this->Publication->save($this->request->data)) {
+            // debug($this->request->data);
+            if ($this->Publication->save($this->request->data['Publication'])) {
+            	$this->loadModel('Attachment');                 
+  	if(!empty($this->request->data['Attachment']['file'])){
+    $this->Upload->upload($this->request->data['Attachment']['file']);
+    if(!is_null($this->request->data['Attachment']['file'])){
+      $nome = $this->request->data['Attachment']['file']['name'];
+      $arquivo = '/src/files/anexos/'.$nome;
+      $publication_id = $this->Publication->id;
+      $this->Attachment->query("INSERT INTO attachments (file,publication_id) VALUES ('$arquivo','$publication_id');");  
+
+      $this->Session->setFlash('O arquivo foi anexado!');
+      return $this->redirect(array('action' => 'index'));
+    }
+    
+	}
 				$this->Session->setFlash(__('The publication has been saved.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The publication could not be saved. Please, try again.'));
 			}
+
 		}
 		$users = $this->Publication->User->find('list');
 		$types = $this->Publication->Type->find('list');
 		$matters = $this->Publication->Matter->find('list');
 		$teachers = $this->Publication->Teacher->find('list');
 		$this->set(compact('users', 'types', 'matters', 'teachers'));
-                                                     
-        
-       
-        
+    
 	}
 
 /**
