@@ -42,7 +42,8 @@ class PublicationsController extends AppController {
  */
 	public function view($id = null) {
 		if (!$this->Publication->exists($id)) {
-			throw new NotFoundException(__('Invalid publication'));
+			$this->Session->setFlash('Publicação Inválida');
+      return $this->redirect(array('action' => 'index'));
 		}
 		$options = array('conditions' => array('Publication.' . $this->Publication->primaryKey => $id));
 		$this->set('publication', $this->Publication->find('first', $options));
@@ -156,7 +157,7 @@ class PublicationsController extends AppController {
 			}
 			return $this->redirect(array('action' => 'index'));
 		}else{
-              $this->Session->setFlash(__('Você não tem permissão para apagar a publicação de outro usuário.'));
+        $this->Session->setFlash(__('Você não tem permissão para apagar a publicação de outro usuário.'));
 			  return $this->redirect(array('action' => 'index')); 
         }
     }
@@ -174,7 +175,7 @@ class PublicationsController extends AppController {
         //Verifica se a publicação já foi avaliada
         if($status_atual != 0){
         	$this->Session->setFlash(__('A publicação já foi avaliada!'));
-           return $this->redirect(array('action' => 'index'));	
+           return $this->redirect(array('action' => 'noavaliable'));	
         }
             $this->loadModel('Teacher');
             $options = array('conditions' => array('Teacher.user_id' => $this->Auth->user('id')));
@@ -219,8 +220,14 @@ class PublicationsController extends AppController {
        
     }
     
-    public function profile(){
-        $this->set('publications', $this->Publication->find('all', array('conditions' => array("Publication.user_id" => $this->Auth->user('id')))));
+    public function profile($id = null){
+        //Outro usuário pode ver o perfil?
+        $this->Publication->id = $id;
+        if($this->Publication->exists()){
+          $this->set('publications', $this->Publication->find('all', array('conditions' => array("Publication.user_id" => $id,"Publication.status" => 1))));  
+        }else{
+          $this->set('publications', $this->Publication->find('all', array('conditions' => array("Publication.user_id" => $this->Auth->user('id')))));  
+        }    
     }
     public function disapproved(){
           //se for aluno ele traz apanes as reprovado do próprio aluno
@@ -236,8 +243,7 @@ class PublicationsController extends AppController {
      public function inappropriate(){
          //se for aluno ele traz apanes as impróprias do próprio aluno
           if($this->Auth->user('role') != 1){
-           $this->set('publications', $this->Publication->find('all', array('conditions' => array("Publication.user_id" => $this->Auth->user('id'), "Publication.status" => 3)))); 
-         
+           $this->set('publications', $this->Publication->find('all', array('conditions' => array("Publication.user_id" => $this->Auth->user('id'), "Publication.status" => 3))));     
         }else{
             //senão, traz todas as publicações improprias
             $this->set('publications', $this->Publication->find('all', array('conditions' => array("Publication.status" => 3)))); 
