@@ -48,12 +48,52 @@ class UsersController extends AppController {
  * @param string $id
  * @return void
  */
-	public function view($id = null) {
+	public function view($id = null, $filter = null) {
+        $this->layout = 'userpage';
 		if (!$this->User->exists($id)) {
 			throw new NotFoundException(__('Invalid user'));
 		}
 		$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
 		$this->set('user', $this->User->find('first', $options));
+        
+    $this->set('users', $this->User->find('all', array('conditions' => array('User.id' => $this->Auth->user('id'))))); 
+     
+            if($this->Auth->user('id') == $id){
+                        $this->loadModel('Teacher');
+                        $this->loadModel('Matter');
+                        $options = array('conditions' => array('Teacher.user_id' => $this->Auth->user('id')));
+                        $teacher = $this->Teacher->find('first', $options);
+                         if( $this->Auth->user('role') == 1){
+                        $this->set('matter', $this->Matter->find('first', array('conditions' => array('Matter.id' => $teacher['Teacher']['matter_id'])))); 
+                        }
+                $this->loadModel('Publication');
+                        //todas as publicações sem filtro
+                        if($filter == null){
+                        
+                        $this->set('publications', $this->Publication->find('all', array('conditions' => array('Publication.user_id' => $this->Auth->user('id')))));        
+                            //todas as publicações Não avaliadas
+                        }else if($filter == 0){    
+                        $this->set('publications', $this->Publication->find('all', array('conditions' => array('Publication.user_id' => $this->Auth->user('id')), 'AND' => array('Publication.status' => 0))));
+                            
+                            //todas as publicações Aprovadas
+                        }else if($filter == 1){    
+                        $this->set('publications', $this->Publication->find('all', array('conditions' => array('Publication.user_id' => $this->Auth->user('id')), 'AND' => array('Publication.status' => 1))));
+                        
+                
+                            //todas as publicações Reprovadas
+                        }else if($filter == 2){    
+                        $this->set('publications', $this->Publication->find('all', array('conditions' => array('Publication.user_id' => $this->Auth->user('id')), 'AND' => array('Publication.status' => 2))));
+                            
+                            //todas as publicações Impróprias
+                        }else if($filter == 3){    
+                        $this->set('publications', $this->Publication->find('all', array('conditions' => array('Publication.user_id' => $this->Auth->user('id')), 'AND' => array('Publication.status' => 3))));
+                        }
+                
+            }else{
+                $this->Session->setFlash(__('Você não tem permissão para ver o perfil privado dados de outro usuário.'));
+				return $this->redirect(array('controller' => 'publications','action' => 'index')); 
+            }
+            
 	}
 
 /**
@@ -80,11 +120,13 @@ class UsersController extends AppController {
 			}*/
           if ($this->User->save($this->request->data)) {
               $this->Session->setFlash('O usuário foi cadastrado com sucesso!');
+              $this->redirect(array('action' => 'index'));
               //Login automático após o cadastro
               $this->Auth->login();
-              if($this->Auth->user('role') == 1){ // Professor
+              //Adicionar esse if após a verificação do email
+              //if($this->Auth->user('role') == 1){ // Professor
 			  	$this->redirect(array('controller' => 'teachers', 'action' => 'add',$this->Auth->user('id')));	
-              }
+              //}
 			}
 		}
 	}
@@ -124,6 +166,7 @@ class UsersController extends AppController {
  * @return void
  */
 	public function edit($id = null) {
+        $this->layout = 'userpage';
 		$this->User->id = $id;
         if (!$this->User->exists()) {
             $this->Session->setFlash("Usuário escolhido é inválido!");
@@ -142,6 +185,8 @@ class UsersController extends AppController {
 				return $this->redirect(array('action' => 'index')); 
         	}
         }
+            
+    $this->set('users', $this->User->find('all', array('conditions' => array('User.id' => $this->Auth->user('id')))));   
 	}
 
 /**
@@ -172,6 +217,8 @@ class UsersController extends AppController {
 
 	public function login() {
 	//	debug($this->request->data); die();
+        
+        
 		 if($this->Session->check('Auth.User')){
 			 $this->redirect($this->Auth->redirect());
 		 } else {

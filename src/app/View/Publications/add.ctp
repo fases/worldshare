@@ -1,5 +1,5 @@
 <div class="publications form">
-<?php echo $this->Form->create('Publication',array('type' => 'file'));?>
+<?php echo $this->Form->create('Publication'); ?>
 	<fieldset>
 		<legend><?php echo __('Add Publication'); ?></legend>
 	<?php
@@ -9,7 +9,6 @@
 		//echo $this->Form->input('user_id');
 		echo $this->Form->input('type_id');
 		echo $this->Form->input('matter_id');
-		echo $this->Form->file('Attachment.file',array('multiple','label' => false));
 		//echo $this->Form->input('status');
 		//echo $this->Form->input('teacher_id');
 		//echo $this->Form->input('text_review');

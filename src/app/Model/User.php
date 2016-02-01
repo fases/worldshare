@@ -106,7 +106,7 @@ class User extends AppModel {
  *
  * @var array
  */
-	public $hasMany = array(
+	public $hasOne = array(
 		'Comment' => array(
 			'className' => 'Comment',
 			'foreignKey' => 'user_id',

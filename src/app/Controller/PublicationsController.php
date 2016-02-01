@@ -13,7 +13,7 @@ class PublicationsController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator','Upload');
+	public $components = array('Paginator');
 
 /**
  * index method
@@ -21,6 +21,7 @@ class PublicationsController extends AppController {
  * @return void
  */
 	public function index() {
+        $this->layout = 'userpage';
 	$options = array(
       	'conditions' => array('Publication.status' => 1),
         'order' => array('Publication.registration' => 'DESC'),
@@ -31,6 +32,11 @@ class PublicationsController extends AppController {
     $publications = $this->paginate('Publication');
     // Envia os dados pra view
     $this->set('publications', $publications);
+        
+    $this->loadModel('User');    
+    $this->set('users', $this->User->find('all', array('conditions' => array('User.id' => $this->Auth->user('id')))));   
+        
+    
 	}
 
 /**
@@ -42,8 +48,7 @@ class PublicationsController extends AppController {
  */
 	public function view($id = null) {
 		if (!$this->Publication->exists($id)) {
-			$this->Session->setFlash('Publicação Inválida');
-      return $this->redirect(array('action' => 'index'));
+			throw new NotFoundException(__('Invalid publication'));
 		}
 		$options = array('conditions' => array('Publication.' . $this->Publication->primaryKey => $id));
 		$this->set('publication', $this->Publication->find('first', $options));
@@ -61,36 +66,26 @@ class PublicationsController extends AppController {
             // Faz com que as publicações dos professores não precisem ser verificadas     
             if( $this->Auth->user('role') == 1){
                  $this->request->data['Publication']['status'] = 1;
+            }else{
+                $this->request->data['Publication']['status'] = 0;
             }
-            // debug($this->request->data);
-            if ($this->Publication->save($this->request->data['Publication'])) {
-            	$this->loadModel('Attachment');                 
-  	if(!empty($this->request->data['Attachment']['file'])){
-    $this->Upload->upload($this->request->data['Attachment']['file']);
-    if(!is_null($this->request->data['Attachment']['file'])){
-      $nome = $this->request->data['Attachment']['file']['name'];
-      $arquivo = '/src/files/anexos/'.$nome;
-      $publication_id = $this->Publication->id;
-      $this->Attachment->query("INSERT INTO attachments (file,publication_id) VALUES ('$arquivo','$publication_id');");  
-
-      $this->Session->setFlash('O arquivo foi anexado!');
-      return $this->redirect(array('action' => 'index'));
-    }
-    
-	}
+            
+            if ($this->Publication->save($this->request->data)) {
 				$this->Session->setFlash(__('The publication has been saved.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The publication could not be saved. Please, try again.'));
 			}
-
 		}
 		$users = $this->Publication->User->find('list');
 		$types = $this->Publication->Type->find('list');
 		$matters = $this->Publication->Matter->find('list');
 		$teachers = $this->Publication->Teacher->find('list');
 		$this->set(compact('users', 'types', 'matters', 'teachers'));
-    
+                                                     
+        
+       
+        
 	}
 
 /**
@@ -157,7 +152,7 @@ class PublicationsController extends AppController {
 			}
 			return $this->redirect(array('action' => 'index'));
 		}else{
-        $this->Session->setFlash(__('Você não tem permissão para apagar a publicação de outro usuário.'));
+              $this->Session->setFlash(__('Você não tem permissão para apagar a publicação de outro usuário.'));
 			  return $this->redirect(array('action' => 'index')); 
         }
     }
@@ -175,7 +170,7 @@ class PublicationsController extends AppController {
         //Verifica se a publicação já foi avaliada
         if($status_atual != 0){
         	$this->Session->setFlash(__('A publicação já foi avaliada!'));
-           return $this->redirect(array('action' => 'noavaliable'));	
+           return $this->redirect(array('action' => 'index'));	
         }
             $this->loadModel('Teacher');
             $options = array('conditions' => array('Teacher.user_id' => $this->Auth->user('id')));
@@ -220,14 +215,8 @@ class PublicationsController extends AppController {
        
     }
     
-    public function profile($id = null){
-        //Outro usuário pode ver o perfil?
-        $this->Publication->id = $id;
-        if($this->Publication->exists()){
-          $this->set('publications', $this->Publication->find('all', array('conditions' => array("Publication.user_id" => $id,"Publication.status" => 1))));  
-        }else{
-          $this->set('publications', $this->Publication->find('all', array('conditions' => array("Publication.user_id" => $this->Auth->user('id')))));  
-        }    
+    public function profile(){
+        $this->set('publications', $this->Publication->find('all', array('conditions' => array("Publication.user_id" => $this->Auth->user('id')))));
     }
     public function disapproved(){
           //se for aluno ele traz apanes as reprovado do próprio aluno
@@ -243,7 +232,8 @@ class PublicationsController extends AppController {
      public function inappropriate(){
          //se for aluno ele traz apanes as impróprias do próprio aluno
           if($this->Auth->user('role') != 1){
-           $this->set('publications', $this->Publication->find('all', array('conditions' => array("Publication.user_id" => $this->Auth->user('id'), "Publication.status" => 3))));     
+           $this->set('publications', $this->Publication->find('all', array('conditions' => array("Publication.user_id" => $this->Auth->user('id'), "Publication.status" => 3)))); 
+         
         }else{
             //senão, traz todas as publicações improprias
             $this->set('publications', $this->Publication->find('all', array('conditions' => array("Publication.status" => 3)))); 
