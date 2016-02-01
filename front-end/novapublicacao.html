@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AdminLTE 2 | Compose Message</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.5 -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- fullCalendar 2.2.5-->
+    <link rel="stylesheet" href="plugins/fullcalendar/fullcalendar.min.css">
+    <link rel="stylesheet" href="plugins/fullcalendar/fullcalendar.print.css" media="print">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="plugins/iCheck/flat/blue.css">
+    <!-- bootstrap wysihtml5 - text editor -->
+    <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+
+      <header class="main-header">
+        <!-- Logo -->
+        <a href="index2.html" class="logo">
+          <!-- mini logo for sidebar mini 50x50 pixels -->
+          <span class="logo-mini"><b>W</b>SH</span>
+          <!-- logo for regular state and mobile devices -->
+          <span class="logo-lg"><b>World</b>SHARE</span>
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top" role="navigation">
+          <!-- Sidebar toggle button-->
+          
+            
+            
+          <div class="navbar-custom-menu">
+              
+            <ul class="nav navbar-nav">
+              <!-- Messages: style can be found in dropdown.less-->   
+
+                <li class="dropdown messages-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="fa fa-envelope-o"></i>
+                  <span class="label label-success">4</span>
+                </a>
+               
+              </li>
+              <!-- Notifications: style can be found in dropdown.less -->
+              <li class="dropdown notifications-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="fa fa-bell-o"></i>
+                  <span class="label label-warning">10</span>
+                </a>
+               
+              </li>
+              <!-- Tasks: style can be found in dropdown.less -->
+              <li class="dropdown tasks-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="fa fa-flag-o"></i>
+                  <span class="label label-danger">9</span>
+                </a>
+             
+              </li>
+              <!-- User Account: style can be found in dropdown.less -->
+              
+                <li class="dropdown user user-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                  <span class="hidden-xs">Alexander Pierce</span>
+                </a>
+                
+                  <ul class="dropdown-menu">
+                  <!-- User image -->
+                  <li class="user-header">
+                    <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                    <p>
+                      Alexander Pierce - Web Developer
+                      <small>Member since Nov. 2012</small>
+                    </p>
+                  </li>
+                  <!-- Menu Body -->
+                  <li class="user-body">
+                    <div class="col-xs-12 text-center">
+                      <a href="#">Publicações</a>
+                    </div>
+                      
+                  </li>
+                  <!-- Menu Footer-->
+                  <li class="user-footer">
+                    <div class="pull-left">
+                      <a href="#" class="btn btn-default btn-flat">Perfil</a>
+                    </div>
+                    <div class="pull-right">
+                      <a href="#" class="btn btn-default btn-flat">Sair</a>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+                              <!-- Control Sidebar Toggle Button -->
+            </ul>
+          </div>
+            <div class="col-lg-4">
+              <!-- search form -->
+          <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+              <input type="text" name="q" class="form-control" placeholder="Search...">
+              <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+              </span>
+            </div>
+          </form>
+          <!-- /.search form -->  
+        
+            </div>
+        </nav>
+      </header>
+      <!-- Left side column. contains the logo and sidebar -->
+      <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+          <!-- Sidebar user panel -->
+          <div class="user-panel">
+            <div class="pull-left image">
+              <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+            </div>
+            <div class="pull-left info">
+              <p>Nome do Usuário</p>
+              <a href="#"><i class="fa fa-circle text-success"></i>Aluno</a>
+            </div>
+          </div>
+         <br />
+          <!-- sidebar menu: : style can be found in sidebar.less -->
+          <ul class="sidebar-menu">
+            
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-newspaper-o"></i> <span>Linha do Tempo</span> 
+              </a>
+            </li>
+              <li class="treeview">
+              <a href="#">
+                <i class="fa fa-edit"></i> <span>Criar nova publicação...</span> 
+              </a>
+            </li>
+            <li class="header">PERFIL</li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-list-alt"></i>
+                <span>Editar</span>
+              </a>
+            </li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-lock"></i>
+                <span>Alterar Senha</span>
+              </a>
+            </li>
+            <li class="header">PUBLICAÇÕES</li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-file-text-o"></i>
+                <span>Todas</span>
+              </a>
+              
+            </li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-circle text-green"></i>
+                <span>Aprovadas</span>
+              </a>
+              
+            </li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-circle text-aqua"></i>
+                <span>Não avalidas</span>
+              </a>
+              
+            </li>
+             <li class="treeview">
+              <a href="#">
+                <i class="fa fa-circle text-red"></i>
+                <span>Reprovadas</span>
+              </a>
+              
+            </li>  
+            <li class="header">OPÇÕES</li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa  fa-sign-out"></i>
+                <span>Sair</span>
+              </a>
+              
+            </li>    
+            
+          </ul>
+        </section>
+        <!-- /.sidebar -->
+      </aside>
+
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            Nova Publicação
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Nova Publicação</li>
+          </ol>
+        </section>
+
+        <!-- Main content -->
+         <!-- Main content -->
+        <section class="content">
+          <div class="row">
+           
+            <div class="box box-primary">
+                </div><!-- /.box-header -->
+            <div class="col-md-8 col-md-offset-2">
+             <div class="box box-success">
+              <div class="box-header with-border">
+                <div class="box-body">
+                  <div class="form-group">
+                      <label>Título</label>
+                    <input class="form-control" placeholder="Titulo">
+                  </div>
+                  <div class="form-group">
+                     <div class="form-group">
+                      <label>Disciplina</label>
+                      <select class="form-control">
+                        <option>option 1</option>
+                        <option>option 2</option>
+                        <option>option 3</option>
+                        <option>option 4</option>
+                        <option>option 5</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label> Texto</label>  
+                    <textarea id="compose-textarea" class="form-control" style="height: 200px">
+                    But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure? On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee.
+                      
+                    </textarea>
+                  </div>
+                    <label> Upload de arquivos</label>
+                  <div class="form-group">
+                    <div class="btn btn-default btn-file">
+                        
+                      <i class="fa fa-paperclip"></i> Arquivo
+                      <input type="file" name="attachment">
+                    </div>
+                    <p class="help-block">Max. 32MB</p>
+                  </div>
+                </div><!-- /.box-body -->
+               
+                  <div class=" box-footer">
+
+                    <button type="submit" class="btn btn-default pull-right"><i class="fa fa-mail-reply "></i> Voltar</button>
+                    <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-edit"></i> Publicar</button>
+                  </div>
+                  
+                
+              </div><!-- /. box -->
+            </div>
+          </div>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </section><!-- /.content -->
+      </div><!-- /.content-wrapper -->
+      <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+          <b>Version</b> 2.3.0
+        </div>
+        <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
+      </footer>
+
+      <!-- Control Sidebar -->
+      <aside class="control-sidebar control-sidebar-dark">
+        <!-- Create the tabs -->
+        <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+          <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+          <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+        </ul>
+       
+        </div>
+      </aside><!-- /.control-sidebar -->
+      <!-- Add the sidebar's background. This div must be placed
+           immediately after the control sidebar -->
+      <div class="control-sidebar-bg"></div>
+    </div><!-- ./wrapper -->
+
+    <!-- jQuery 2.1.4 -->
+    <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <!-- Bootstrap 3.3.5 -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <!-- Slimscroll -->
+    <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <script src="plugins/fastclick/fastclick.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="dist/js/app.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="dist/js/demo.js"></script>
+    <!-- iCheck -->
+    <script src="plugins/iCheck/icheck.min.js"></script>
+    <!-- Bootstrap WYSIHTML5 -->
+<!--    <script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>-->
+    <!-- Page Script -->
+    <script>
+      $(function () {
+        //Add text editor
+        $("#compose-textarea").wysihtml5();
+      });
+    </script>
+  </body>
+</html>

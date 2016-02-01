@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
-    <title>AdminLTE 2 | User Profile</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AdminLTE 2 | Dashboard</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -16,6 +17,18 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="../../plugins/iCheck/flat/blue.css">
+    <!-- Morris chart -->
+    <link rel="stylesheet" href="../../plugins/morris/morris.css">
+    <!-- jvectormap -->
+    <link rel="stylesheet" href="../../plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+    <!-- Date Picker -->
+    <link rel="stylesheet" href="../../plugins/datepicker/datepicker3.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker-bs3.css">
+    <!-- bootstrap wysihtml5 - text editor -->
+    <link rel="stylesheet" href="../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -29,98 +42,29 @@
 
       <header class="main-header">
         <!-- Logo -->
-        <a href="../../index2.html" class="logo">
+        <a href="index2.html" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>W</b>SH</span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg"><b>World</b>LTE</span>
+          <span class="logo-lg"><b>World</b>SHARE</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button-->
-          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
+          
+            
+            
           <div class="navbar-custom-menu">
+              
             <ul class="nav navbar-nav">
-              <!-- Messages: style can be found in dropdown.less-->
-              <li class="dropdown messages-menu">
+              <!-- Messages: style can be found in dropdown.less-->   
+
+                <li class="dropdown messages-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <i class="fa fa-envelope-o"></i>
                   <span class="label label-success">4</span>
                 </a>
-                <ul class="dropdown-menu">
-                  <li class="header">You have 4 messages</li>
-                  <li>
-                    <!-- inner menu: contains the actual data -->
-                    <ul class="menu">
-                      <li><!-- start message -->
-                        <a href="#">
-                          <div class="pull-left">
-                            <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                          </div>
-                          <h4>
-                            Support Team
-                            <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                          </h4>
-                          <p>Why not buy a new awesome theme?</p>
-                        </a>
-                      </li><!-- end message -->
-                      <li>
-                        <a href="#">
-                          <div class="pull-left">
-                            <img src="../../dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
-                          </div>
-                          <h4>
-                            AdminLTE Design Team
-                            <small><i class="fa fa-clock-o"></i> 2 hours</small>
-                          </h4>
-                          <p>Why not buy a new awesome theme?</p>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <div class="pull-left">
-                            <img src="../../dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
-                          </div>
-                          <h4>
-                            Developers
-                            <small><i class="fa fa-clock-o"></i> Today</small>
-                          </h4>
-                          <p>Why not buy a new awesome theme?</p>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <div class="pull-left">
-                            <img src="../../dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
-                          </div>
-                          <h4>
-                            Sales Department
-                            <small><i class="fa fa-clock-o"></i> Yesterday</small>
-                          </h4>
-                          <p>Why not buy a new awesome theme?</p>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <div class="pull-left">
-                            <img src="../../dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
-                          </div>
-                          <h4>
-                            Reviewers
-                            <small><i class="fa fa-clock-o"></i> 2 days</small>
-                          </h4>
-                          <p>Why not buy a new awesome theme?</p>
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li class="footer"><a href="#">See All Messages</a></li>
-                </ul>
+               
               </li>
               <!-- Notifications: style can be found in dropdown.less -->
               <li class="dropdown notifications-menu">
@@ -128,40 +72,7 @@
                   <i class="fa fa-bell-o"></i>
                   <span class="label label-warning">10</span>
                 </a>
-                <ul class="dropdown-menu">
-                  <li class="header">You have 10 notifications</li>
-                  <li>
-                    <!-- inner menu: contains the actual data -->
-                    <ul class="menu">
-                      <li>
-                        <a href="#">
-                          <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the page and may cause design problems
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i class="fa fa-users text-red"></i> 5 new members joined
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i class="fa fa-shopping-cart text-green"></i> 25 sales made
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i class="fa fa-user text-red"></i> You changed your username
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li class="footer"><a href="#">View all</a></li>
-                </ul>
+               
               </li>
               <!-- Tasks: style can be found in dropdown.less -->
               <li class="dropdown tasks-menu">
@@ -169,84 +80,31 @@
                   <i class="fa fa-flag-o"></i>
                   <span class="label label-danger">9</span>
                 </a>
-                <ul class="dropdown-menu">
-                  <li class="header">You have 9 tasks</li>
-                  <li>
-                    <!-- inner menu: contains the actual data -->
-                    <ul class="menu">
-                      <li><!-- Task item -->
-                        <a href="#">
-                          <h3>
-                            Design some buttons
-                            <small class="pull-right">20%</small>
-                          </h3>
-                          <div class="progress xs">
-                            <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                              <span class="sr-only">20% Complete</span>
-                            </div>
-                          </div>
-                        </a>
-                      </li><!-- end task item -->
-                      <li><!-- Task item -->
-                        <a href="#">
-                          <h3>
-                            Create a nice theme
-                            <small class="pull-right">40%</small>
-                          </h3>
-                          <div class="progress xs">
-                            <div class="progress-bar progress-bar-green" style="width: 40%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                              <span class="sr-only">40% Complete</span>
-                            </div>
-                          </div>
-                        </a>
-                      </li><!-- end task item -->
-                      <li><!-- Task item -->
-                        <a href="#">
-                          <h3>
-                            Some task I need to do
-                            <small class="pull-right">60%</small>
-                          </h3>
-                          <div class="progress xs">
-                            <div class="progress-bar progress-bar-red" style="width: 60%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                              <span class="sr-only">60% Complete</span>
-                            </div>
-                          </div>
-                        </a>
-                      </li><!-- end task item -->
-                      <li><!-- Task item -->
-                        <a href="#">
-                          <h3>
-                            Make beautiful transitions
-                            <small class="pull-right">80%</small>
-                          </h3>
-                          <div class="progress xs">
-                            <div class="progress-bar progress-bar-yellow" style="width: 80%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                              <span class="sr-only">80% Complete</span>
-                            </div>
-                          </div>
-                        </a>
-                      </li><!-- end task item -->
-                    </ul>
-                  </li>
-                  <li class="footer">
-                    <a href="#">View all tasks</a>
-                  </li>
-                </ul>
+             
               </li>
               <!-- User Account: style can be found in dropdown.less -->
-              <li class="dropdown user user-menu">
+              
+                <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
                   <span class="hidden-xs">Alexander Pierce</span>
                 </a>
-                <ul class="dropdown-menu">
+                
+                  <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
                     <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                     <p>
-                      Alexander Pierce
-                      <small> Data Registro</small>
+                      Alexander Pierce - Web Developer
+                      <small>Member since Nov. 2012</small>
                     </p>
+                  </li>
+                  <!-- Menu Body -->
+                  <li class="user-body">
+                    <div class="col-xs-12 text-center">
+                      <a href="#">Publicações</a>
+                    </div>
+                      
                   </li>
                   <!-- Menu Footer-->
                   <li class="user-footer">
@@ -254,17 +112,27 @@
                       <a href="#" class="btn btn-default btn-flat">Perfil</a>
                     </div>
                     <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">Logout</a>
+                      <a href="#" class="btn btn-default btn-flat">Sair</a>
                     </div>
                   </li>
                 </ul>
               </li>
-              <!-- Control Sidebar Toggle Button -->
-              <li>
-                <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-              </li>
+                              <!-- Control Sidebar Toggle Button -->
             </ul>
           </div>
+            <div class="col-lg-4">
+              <!-- search form -->
+          <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+              <input type="text" name="q" class="form-control" placeholder="Search...">
+              <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+              </span>
+            </div>
+          </form>
+          <!-- /.search form -->  
+        
+            </div>
         </nav>
       </header>
       <!-- Left side column. contains the logo and sidebar -->
@@ -277,155 +145,75 @@
               <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-              <p>Alexander Pierce</p>
-              <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+              <p>Nome do Usuário</p>
+              <a href="#"><i class="fa fa-circle text-success"></i>Aluno</a>
             </div>
           </div>
-          <!-- search form -->
-          <form action="#" method="get" class="sidebar-form">
-            <div class="input-group">
-              <input type="text" name="q" class="form-control" placeholder="Search...">
-              <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
-              </span>
-            </div>
-          </form>
-          <!-- /.search form -->
+         <br />
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
-            <li class="header">MAIN NAVIGATION</li>
+            
             <li class="treeview">
               <a href="#">
-                <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-newspaper-o"></i> <span>Linha do Tempo</span> 
               </a>
-              <ul class="treeview-menu">
-                <li><a href="../../index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-                <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
-              </ul>
             </li>
+              <li class="treeview">
+              <a href="#">
+                <i class="fa fa-edit"></i> <span>Criar nova publicação...</span> 
+              </a>
+            </li>
+            <li class="header">PERFIL</li>
             <li class="treeview">
               <a href="#">
-                <i class="fa fa-files-o"></i>
-                <span>Layout Options</span>
-                <span class="label label-primary pull-right">4</span>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="../layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
-                <li><a href="../layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
-                <li><a href="../layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
-              </ul>
-            </li>
-            <li>
-              <a href="../widgets.html">
-                <i class="fa fa-th"></i> <span>Widgets</span> <small class="label pull-right bg-green">new</small>
+                <i class="fa fa-list-alt"></i>
+                <span>Editar</span>
               </a>
             </li>
             <li class="treeview">
               <a href="#">
-                <i class="fa fa-pie-chart"></i>
-                <span>Charts</span>
-                <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-lock"></i>
+                <span>Alterar Senha</span>
               </a>
-              <ul class="treeview-menu">
-                <li><a href="../charts/chartjs.html"><i class="fa fa-circle-o"></i> ChartJS</a></li>
-                <li><a href="../charts/morris.html"><i class="fa fa-circle-o"></i> Morris</a></li>
-                <li><a href="../charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
-                <li><a href="../charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
-                <li><a href="../layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
-              </ul>
+            </li>
+            <li class="header">PUBLICAÇÕES</li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-file-text-o"></i>
+                <span>Todas</span>
+              </a>
+              
             </li>
             <li class="treeview">
               <a href="#">
-                <i class="fa fa-laptop"></i>
-                <span>UI Elements</span>
-                <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-circle text-green"></i>
+                <span>Aprovadas</span>
               </a>
-              <ul class="treeview-menu">
-                <li><a href="../UI/general.html"><i class="fa fa-circle-o"></i> General</a></li>
-                <li><a href="../UI/icons.html"><i class="fa fa-circle-o"></i> Icons</a></li>
-                <li><a href="../UI/buttons.html"><i class="fa fa-circle-o"></i> Buttons</a></li>
-                <li><a href="../UI/sliders.html"><i class="fa fa-circle-o"></i> Sliders</a></li>
-                <li><a href="../UI/timeline.html"><i class="fa fa-circle-o"></i> Timeline</a></li>
-                <li><a href="../UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>
-              </ul>
+              
             </li>
             <li class="treeview">
               <a href="#">
-                <i class="fa fa-edit"></i> <span>Forms</span>
-                <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-circle text-aqua"></i>
+                <span>Não avalidas</span>
               </a>
-              <ul class="treeview-menu">
-                <li><a href="../forms/general.html"><i class="fa fa-circle-o"></i> General Elements</a></li>
-                <li><a href="../forms/advanced.html"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
-                <li><a href="../forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
-              </ul>
+              
             </li>
+             <li class="treeview">
+              <a href="#">
+                <i class="fa fa-circle text-red"></i>
+                <span>Reprovadas</span>
+              </a>
+              
+            </li>  
+            <li class="header">OPÇÕES</li>
             <li class="treeview">
               <a href="#">
-                <i class="fa fa-table"></i> <span>Tables</span>
-                <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa  fa-sign-out"></i>
+                <span>Sair</span>
               </a>
-              <ul class="treeview-menu">
-                <li><a href="../tables/simple.html"><i class="fa fa-circle-o"></i> Simple tables</a></li>
-                <li><a href="../tables/data.html"><i class="fa fa-circle-o"></i> Data tables</a></li>
-              </ul>
-            </li>
-            <li>
-              <a href="../calendar.html">
-                <i class="fa fa-calendar"></i> <span>Calendar</span>
-                <small class="label pull-right bg-red">3</small>
-              </a>
-            </li>
-            <li>
-              <a href="../mailbox/mailbox.html">
-                <i class="fa fa-envelope"></i> <span>Mailbox</span>
-                <small class="label pull-right bg-yellow">12</small>
-              </a>
-            </li>
-            <li class="treeview active">
-              <a href="#">
-                <i class="fa fa-folder"></i> <span>Examples</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="invoice.html"><i class="fa fa-circle-o"></i> Invoice</a></li>
-                <li class="active"><a href="profile.html"><i class="fa fa-circle-o"></i> Profile</a></li>
-                <li><a href="login.html"><i class="fa fa-circle-o"></i> Login</a></li>
-                <li><a href="register.html"><i class="fa fa-circle-o"></i> Register</a></li>
-                <li><a href="lockscreen.html"><i class="fa fa-circle-o"></i> Lockscreen</a></li>
-                <li><a href="404.html"><i class="fa fa-circle-o"></i> 404 Error</a></li>
-                <li><a href="500.html"><i class="fa fa-circle-o"></i> 500 Error</a></li>
-                <li><a href="blank.html"><i class="fa fa-circle-o"></i> Blank Page</a></li>
-              </ul>
-            </li>
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-share"></i> <span>Multilevel</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-                <li>
-                  <a href="#"><i class="fa fa-circle-o"></i> Level One <i class="fa fa-angle-left pull-right"></i></a>
-                  <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
-                    <li>
-                      <a href="#"><i class="fa fa-circle-o"></i> Level Two <i class="fa fa-angle-left pull-right"></i></a>
-                      <ul class="treeview-menu">
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-              </ul>
-            </li>
-            <li><a href="../../documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
-            <li class="header">LABELS</li>
-            <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-            <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-            <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
+              
+            </li>    
+            
           </ul>
         </section>
         <!-- /.sidebar -->
@@ -436,12 +224,12 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Perfil
+            User Profile
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="#">Examples</a></li>
-            <li class="active">Perfil</li>
+            <li class="active">User profile</li>
           </ol>
         </section>
 
@@ -454,7 +242,7 @@
               <!-- Profile Image -->
               <div class="box box-primary">
                 <div class="box-body box-profile">
-                  <img class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture">
+                  <img class="profile-user-img img-responsive img-circle" src="../../dist/img/user2-160x160.jpg" alt="User profile picture">
                   <h3 class="profile-username text-center">Nina Mcintire</h3>
                   <p class="text-muted text-center">Tipo de Usuário</p>
                 </div><!-- /.box-body -->
@@ -466,30 +254,22 @@
                   <h3 class="box-title">Sobre mim</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <strong><i class="fa fa-book margin-r-5"></i> Local de Ensino </strong>
+                  <strong><i class="fa fa-book margin-r-5"></i> Ensino </strong>
                   <p class="text-muted">
                     IFRN - Natal Zona Norte
                   </p>
-                  <hr>
-                  <strong><i class="fa fa-envelope margin-r-5"></i> E-mail</strong>
-                  <p class="text-muted">endereco@ifrn.edu.br</p>
-                  <hr>
-                  <strong><i class="fa fa-calendar"></i> Membro desde </strong>
-                  <p class="text-muted">
-                    12/08/2016
-                  </p>
-                  <hr>
-                  <strong><i class="fa fa-graduation-cap"></i> Tipo </strong>
-                  <!-- Para aluno  fa-user -->
-                  <p class="text-muted">
-                    Professor
-                  </p>
+
                   <hr>
 
-                  <strong><i class="fa fa-calendar"></i> Matéria </strong>
-                  <p class="text-muted">
-                    Português
-                  </p>
+                  <strong><i class="fa fa-envelope margin-r-5"></i> E-mail</strong>
+                  <p class="text-muted">endereco@ifrn.edu.br</p>
+
+                  <hr>
+                  
+
+                  <strong><i class="fa fa-envelope margin-r-5"></i> Telefone</strong>
+                  <p class="text-muted">988876768</p>
+
                   <hr>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
@@ -497,21 +277,24 @@
             <div class="col-md-9">
               <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
-                  <li class="active"><a href="#activity" data-toggle="tab">Activity</a></li>
-                  <li><a href="#timeline" data-toggle="tab">Timeline</a></li>
-                  <li><a href="#settings" data-toggle="tab">Settings</a></li>
+                  <li class="active"><a href="#activity" data-toggle="tab">Minhas Publicações</a></li>
+                  <li><a href="#settings" data-toggle="tab">Configurações</li>
                 </ul>
                 <div class="tab-content">
                   <div class="active tab-pane" id="activity">
                     <!-- Post -->
-                    <div class="post">
+                    <div class="post ">
                       <div class="user-block">
-                        <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">
-                        <span class='username'>
-                          <a href="#">Upload de Fotos</a>
                           
+                        <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">
+                        
+                          <span class='username'>
+                          <a href="#">Jonathan Burke Jr.</a>
+                          <a href='#' class='pull-right label label-success'>Aprovada</a>
                         </span>
-                        <span class='description'><a href="">Jonathan Ackles</a> - 12/08/2015</span>
+                          
+                        <span class='description'>Shared publicly - 7:30 PM today</span>
+                          
                       </div><!-- /.user-block -->
                       <p>
                         Lorem ipsum represents a long-held tradition for designers,
@@ -521,10 +304,25 @@
                         to Charlie Sheen fans.
                       </p>
                       <ul class="list-inline">
-                        <li><a href="#" class="link-black text-sm"><i class="fa fa-star"></i> Like</a></li>
+                        <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a></li>
+                        <li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> Like</a></li>
                         <li class="pull-right"><a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comments (5)</a></li>
                       </ul>
-
+                        <hr>
+                        <div class="user-block">
+                          
+                        <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">
+                        
+                          <span class='username'>
+                          <a href="#">Jonathan Burke Jr.</a>
+                          
+                        </span>
+                          
+                        <span class='description'>Lorem ipsum represents a long-held tradition for designers,
+                        typographers and the like.</span>
+                          
+                      </div><!-- /.user-block -->
+                      <p>
                       <input class="form-control input-sm" type="text" placeholder="Type a comment">
                     </div><!-- /.post -->
 
@@ -534,9 +332,10 @@
                         <img class='img-circle img-bordered-sm' src='../../dist/img/user7-128x128.jpg' alt='user image'>
                         <span class='username'>
                           <a href="#">Sarah Ross</a>
-                          
+<!--                          <a href='#' class='pull-right btn-box-tool'><i class='fa fa-times'></i></a>-->
+                             <a href='#' class='pull-right label label-success'>Aprovada</a>
                         </span>
-                        <span class='description'><a href="">Sarah Ross</a> - 12/08/2015</span>
+                        <span class='description'>Sent you a message - 3 days ago</span>
                       </div><!-- /.user-block -->
                       <p>
                         Lorem ipsum represents a long-held tradition for designers,
@@ -545,7 +344,11 @@
                         tools to help create filler text for everyone from bacon lovers
                         to Charlie Sheen fans.
                       </p>
-
+                        <ul class="list-inline">
+                        <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a></li>
+                        <li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> Like</a></li>
+                        <li class="pull-right"><a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comments (5)</a></li>
+                      </ul>
                       <form class='form-horizontal'>
                         <div class='form-group margin-bottom-none'>
                           <div class='col-sm-9'>
@@ -564,7 +367,7 @@
                         <img class='img-circle img-bordered-sm' src='../../dist/img/user6-128x128.jpg' alt='user image'>
                         <span class='username'>
                           <a href="#">Adam Jones</a>
-                          
+                          <a href='#' class='pull-right btn-box-tool'><i class='fa fa-times'></i></a>
                         </span>
                         <span class='description'>Posted 5 photos - 5 days ago</span>
                       </div><!-- /.user-block -->
@@ -597,88 +400,7 @@
                       <input class="form-control input-sm" type="text" placeholder="Type a comment">
                     </div><!-- /.post -->
                   </div><!-- /.tab-pane -->
-                  <div class="tab-pane" id="timeline">
-                    <!-- The timeline -->
-                    <ul class="timeline timeline-inverse">
-                      <!-- timeline time label -->
-                      <li class="time-label">
-                        <span class="bg-red">
-                          10 Feb. 2014
-                        </span>
-                      </li>
-                      <!-- /.timeline-label -->
-                      <!-- timeline item -->
-                      <li>
-                        <i class="fa fa-envelope bg-blue"></i>
-                        <div class="timeline-item">
-                          <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
-                          <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
-                          <div class="timeline-body">
-                            Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                            weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                            jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                            quora plaxo ideeli hulu weebly balihoo...
-                          </div>
-                          <div class="timeline-footer">
-                            <a class="btn btn-primary btn-xs">Read more</a>
-                            <a class="btn btn-danger btn-xs">Delete</a>
-                          </div>
-                        </div>
-                      </li>
-                      <!-- END timeline item -->
-                      <!-- timeline item -->
-                      <li>
-                        <i class="fa fa-user bg-aqua"></i>
-                        <div class="timeline-item">
-                          <span class="time"><i class="fa fa-clock-o"></i> 5 mins ago</span>
-                          <h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted your friend request</h3>
-                        </div>
-                      </li>
-                      <!-- END timeline item -->
-                      <!-- timeline item -->
-                      <li>
-                        <i class="fa fa-comments bg-yellow"></i>
-                        <div class="timeline-item">
-                          <span class="time"><i class="fa fa-clock-o"></i> 27 mins ago</span>
-                          <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
-                          <div class="timeline-body">
-                            Take me to your leader!
-                            Switzerland is small and neutral!
-                            We are more like Germany, ambitious and misunderstood!
-                          </div>
-                          <div class="timeline-footer">
-                            <a class="btn btn-warning btn-flat btn-xs">View comment</a>
-                          </div>
-                        </div>
-                      </li>
-                      <!-- END timeline item -->
-                      <!-- timeline time label -->
-                      <li class="time-label">
-                        <span class="bg-green">
-                          3 Jan. 2014
-                        </span>
-                      </li>
-                      <!-- /.timeline-label -->
-                      <!-- timeline item -->
-                      <li>
-                        <i class="fa fa-camera bg-purple"></i>
-                        <div class="timeline-item">
-                          <span class="time"><i class="fa fa-clock-o"></i> 2 days ago</span>
-                          <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
-                          <div class="timeline-body">
-                            <img src="http://placehold.it/150x100" alt="..." class="margin">
-                            <img src="http://placehold.it/150x100" alt="..." class="margin">
-                            <img src="http://placehold.it/150x100" alt="..." class="margin">
-                            <img src="http://placehold.it/150x100" alt="..." class="margin">
-                          </div>
-                        </div>
-                      </li>
-                      <!-- END timeline item -->
-                      <li>
-                        <i class="fa fa-clock-o bg-gray"></i>
-                      </li>
-                    </ul>
-                  </div><!-- /.tab-pane -->
+                
 
                   <div class="tab-pane" id="settings">
                     <form class="form-horizontal">

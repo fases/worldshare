@@ -3,20 +3,27 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | General Form Elements</title>
+    <title>AdminLTE 2 | Compose Message</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
-    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- fullCalendar 2.2.5-->
+    <link rel="stylesheet" href="plugins/fullcalendar/fullcalendar.min.css">
+    <link rel="stylesheet" href="plugins/fullcalendar/fullcalendar.print.css" media="print">
     <!-- Theme style -->
-    <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="plugins/iCheck/flat/blue.css">
+    <!-- bootstrap wysihtml5 - text editor -->
+    <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -225,9 +232,10 @@
         <section class="content">
           <div class="row">            
             <!-- right column -->
-            <div class="col-md-10 col-md-offset-1">
-              <!-- Horizontal Form -->
-              <div class="box box-info">
+            <div class="box box-primary">
+                </div><!-- /.box-header -->
+            <div class="col-md-8 col-md-offset-2">
+             <div class="box box-success">
                 <div class="box-header with-border">
                   <h3 class="box-title"> Alterar Perfil</h3>
                 </div><!-- /.box-header -->
@@ -277,7 +285,7 @@
                   </div><!-- /.box-body -->
                   <div class="box-footer">
                     <button type="submit" class="btn btn-default pull-right">Cancelar</button>
-                    <button type="submit" class="btn btn-info pull-right">Alterar</button>
+                    <button type="submit" class="btn btn-success pull-right">Alterar</button>
                   </div><!-- /.box-footer -->
                 </form>
               </div><!-- /.box -->
@@ -295,14 +303,14 @@
       </footer>
 
     <!-- jQuery 2.1.4 -->
-    <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- Bootstrap 3.3.5 -->
-    <script src="../../bootstrap/js/bootstrap.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
     <!-- FastClick -->
-    <script src="../../plugins/fastclick/fastclick.min.js"></script>
+    <script src="plugins/fastclick/fastclick.min.js"></script>
     <!-- AdminLTE App -->
-    <script src="../../dist/js/app.min.js"></script>
+    <script src="dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="../../dist/js/demo.js"></script>
+    <script src="dist/js/demo.js"></script>
   </body>
 </html>
