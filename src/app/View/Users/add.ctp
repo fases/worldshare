@@ -26,12 +26,10 @@
         <p class="login-box-msg"> Registrar</p>
         
         
-              
+              <?php echo $this->Session->flash(); ?>
               <?php echo $this->Form->create('User');
 		
 		echo $this->Form->input('ativo', array('type' => 'hidden','value'=>'0'));
-             
-		echo $this->Form->input('registration');
           ?>
             <div class="form-group has-feedback">
 	          <?php
@@ -49,12 +47,12 @@
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
           </div>
             <div class="form-group has-feedback">
-              <?php echo $this->Form->input('phone', array('label' => false, 'type' => 'number' , 'class' => 'form-control', 'placeholder' => 'Telefone'));     ?>  
+              <?php echo $this->Form->input('phone', array('label' => false, 'class' => 'form-control', 'placeholder' => 'Telefone'));     ?>  
             <span class="glyphicon glyphicon-earphone form-control-feedback"></span>
           </div>
 <!--            Mudar de address para enrollment no banco-->
             <div class="form-group has-feedback">
-              <?php echo $this->Form->input('address', array('label' => false, 'type' => 'number' , 'class' => 'form-control', 'placeholder' => 'Matrícula'));     ?>  
+              <?php echo $this->Form->input('address', array('label' => false,'class' => 'form-control', 'placeholder' => 'Matrícula'));     ?>  
              <span class="fa fa-mortar-board form-control-feedback"></span>
           </div>
             <div class="form-group has-feedback">
@@ -98,5 +96,5 @@
   </body>
 </html>
 
-?>
+
 

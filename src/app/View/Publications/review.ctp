@@ -1,36 +1,60 @@
-<div class="publications form">
-<?php echo $this->Form->create('Publication'); ?>
-	<fieldset>
-		<legend><?php echo __('Review Publication'); ?></legend>
-	<?php
-		echo $this->Form->input('id');
-		echo $this->Form->input('registration');
-		echo $this->Form->input('status', array('label' => 'Avaliable', 'options' => array("Não avaliada", "Aprovada", "Reprovada", "Imprópria")));
-		echo $this->Form->input('text_review',array('rows' => '5'));
-		// echo $this->Form->input('old_publication');
-	?>
-	</fieldset>
-<?php echo $this->Form->end(__('Submit')); ?>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Título da publicação
+            <small> Autor</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Publicação</a></li>
+            <li class="active"> Avaliar Publicação</li>
+        </ol>
+    </section>
 
-		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Publication.id')), array('confirm' => __('Are you sure you want to delete # %s?', $this->Form->value('Publication.id')))); ?></li>
-		<li><?php echo $this->Html->link(__('List Publications'), array('action' => 'index')); ?></li>
-		<li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Types'), array('controller' => 'types', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Type'), array('controller' => 'types', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Matters'), array('controller' => 'matters', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Matter'), array('controller' => 'matters', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Teachers'), array('controller' => 'teachers', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Teacher'), array('controller' => 'teachers', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Attachments'), array('controller' => 'attachments', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Attachment'), array('controller' => 'attachments', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Comments'), array('controller' => 'comments', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Comment'), array('controller' => 'comments', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Ratings'), array('controller' => 'ratings', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Rating'), array('controller' => 'ratings', 'action' => 'add')); ?> </li>
-	</ul>
-</div>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">            
+            <!-- right column -->
+            <div class="col-md-10 col-md-offset-1">
+                <!-- Horizontal Form -->
+                <div class="box box-warning">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"> Avaliar Publicação</h3>
+                    </div><!-- /.box-header -->
+                    <!-- form start -->
+                    <form class="form-horizontal">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="inputAddress3" class="col-sm-2 control-label">Status</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" id="sel1" >
+                                        <option>Não avaliada</option>
+                                        <option>Aprovada</option>
+                                        <option>Reprovada</option>
+                                        <option>Imprópria</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputAddress3" class="col-sm-2 control-label"> Texto da avaliação</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" rows="5" placeholder="Avaliação..."> </textarea>
+                                </div>
+                            </div>
+                        </div><!-- /.box-body -->
+                        <div class="box-footer">
+                            <div class="col-sm-4 col-sm-offset-4">
+                                <div class="btn-group" role="group">
+                                    <button type="submit" class="btn btn-default">Cancelar</button>
+                                    <button type="submit" class="btn btn-info">Avaliar</button>
+                                </div>
+                            </div>    
+                        </div><!-- /.box-footer -->
+                    </form>
+                </div><!-- /.box -->
+                <!-- general form elements disabled -->
+
+            </div><!--/.col (right) -->
+        </div>   <!-- /.row -->
+    </section><!-- /.content -->
+</div><!-- /.content-wrapper -->

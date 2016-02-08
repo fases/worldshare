@@ -10,77 +10,52 @@
               
             </div>
             <div class="pull-left info">
-              <p> <?php foreach ($users as $user):
-                                    echo h($user['User']['name']); 	
-                                    endforeach; 
-                      	
-                       ?></span></p>
-              <a href="#"> <?php echo ($user['User']['role'] == 0?"<i class='fa  fa-user text-success'></i>Estudante":"<i class='fa fa-graduation-cap text-warning'></i>Professor"); ?> </span></a>
+              <p> 
+                          <?php echo $this->Session->read('Auth.User.name'); ?></span></p>
+              <a href="#"> <?php echo ($this->Session->read('Auth.User.role') == 0?"<i class='fa  fa-user text-success'></i>Estudante":"<i class='fa fa-graduation-cap text-warning'></i>Professor"); ?> </span></a>
             </div>          
 </div>
          <br />
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
-            
             <li class="treeview">
-              <a href="/worldshare/src/publications">
-                <i class="fa fa-newspaper-o"></i> <span>Linha do Tempo</span> 
-              </a>
+                <?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-newspaper-o')).'<span>Linha do Tempo</span>', 
+                array('controller' => 'publications', 'action' => 'index'), array('escape' => false));?>
             </li>
               <li class="treeview">
-              <a href="#">
-                <i class="fa fa-edit"></i> <span>Criar nova publicação...</span> 
-              </a>
+              <?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-edit')).'<span>Criar Nova Publicação</span>', 
+                array('controller' => 'publications', 'action' => 'add'), array('escape' => false));?>
             </li>
             <li class="header">PERFIL</li>
             <li class="treeview">
-              <a href="/worldshare/src/users/edit/ <?php echo ($user['User']['id'])?>">
-                <i class="fa fa-list-alt"></i>
-                <span>Editar</span>
-              </a>
+              <?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-list-alt')).'<span>Editar</span>', 
+                array('controller' => 'users', 'action' => 'edit',$this->Session->read('Auth.User.id')), array('escape' => false));?>
             </li>
             <li class="treeview">
-              <a href="#">
-                <i class="fa fa-lock"></i>
-                <span>Alterar Senha</span>
-              </a>
+               <?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-user')).'<span>Visualizar Perfil</span>', 
+                array('controller' => 'users', 'action' => 'view',$this->Session->read('Auth.User.id')), array('escape' => false));?>
             </li>
             <li class="header">PUBLICAÇÕES</li>
             <li class="treeview">
-              <a href="#">
-                <i class="fa fa-file-text-o"></i>
-                <span>Todas</span>
-              </a>
-              
+               <?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-file-text-o')).'<span>Todas</span>', 
+                array('controller' => 'publications', 'action' => 'index'), array('escape' => false));?>
             </li>
             <li class="treeview">
-              <a href="#">
-                <i class="fa fa-circle text-green"></i>
-                <span>Aprovadas</span>
-              </a>
-              
+              <?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-circle text-green')).'<span>Aprovadas</span>', 
+                array('controller' => 'publications', 'action' => 'approved'), array('escape' => false));?>
             </li>
             <li class="treeview">
-              <a href="#">
-                <i class="fa fa-circle text-aqua"></i>
-                <span>Não avalidas</span>
-              </a>
-              
+              <?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-circle text-aqua')).'<span>Não avaliadas</span>', 
+                array('controller' => 'publications', 'action' => 'noavaliable'), array('escape' => false));?>
             </li>
              <li class="treeview">
-              <a href="#">
-                <i class="fa fa-circle text-red"></i>
-                <span>Reprovadas</span>
-              </a>
-              
+              <?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-circle text-red')).'<span>Reprovadas</span>', 
+                array('controller' => 'publications', 'action' => 'disapproved'), array('escape' => false));?>
             </li>  
             <li class="header">OPÇÕES</li>
             <li class="treeview">
-              <a href="/worldshare/src/users/logout">
-                <i class="fa  fa-sign-out"></i>
-                <span>Sair</span>
-              </a>
-              
+               <?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-sign-out')).'<span>Sair</span>', 
+                array('controller' => 'users', 'action' => 'logout'), array('escape' => false));?>
             </li>    
             
           </ul>

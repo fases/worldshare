@@ -4744,6 +4744,19 @@ table.text-center th {
 
 }
 
+.imgbackground2{
+   
+    
+    
+    background: url(../img/theme/backgroundTeachers.jpg);
+/*    background: #105892;*/
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+
+
+
+}
+
 .textCenter{
     text-align: center;
 }

@@ -53,6 +53,7 @@
     </script>
     <!-- Bootstrap 3.3.5 -->
     <?php echo $this->Html->script('bootstrap.min.js')?>
+    <?php echo $this->Html->script('jquery.js')?>
     <!-- Morris.js charts -->
     <?php echo $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js'); ?>
     <?php echo $this->Html->script('plugins/morris/morris.min.js') ?>

@@ -1,182 +1,92 @@
-<div class="publications view">
-<h2><?php echo __('Publication'); ?></h2>
-	<dl>
-		<dt><?php echo __('Id'); ?></dt>
-		<dd>
-			<?php echo h($publication['Publication']['id']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Registration'); ?></dt>
-		<dd>
-			<?php echo h($publication['Publication']['registration']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Title'); ?></dt>
-		<dd>
-			<?php echo h($publication['Publication']['title']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Text Publication'); ?></dt>
-		<dd>
-			<?php echo h($publication['Publication']['text_publication']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('User'); ?></dt>
-		<dd>
-			<?php echo $this->Html->link($publication['User']['name'], array('controller' => 'users', 'action' => 'view', $publication['User']['id'])); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Type'); ?></dt>
-		<dd>
-			<?php echo $this->Html->link($publication['Type']['name'], array('controller' => 'types', 'action' => 'view', $publication['Type']['id'])); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Matter'); ?></dt>
-		<dd>
-			<?php echo $this->Html->link($publication['Matter']['name'], array('controller' => 'matters', 'action' => 'view', $publication['Matter']['id'])); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Status'); ?></dt>
-		<dd>
-			<?php echo h($publication['Publication']['status']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Teacher'); ?></dt>
-		<dd>
-			<?php echo $this->Html->link($publication['Teacher']['id'], array('controller' => 'teachers', 'action' => 'view', $publication['Teacher']['id'])); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Text Review'); ?></dt>
-		<dd>
-			<?php echo h($publication['Publication']['text_review']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Old Publication'); ?></dt>
-		<dd>
-			<?php echo h($publication['Publication']['old_publication']); ?>
-			&nbsp;
-		</dd>
-	</dl>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit Publication'), array('action' => 'edit', $publication['Publication']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Publication'), array('action' => 'delete', $publication['Publication']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $publication['Publication']['id']))); ?> </li>
-		<li><?php echo $this->Html->link(__('List Publications'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Publication'), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Types'), array('controller' => 'types', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Type'), array('controller' => 'types', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Matters'), array('controller' => 'matters', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Matter'), array('controller' => 'matters', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Teachers'), array('controller' => 'teachers', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Teacher'), array('controller' => 'teachers', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Attachments'), array('controller' => 'attachments', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Attachment'), array('controller' => 'attachments', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Comments'), array('controller' => 'comments', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Comment'), array('controller' => 'comments', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Ratings'), array('controller' => 'ratings', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Rating'), array('controller' => 'ratings', 'action' => 'add')); ?> </li>
-	</ul>
-</div>
-<div class="related">
-	<h3><?php echo __('Related Attachments'); ?></h3>
-	<?php if (!empty($publication['Attachment'])): ?>
-	<table cellpadding = "0" cellspacing = "0">
-	<tr>
-		<th><?php echo __('Id'); ?></th>
-		<th><?php echo __('File'); ?></th>
-		<th><?php echo __('Publication Id'); ?></th>
-		<th class="actions"><?php echo __('Actions'); ?></th>
-	</tr>
-	<?php foreach ($publication['Attachment'] as $attachment): ?>
-		<tr>
-			<td><?php echo $attachment['id']; ?></td>
-			<td><?php echo $attachment['file']; ?></td>
-			<td><?php echo $attachment['publication_id']; ?></td>
-			<td class="actions">
-				<?php echo $this->Html->link(__('View'), array('controller' => 'attachments', 'action' => 'view', $attachment['id'])); ?>
-				<?php echo $this->Html->link(__('Edit'), array('controller' => 'attachments', 'action' => 'edit', $attachment['id'])); ?>
-				<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'attachments', 'action' => 'delete', $attachment['id']), array('confirm' => __('Are you sure you want to delete # %s?', $attachment['id']))); ?>
-			</td>
-		</tr>
-	<?php endforeach; ?>
-	</table>
-<?php endif; ?>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Publicação
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Publicações</a></li>
+            <li class="active">Visualizar</li>
+        </ol>
+    </section>
 
-	<div class="actions">
-		<ul>
-			<li><?php echo $this->Html->link(__('New Attachment'), array('controller' => 'attachments', 'action' => 'add')); ?> </li>
-		</ul>
-	</div>
-</div>
-<div class="related">
-	<h3><?php echo __('Related Comments'); ?></h3>
-	<?php if (!empty($publication['Comment'])): ?>
-	<table cellpadding = "0" cellspacing = "0">
-	<tr>
-		<th><?php echo __('Id'); ?></th>
-		<th><?php echo __('User Id'); ?></th>
-		<th><?php echo __('Publication Id'); ?></th>
-		<th><?php echo __('Schedule'); ?></th>
-		<th><?php echo __('Text'); ?></th>
-		<th class="actions"><?php echo __('Actions'); ?></th>
-	</tr>
-	<?php foreach ($publication['Comment'] as $comment): ?>
-		<tr>
-			<td><?php echo $comment['id']; ?></td>
-			<td><?php echo $comment['user_id']; ?></td>
-			<td><?php echo $comment['publication_id']; ?></td>
-			<td><?php echo $comment['schedule']; ?></td>
-			<td><?php echo $comment['text']; ?></td>
-			<td class="actions">
-				<?php echo $this->Html->link(__('View'), array('controller' => 'comments', 'action' => 'view', $comment['id'])); ?>
-				<?php echo $this->Html->link(__('Edit'), array('controller' => 'comments', 'action' => 'edit', $comment['id'])); ?>
-				<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'comments', 'action' => 'delete', $comment['id']), array('confirm' => __('Are you sure you want to delete # %s?', $comment['id']))); ?>
-			</td>
-		</tr>
-	<?php endforeach; ?>
-	</table>
-<?php endif; ?>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
 
-	<div class="actions">
-		<ul>
-			<li><?php echo $this->Html->link(__('New Comment'), array('controller' => 'comments', 'action' => 'add')); ?> </li>
-		</ul>
-	</div>
-</div>
-<div class="related">
-	<h3><?php echo __('Related Ratings'); ?></h3>
-	<?php if (!empty($publication['Rating'])): ?>
-	<table cellpadding = "0" cellspacing = "0">
-	<tr>
-		<th><?php echo __('Id'); ?></th>
-		<th><?php echo __('User Id'); ?></th>
-		<th><?php echo __('Publication Id'); ?></th>
-		<th><?php echo __('Stars'); ?></th>
-		<th class="actions"><?php echo __('Actions'); ?></th>
-	</tr>
-	<?php foreach ($publication['Rating'] as $rating): ?>
-		<tr>
-			<td><?php echo $rating['id']; ?></td>
-			<td><?php echo $rating['user_id']; ?></td>
-			<td><?php echo $rating['publication_id']; ?></td>
-			<td><?php echo $rating['stars']; ?></td>
-			<td class="actions">
-				<?php echo $this->Html->link(__('View'), array('controller' => 'ratings', 'action' => 'view', $rating['id'])); ?>
-				<?php echo $this->Html->link(__('Edit'), array('controller' => 'ratings', 'action' => 'edit', $rating['id'])); ?>
-				<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'ratings', 'action' => 'delete', $rating['id']), array('confirm' => __('Are you sure you want to delete # %s?', $rating['id']))); ?>
-			</td>
-		</tr>
-	<?php endforeach; ?>
-	</table>
-<?php endif; ?>
-
-	<div class="actions">
-		<ul>
-			<li><?php echo $this->Html->link(__('New Rating'), array('controller' => 'ratings', 'action' => 'add')); ?> </li>
-		</ul>
-	</div>
-</div>
+            <div class="col-md-8 col-md-offset-2">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"><?php echo $publication['User']['name'];?></h3>
+                    </div><!-- /.box-header -->
+                    <div class="box-body no-padding">
+                        <div class="mailbox-read-info">
+                            <h3><?php echo h($publication['Publication']['title']); ?></h3>
+                            <h5><?php echo $publication['Matter']['name']; ?><span class="mailbox-read-time pull-right"><?php echo h($publication['Publication']['registration']); ?></span></h5>
+                        </div><!-- /.mailbox-read-info -->
+                        <div class="mailbox-read-message">
+                    <?php echo h($publication['Publication']['text_publication'])?>
+                        </div><!-- /.mailbox-read-message -->
+                    </div><!-- /.box-body -->
+                    <div class="box-footer">
+                        <ul class="mailbox-attachments clearfix">
+                            <li>
+                                <span class="mailbox-attachment-icon"><i class="fa fa-file-pdf-o"></i></span>
+                                <div class="mailbox-attachment-info">
+                                    <a href="#" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> Sep2014-report.pdf</a>
+                                    <span class="mailbox-attachment-size">
+                                        1,245 KB
+                                        <a href="#" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
+                                    </span>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="mailbox-attachment-icon"><i class="fa fa-file-word-o"></i></span>
+                                <div class="mailbox-attachment-info">
+                                    <a href="#" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> App Description.docx</a>
+                                    <span class="mailbox-attachment-size">
+                                        1,245 KB
+                                        <a href="#" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
+                                    </span>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="mailbox-attachment-icon has-img"><img src="../../dist/img/photo1.png" alt="Attachment"></span>
+                                <div class="mailbox-attachment-info">
+                                    <a href="#" class="mailbox-attachment-name"><i class="fa fa-camera"></i> photo1.png</a>
+                                    <span class="mailbox-attachment-size">
+                                        2.67 MB
+                                        <a href="#" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
+                                    </span>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="mailbox-attachment-icon has-img"><img src="../../dist/img/photo2.png" alt="Attachment"></span>
+                                <div class="mailbox-attachment-info">
+                                    <a href="#" class="mailbox-attachment-name"><i class="fa fa-camera"></i> photo2.png</a>
+                                    <span class="mailbox-attachment-size">
+                                        1.9 MB
+                                        <a href="#" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
+                                    </span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div><!-- /.box-footer -->
+                    <div class="box-footer">
+                  <?php if($this->Session->read('Auth.User.role') == 1){ 
+                      echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-pencil')).'Avaliar', 
+                          array('controller' => 'publications', 'action' => 'review',$publication['Publication']['id']), 
+                  array('class' => 'btn btn-default','escape' => false)); } ?>
+                    <?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-star')).'1', array('controller' => 'ratings', 'action' => 'add'), array('escape' => false));?>
+                    <?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-star')).'2', array('controller' => 'ratings', 'action' => 'add'), array('escape' => false));?>
+                    <?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-star')).'3', array('controller' => 'ratings', 'action' => 'add'), array('escape' => false));?>
+                    <?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-star')).'4', array('controller' => 'ratings', 'action' => 'add'), array('escape' => false));?>
+                    <?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-star')).'5', array('controller' => 'ratings', 'action' => 'add'), array('escape' => false));?>
+                        <span class='pull-right text-muted'>
+                            5 likes - 2 comments</span>
+                    </div><!-- /.box-footer -->
+                </div><!-- /. box -->
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </section><!-- /.content -->
+</div><!-- /.content-wrapper -->

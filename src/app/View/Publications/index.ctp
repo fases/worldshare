@@ -1,4 +1,9 @@
-    <!-- Content Wrapper. Contains page content -->
+<style>
+    .link{
+       color: white;
+    }
+</style>  
+  <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
@@ -19,11 +24,6 @@
     $i = 0;
     
     foreach ($publications as $publication): ?>
-	
-
-	
-      
-          
             <div class="col-md-9">
               <!-- Box Comment -->
               <div class="box box-widget">
@@ -56,52 +56,79 @@
                   
                   <hr>
                   <!-- Social sharing buttons -->
-                  <button class='btn btn-default btn-xs'><i class='fa fa-share'></i> Post completo</button>
-                  <button class='btn btn-default btn-xs'><i class='fa fa-thumbs-o-up'></i> Like</button>
-                  <span class='pull-right text-muted'>45 likes - 2 comments</span>
+                  <button class='btn btn-primary btn-xs'><i class='fa fa-share'></i> Post completo</button>
+                    <?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-star')).'1', array('controller' => 'ratings', 'action' => 'add'), array('escape' => false));?>
+                    <?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-star')).'2', array('controller' => 'ratings', 'action' => 'add'), array('escape' => false));?>
+                    <?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-star')).'3', array('controller' => 'ratings', 'action' => 'add'), array('escape' => false));?>
+<?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-star')).'4', array('controller' => 'ratings', 'action' => 'add'), array('escape' => false));?>
+<?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-star')).'5', array('controller' => 'ratings', 'action' => 'add'), array('escape' => false));?>
                 </div><!-- /.box-body -->
-                <div class='box-footer box-comments'>
+                  
+                
+                <div class='box-footer box-comments' >
+                <div id='<?php echo $publication['Publication']['id']; ?>'>    
+                    <?php foreach($comments as $comment): ?>
+                    
+                    <?php if($publication['Publication']['id'] == $comment['Comment']['publication_id']){ ?>
                   <div class='box-comment'>
                     <!-- User image -->
-                    <img class='img-circle img-sm' src='dist/img/user3-128x128.jpg' alt='user image'>
+                  <?php echo $this->Html->image('theme/user2-160x160.jpg' , array('class' =>'img-circle')); ?>
                     <div class='comment-text'>
                       <span class="username">
-                        Maria Gonzales
-                        <span class='text-muted pull-right'>8:03 PM Today</span>
+                        <?php echo $this->Html->link($comment['User']['name'],array('controller' => 'users','action' => 'view',$comment['User']['id'])); ?>
+                           <div class='box-tools pull-right'>
+                    <?php
+                                if(($this->Session->read('Auth.User.id') == $publication['Publication']['user_id']) ||  ($this->Session->read('Auth.User.id') == $comment['Comment']['user_id'])){                                                  
+                                 echo $this->Js->submit('Excluir',array('url' => array('controller' => 'comments',
+                                            'action' => 'delete',$comment['Comment']['id'],h($publication['Publication']['id'])),
+                                                        'update' => '#'.$publication['Publication']['id'],'class' => 'btn bg-red btn-box-tool')); 
+                                
+                         }     ?>
+                  </div><!-- /.box-tools -->
+                        
                       </span><!-- /.username -->
-                      It is a long established fact that a reader will be distracted
-                      by the readable content of a page when looking at its layout.
+                      <?php echo $comment['Comment']['text']; ?>
                     </div><!-- /.comment-text -->
+                     
                   </div><!-- /.box-comment -->
-                  <div class='box-comment'>
-                    <!-- User image -->
-                    <img class='img-circle img-sm' src='dist/img/user5-128x128.jpg' alt='user image'>
-                    <div class='comment-text'>
-                      <span class="username">
-                        Nora Havisham
-                        <span class='text-muted pull-right'>8:03 PM Today</span>
-                      </span><!-- /.username -->
-                      The point of using Lorem Ipsum is that it has a more-or-less
-                      normal distribution of letters, as opposed to using
-                      'Content here, content here', making it look like readable English.
-                    </div><!-- /.comment-text -->
-                  </div><!-- /.box-comment -->
-                </div><!-- /.box-footer -->
+                    <?php } ?>
+    <?php endforeach; ?>
                 <div class="box-footer">
                   <form class='form-horizontal'>
                         <div class='form-group margin-bottom-none'>
                           <div class='col-sm-9'>
-                            <input class="form-control input-sm" placeholder="Response">
+                        <?php 
+                            echo $this->Form->create('Comment',array('action' => 'add'));
+                            echo $this->Form->input('text', array('class' => 'form-control input-sm', 'label' => false, 'placeholder' => 'Comentário...')); 
+                                
+                        ?>
+                        
                           </div>                          
                           <div class='col-sm-3'>
-                            <button class='btn btn-danger pull-right btn-block btn-sm'>Comentar</button>
-                          </div>                          
+                              <?php
+                                 echo $this->Js->submit('Comentar',array('url' => array('controller' => 'comments',
+                                            'action' => 'add',h($publication['Publication']['id'])),
+                                                        'update' => '#'.$publication['Publication']['id'],'class' => 'btn btn-success pull-right btn-block btn-sm'));
+//                 $options = array(
+//                    'label' => 'Comentar',
+//                    'class' => 'btn btn-danger pull-right btn-block btn-sm',
+//                    'div' => false   
+//                    );                                              
+//                   echo $this->Form->end($options); 
+                                 ?>
+                           
+                            </div>                         
                         </div>                        
                   </form>
                 </div><!-- /.box-footer -->
+                </div>
+                 </div><!-- /.box-footer -->    
               </div><!-- /.box -->
             </div><!-- /.col -->
-              
+        <?php 
+            echo $this->Html->script('jquery',array('inline' => 'false'));
+            echo $this->Js->writeBuffer(array('cache' => FALSE));
+        ?>
     
         
         <?php 
@@ -109,7 +136,7 @@
            
             if($i == 0){
              ?>
-                  <div class="col-md-3">
+                  <div class="col-md-3 pull-right">
               <div class="box">
                 <div class="box-header with-border">
                   <h3 class="box-title">Ranking</h3>
@@ -187,4 +214,3 @@
 
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
-

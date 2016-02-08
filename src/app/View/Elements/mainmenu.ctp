@@ -47,11 +47,7 @@
                     <?php echo $this->Html->image('theme/user2-160x160.jpg' , array('class' =>'user-image')); ?>
                   <span class="hidden-xs"> 
                       
-                       <?php foreach ($users as $user):
-                                    echo h($user['User']['name']); 	
-                                    endforeach; 
-                      	
-                       ?></span>
+                       <?php echo $this->Session->read('Auth.User.name'); ?></span>
                 </a>
                 
                   <ul class="dropdown-menu">
@@ -61,25 +57,24 @@
                     <?php echo $this->Html->image('theme/user2-160x160.jpg' , array('class' =>'img-circle')); ?>
                     
                     <p>
-                      Alexander Pierce - Web Developer
-                      <small>Member since Nov. 2012</small>
+                      <?php echo $this->Session->read('Auth.User.name');?>
+                      <small>Membro desde <?php echo $this->Session->read('Auth.User.registration'); ?></small>
                     </p>
                   </li>
                   <!-- Menu Body -->
                   <li class="user-body">
                     <div class="col-xs-12 text-center">
-                      <a href="#">Publicações</a>
+                      <?php echo $this->Html->link('Publicações',array('controller' => 'publications','action' => 'index'));?>
                     </div>
                       
                   </li>
                   <!-- Menu Footer-->
                   <li class="">
                     <div class="pull-left">
-                        
-                      <a href="/worldshare/src/users/view/<?php echo $user['User']['id']?>" class="btn btn-default btn-flat">Perfil</a>
+                      <?php echo $this->Html->link('Perfil',array('controller' => 'users','action' => 'view',$this->Session->read('Auth.User.id')),array('class' => 'btn btn-default btn-flat'))?>
                     </div>
                     <div class="pull-right">
-                      <a href="/worldshare/src/users/logout" class="btn btn-default btn-flat"> Sair  </a>
+                      <?php echo $this->Html->link('Sair',array('controller' => 'users','action' => 'logout',$this->Session->read('Auth.User.id')),array('class' => 'btn btn-danger btn-flat'))?>
                     </div>
                   </li>
                 </ul>

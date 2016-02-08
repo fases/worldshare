@@ -15,6 +15,8 @@ class TeachersController extends AppController {
  */
 	public $components = array('Paginator');
 
+
+
 /**
  * index method
  *
@@ -54,11 +56,13 @@ class TeachersController extends AppController {
 		}
 		$options = array('conditions' => array('Teacher.user_id' => $this->Auth->user('id')));
 		$user = $this->Teacher->find('first',$options);
-		if($this->Auth->user('role') == 0 || is_null($user['Teacher']['id'])){ //Não permite que alunos editem
-			return $this->redirect(array('controller' => 'publications','action' => 'profile'));
+		if($this->Auth->user('role') == 0){ //Não permite que alunos editem
+			return $this->redirect(array('controller' => 'publications','action' => 'index'));
 		}
+        
 		if ($this->request->is('post')) {
 			$this->Teacher->create();
+            $this->request->data['Teacher']['user_id'] = $this->Auth->user('id');
 			if ($this->Teacher->save($this->request->data)) {
 				$this->Session->setFlash(__('The teacher has been saved.'));
 				return $this->redirect(array('action' => 'index'));

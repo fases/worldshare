@@ -48,12 +48,12 @@
                    echo $this->Form->end($options); 
                                  ?>
             </div><!-- /.col -->
+            <?php echo $this->Html->link('Recuperar senha',array('action' => 'add')); ?>
           </div>
         
 
         <div class="social-auth-links text-center">
           <p>OU</p>
-          <a href="#" class="btn btn-block btn-social btn-facebook"><i class="fa fa-unlock-alt"></i> Recuperar senha</a>
           <a href="add" class="btn btn-block btn-social btn-google"><i class="fa fa-user-plus"></i> Registre-se</a>
         </div><!-- /.social-auth-links -->
 

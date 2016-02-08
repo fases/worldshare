@@ -171,7 +171,7 @@ class Publication extends AppModel {
 		'Comment' => array(
 			'className' => 'Comment',
 			'foreignKey' => 'publication_id',
-			'dependent' => false,
+			'dependent' => 'false',
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',

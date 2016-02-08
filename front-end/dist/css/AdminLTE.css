@@ -3179,7 +3179,7 @@ table.text-center th {
 }
 .login-logo a,
 .register-logo a {
-  color: #fff;
+  color: #444;
 }
 .login-page,
 .register-page {
@@ -3202,11 +3202,11 @@ table.text-center th {
   background: #fff;
   padding: 20px;
   border-top: 0;
-  color: #fff;
+  color: #666;
 }
 .login-box-body .form-control-feedback,
 .register-box-body .form-control-feedback {
-  color: #fff;
+  color: #777;
 }
 .login-box-msg,
 .register-box-msg {

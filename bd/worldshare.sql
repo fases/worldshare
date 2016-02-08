@@ -129,7 +129,7 @@ CREATE TABLE `users` (
   `password` varchar(255) COLLATE latin1_general_ci NOT NULL,
   `name` varchar(255) COLLATE latin1_general_ci NOT NULL,
   `phone` varchar(20) COLLATE latin1_general_ci NOT NULL,
-  `enrollment` varchar(255) COLLATE latin1_general_ci NOT NULL,
+  `address` varchar(255) COLLATE latin1_general_ci NOT NULL,
   `registration` datetime NOT NULL,
   `role` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
