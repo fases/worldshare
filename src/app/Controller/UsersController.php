@@ -69,28 +69,40 @@ class UsersController extends AppController {
             //todas as publicações sem filtro
             if ($filter == null) {
 
-                $this->set('publications', $this->Publication->find('all', array('conditions' => array('Publication.user_id' => $this->Auth->user('id')))));
+                $conditions = array('Publication.user_id' => $this->Auth->user('id'));
                 //todas as publicações Não avaliadas
             } else if ($filter == 0) {
-                $this->set('publications', $this->Publication->find('all', array('conditions' => array('Publication.user_id' => $this->Auth->user('id'), 'Publication.status' => 0))));
+                $conditions = array('Publication.user_id' => $this->Auth->user('id'), 'Publication.status' => 0);
 
                 //todas as publicações Aprovadas
             } else if ($filter == 1) {
-                $this->set('publications', $this->Publication->find('all', array('conditions' => array('Publication.user_id' => $this->Auth->user('id'), 'Publication.status' => 1))));
+                 $conditions = array('Publication.user_id' => $this->Auth->user('id'), 'Publication.status' => 1);
 
                 //todas as publicações Reprovadas
             } else if ($filter == 2) {
-                $this->set('publications', $this->Publication->find('all', array('conditions' => array('Publication.user_id' => $this->Auth->user('id'), 'Publication.status' => 2))));
+                 $conditions = array('Publication.user_id' => $this->Auth->user('id'), 'Publication.status' => 2);
 
                 //todas as publicações Impróprias
             } else if ($filter == 3) {
-                $this->set('publications', $this->Publication->find('all', array('conditions' => array('Publication.user_id' => $this->Auth->user('id'), 'Publication.status' => 3))));
+                 $conditions = array('Publication.user_id' => $this->Auth->user('id'), 'Publication.status' => 3);
             }
         } else {
             $this->Session->setFlash(__('Você não tem permissão para ver o perfil privado dados de outro usuário.'));
             return $this->redirect(array('controller' => 'publications', 'action' => 'index'));
         }
         $this->set('users', $this->User->find('first', array('conditions' => array('User.id' => $this->Auth->user('id')))));
+        
+        
+        $options = array(
+            'conditions' => array( $conditions),
+            'order' => array('Publication.registration' => 'DESC'),
+            'limit' => 30
+        );
+        $this->paginate = $options;
+        // Consulta com resultados paginados
+        $publications = $this->paginate('Publication');
+        // Envia os dados pra view
+        $this->set('publications', $publications);
     }
 
     /**
