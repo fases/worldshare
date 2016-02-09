@@ -22,12 +22,33 @@ class PublicationsController extends AppController {
      *
      * @return void
      */
-    public function index() {
+    public function index($filter = null) {
         $this->layout = 'userpage';
+        if ($filter == null ) {
+
+                $conditions = array('Publication.status' => 1);
+                //todas as publicações Não avaliadas
+            }  else if ($filter == 0) {
+                 $conditions = array('Publication.user_id' => $this->Auth->user('id'), 'Publication.status' => 0);
+                  $this->Session->setFlash('Estas são suas Publicações Não avaliadas', 'info');
+
+                //todas as publicações Aprovadas
+            } else if ($filter == 1) {
+                 $conditions = array('Publication.user_id' => $this->Auth->user('id'), 'Publication.status' => 1);
+                  $this->Session->setFlash('Estas são suas Publicações Aprovadas', 'success');
+                //todas as publicações Reprovadas
+            } else if ($filter == 2) {
+                 $conditions = array('Publication.user_id' => $this->Auth->user('id'), 'Publication.status' => 2);
+                $this->Session->setFlash('Estas são suas Publicações Reprovadas', 'error');
+            } else {
+            $this->Session->setFlash(__('Não existem essas possibilidades na linha do tempo'));
+            return $this->redirect(array('controller' => 'publications', 'action' => 'index'));
+        }
+        
+        
         $options = array(
-            'conditions' => array('Publication.status' => 1),
-            'order' => array('Publication.registration' => 'DESC'),
-            'limit' => 30
+            'conditions' => $conditions,
+            'order' => array('Publication.registration' => 'DESC')
         );
         $this->paginate = $options;
         // Consulta com resultados paginados

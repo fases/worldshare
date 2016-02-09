@@ -19,6 +19,7 @@
         <!-- Main content -->
         <section class="content">
 <div class="row">
+    <?php echo $this->Session->flash(); ?>
 	           <?php 
     
     $i = 0;
@@ -57,11 +58,13 @@
                   <hr>
                   <!-- Social sharing buttons -->
                   <button class='btn btn-primary btn-xs'><i class='fa fa-share'></i> Post completo</button>
+                    <div class="pull-right">
                     <?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-star')).'1', array('controller' => 'ratings', 'action' => 'add'), array('escape' => false));?>
                     <?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-star')).'2', array('controller' => 'ratings', 'action' => 'add'), array('escape' => false));?>
                     <?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-star')).'3', array('controller' => 'ratings', 'action' => 'add'), array('escape' => false));?>
 <?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-star')).'4', array('controller' => 'ratings', 'action' => 'add'), array('escape' => false));?>
 <?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-star')).'5', array('controller' => 'ratings', 'action' => 'add'), array('escape' => false));?>
+                    </div>        
                 </div><!-- /.box-body -->
                   
                 
