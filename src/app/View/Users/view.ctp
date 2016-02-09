@@ -64,12 +64,7 @@
                       <?php }?>
                   </p>
                     <?php    }   ?>
-                  <strong><i class="fa fa-graduation-cap"></i> Matrícula </strong>
-                  <!-- Para aluno  fa-user -->
-                  <p class="text-muted">
-                   <?php echo ($user['User']['address']); ?>
-                  </p>
-                 <hr>
+                
                  <?php echo $this->Html->link('Alterar Dados', array('controller' => 'users', 'action' => 'edit',$user['User']['id']), array('class' => 'btn btn-success pull-right'));?>
                 
                   
@@ -113,17 +108,21 @@
                     <span class='description'><?php echo ($publication['Publication']['registration']); ?></span>
                   </div><!-- /.user-block --> 
                   <div class='box-tools'>
-                      <a href='#' class=' label label-success'><?php 
+                      <?php 
                           
                           
                           if($publication['Publication']['status'] == 0){
+                            echo "<a href='#' class=' label label-primary'>";  
                             echo 'Não avaliada';
                           }else if($publication['Publication']['status'] == 1){
+                            echo "<a href='#' class=' label label-success'>";  
                             echo 'Aprovada';
                           }else if($publication['Publication']['status'] == 2){
-                            echo 'Reprovada';
+                           echo "<a href='#' class=' label label-warning'>"; 
+                           echo 'Reprovada';
 
                           }else{
+                            echo "<a href='#' class=' label label-danger'>";   
                             echo 'Imprópria';
 
                           }

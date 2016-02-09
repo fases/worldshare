@@ -46,15 +46,7 @@
               <?php echo $this->Form->input('name', array('label' => false, 'type' => 'text' , 'class' => 'form-control', 'placeholder' => 'Nome'));     ?>  
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
           </div>
-            <div class="form-group has-feedback">
-              <?php echo $this->Form->input('phone', array('label' => false, 'class' => 'form-control', 'placeholder' => 'Telefone'));     ?>  
-            <span class="glyphicon glyphicon-earphone form-control-feedback"></span>
-          </div>
-<!--            Mudar de address para enrollment no banco-->
-            <div class="form-group has-feedback">
-              <?php echo $this->Form->input('address', array('label' => false,'class' => 'form-control', 'placeholder' => 'Matrícula'));     ?>  
-             <span class="fa fa-mortar-board form-control-feedback"></span>
-          </div>
+          
             <div class="form-group has-feedback">
               <?php echo $this->Form->input('role', array('placeholder' => 'Tipo', 'label' => false, 'class' => 'form-control', 'placeholder' => 'tipo', 'options' => array("Student","Teacher")));  ?>  
             
