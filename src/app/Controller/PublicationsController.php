@@ -189,13 +189,13 @@ class PublicationsController extends AppController {
         if ($this->request->is(array('post', 'put'))) {
             $status = $this->request->data['Publication']['status'];
             if ($this->Publication->save($this->request->data)) {
-                if ($status == 3) {
-                    return $this->redirect(array('action' => 'delete', $id, true));
-                    //return $this->Publication->delete($id);	
-                } else {
+//                if ($status == 3) {
+//                    return $this->redirect(array('action' => 'delete', $id, true));
+//                    //return $this->Publication->delete($id);	
+//                } else {
                     $this->Session->setFlash(__('The publication has been saved.'));
                     return $this->redirect(array('action' => 'index'));
-                }
+//                }
             } else {
                 $this->Session->setFlash(__('The publication could not be saved. Please, try again.'));
             }
@@ -207,7 +207,7 @@ class PublicationsController extends AppController {
 
     public function noavaliable() {
         //se for aluno ele traz apanes as não avaliadas do próprio aluno
-        if ($this->Auth->user('role') === 0) {
+        if ($this->Auth->user('role') == 0) {
             $this->set('publications', $this->Publication->find('all', array('conditions' => array("Publication.user_id" => $this->Auth->user('id'), "Publication.status" => 0))));
         } else {
             //senão, traz todas as publicações não avaliadas
