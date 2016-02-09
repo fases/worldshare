@@ -42,15 +42,15 @@
             </li>
             <li class="treeview">
               <?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-circle text-green')).'<span>Aprovadas</span>', 
-                array('controller' => 'publications', 'action' => 'approved'), array('escape' => false));?>
+                array('controller' => 'publications', 'action' => 'index', 1), array('escape' => false));?>
             </li>
             <li class="treeview">
               <?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-circle text-aqua')).'<span>Não avaliadas</span>', 
-                array('controller' => 'publications', 'action' => 'noavaliable'), array('escape' => false));?>
+                array('controller' => 'publications', 'action' => 'index' , 0), array('escape' => false));?>
             </li>
              <li class="treeview">
               <?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-circle text-red')).'<span>Reprovadas</span>', 
-                array('controller' => 'publications', 'action' => 'disapproved'), array('escape' => false));?>
+                array('controller' => 'publications', 'action' => 'index',2), array('escape' => false));?>
             </li>  
             <li class="header">OPÇÕES</li>
             <li class="treeview">
