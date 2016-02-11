@@ -32,10 +32,10 @@
   <!-- START LOCK SCREEN ITEM -->
   <section class="content">
       <div class="error-page">
-        <h2 class="headline text-red"> 500</h2>
+        <h2 class="headline text-yellow"> 404</h2>
 
         <div class="error-content">
-          <h3><i class="fa fa-warning text-red"></i> Oops! Erro interno no servidor.</h3>
+          <h3><i class="fa fa-warning text-yellow"></i> Oops! Página não encontrada.</h3>
 
           <p>
            Não foi possível encontrar a página que você estava procurando. Você pode voltar para as  

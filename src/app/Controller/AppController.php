@@ -51,5 +51,13 @@ class AppController extends Controller {
 public function isAuthorized($user) {
 
    return true;
- }
+}
+function beforeRender () {
+       $this->_setErrorLayout();
+} 
+function _setErrorLayout() {
+    if($this->name == 'CakeError') {
+        $this->layout = 'default';
+    }
+}
 }
