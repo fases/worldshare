@@ -15,7 +15,8 @@ class PublicationsController extends AppController {
      *
      * @var array
      */
-    public $components = array('Paginator');
+    public $helpers = array('Html', 'Form', 'Js' => array('jquery'));
+    public $components = array('Paginator','RequestHandler',);
 
     /**
      * index method
@@ -24,28 +25,46 @@ class PublicationsController extends AppController {
      */
     public function index($filter = null) {
         $this->layout = 'userpage';
-        if ($filter == null ) {
+        $this->loadModel('Teacher');
+        if ($filter == null) {
 
                 $conditions = array('Publication.status' => 1);
+                //todas as publicações do usuário logado
+            }  else if ($filter == 3) {
+                 $conditions = array('Publication.user_id' => $this->Auth->user('id'));
+                  $this->Session->setFlash('Estas são suas Publicações', 'info');
                 //todas as publicações Não avaliadas
             }  else if ($filter == 0) {
+                    if($this->Auth->user('role') == 0){
                  $conditions = array('Publication.user_id' => $this->Auth->user('id'), 'Publication.status' => 0);
                   $this->Session->setFlash('Estas são suas Publicações Não avaliadas', 'info');
+                    }else{
+                  $teacher = $this->Teacher->find('first',array('conditions' => array('Teacher.user_id' => $this->Auth->user('id'))));
+                  $conditions = array('Publication.matter_id' => $teacher['Teacher']['matter_id'], 'Publication.status' => 0);
 
+
+                  $this->Session->setFlash('Estas são as publicações disponíveis para avaliação', 'error');
+                    }
                 //todas as publicações Aprovadas
             } else if ($filter == 1) {
+                    if($this->Auth->user('role') == 0){
                  $conditions = array('Publication.user_id' => $this->Auth->user('id'), 'Publication.status' => 1);
                   $this->Session->setFlash('Estas são suas Publicações Aprovadas', 'success');
+                    }else{
+                  $teacher = $this->Teacher->find('first',array('conditions' => array('Teacher.user_id' => $this->Auth->user('id'))));
+                  $conditions = array('Publication.matter_id' => $teacher['Teacher']['matter_id'], 'Publication.user_id !=' => $this->Auth->user('id'));
+                  $this->Session->setFlash('Estas são as publicações referentes a sua área', 'success');
+                    }
                 //todas as publicações Reprovadas
             } else if ($filter == 2) {
                  $conditions = array('Publication.user_id' => $this->Auth->user('id'), 'Publication.status' => 2);
                 $this->Session->setFlash('Estas são suas Publicações Reprovadas', 'error');
             } else {
-            $this->Session->setFlash(__('Não existem essas possibilidades na linha do tempo'));
+           // $this->Session->setFlash(__('Não existem essas possibilidades na linha do tempo'));
             return $this->redirect(array('controller' => 'publications', 'action' => 'index'));
         }
-        
-        
+
+
         $options = array(
             'conditions' => $conditions,
             'order' => array('Publication.registration' => 'DESC')
@@ -76,6 +95,12 @@ class PublicationsController extends AppController {
         if (!$this->Publication->exists($id)) {
             throw new NotFoundException(__('Invalid publication'));
         }
+        //Enviar variavel do professor (matéria) para a view
+        if($this->Auth->user('role') == 1){
+            $this->loadModel('Teacher');
+            $this->set('teacher',$this->Teacher->find('first',array('conditions' => array('Teacher.user_id' => $this->Auth->user('id')))));
+        }
+        //Restrição para não mostrar a publicação impropria ou reprovada a outros usuários, senão o dono...
         $options = array('conditions' => array('Publication.' . $this->Publication->primaryKey => $id));
         $this->set('publication', $this->Publication->find('first', $options));
     }
@@ -86,16 +111,23 @@ class PublicationsController extends AppController {
      * @return void
      */
     public function add() {
+        $this->layout = 'userpage';
         if ($this->request->is('post')) {
             $this->Publication->create();
             $this->request->data['Publication']['user_id'] = $this->Auth->user('id');
-            // Faz com que as publicações dos professores não precisem ser verificadas     
+            // Faz com que as publicações dos professores não precisem ser verificadas
+            $this->loadModel('Teacher');
             if ($this->Auth->user('role') == 1) {
                 $this->request->data['Publication']['status'] = 1;
+                //Atribui matéria do professor a publicação criada
+                $teacher = $this->Teacher->find('first',array('conditions' => array('Teacher.user_id' => $this->Auth->user('id'))));
+                $this->request->data['Publication']['matter_id'] = $teacher['Teacher']['matter_id'];
+
             } else {
+                //Seta status da publicação do aluno como aberta
                 $this->request->data['Publication']['status'] = 0;
             }
-
+            $this->request->data['Publication']['registration'] = date('Y-m-d H:i:s');
             if ($this->Publication->save($this->request->data)) {
                 $this->Session->setFlash(__('The publication has been saved.'));
                 return $this->redirect(array('action' => 'index'));
@@ -103,9 +135,9 @@ class PublicationsController extends AppController {
                 $this->Session->setFlash(__('The publication could not be saved. Please, try again.'));
             }
         }
+        $matters = $this->Publication->Matter->find('list');
         $users = $this->Publication->User->find('list');
         $types = $this->Publication->Type->find('list');
-        $matters = $this->Publication->Matter->find('list');
         $teachers = $this->Publication->Teacher->find('list');
         $this->set(compact('users', 'types', 'matters', 'teachers'));
     }
@@ -183,12 +215,14 @@ class PublicationsController extends AppController {
         if (!$this->Publication->exists($id)) {
             throw new NotFoundException(__('Publicação Inválida'));
         }
+        //Restringe avaliação somente a professores
         if ($this->Auth->user('role') != 1) {
             $this->Session->setFlash(__('Você não tem permissão para acessar essa funcionalidade'));
             return $this->redirect(array('action' => 'index'));
-        }
+        }else{
         $status = $this->Publication->find('first', array('fields' => array('Publication.status'), 'conditions' => array('Publication.id' => $id)));
         $status_atual = $status['Publication']['status'];
+        }
         //Verifica se a publicação já foi avaliada
         if ($status_atual != 0) {
             $this->Session->setFlash(__('A publicação já foi avaliada!'));
@@ -210,13 +244,8 @@ class PublicationsController extends AppController {
         if ($this->request->is(array('post', 'put'))) {
             $status = $this->request->data['Publication']['status'];
             if ($this->Publication->save($this->request->data)) {
-//                if ($status == 3) {
-//                    return $this->redirect(array('action' => 'delete', $id, true));
-//                    //return $this->Publication->delete($id);	
-//                } else {
-                    $this->Session->setFlash(__('The publication has been saved.'));
+                    $this->Session->setFlash('Publicação realizada com sucesso.','success');
                     return $this->redirect(array('action' => 'index'));
-//                }
             } else {
                 $this->Session->setFlash(__('The publication could not be saved. Please, try again.'));
             }
@@ -227,7 +256,7 @@ class PublicationsController extends AppController {
     }
 
     public function noavaliable() {
-        //se for aluno ele traz apanes as não avaliadas do próprio aluno
+        //Se for aluno ele traz apanas as não avaliadas do próprio aluno
         if ($this->Auth->user('role') == 0) {
             $this->set('publications', $this->Publication->find('all', array('conditions' => array("Publication.user_id" => $this->Auth->user('id'), "Publication.status" => 0))));
         } else {

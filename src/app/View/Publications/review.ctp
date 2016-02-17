@@ -2,8 +2,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Título da publicação
-            <small> Autor</small>
+            Avaliar
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Publicação</a></li>
@@ -22,35 +21,41 @@
                         <h3 class="box-title"> Avaliar Publicação</h3>
                     </div><!-- /.box-header -->
                     <!-- form start -->
-                    <form class="form-horizontal">
+                    <?php echo $this->Form->create('Publication',array('action' => 'review','class' => 'form-horizontal')); ?>
+                    <?php  
+    echo $this->Form->input('id',array('type' => 'hidden'));
+    echo $this->Form->input('registration',array('type' => 'hidden'));
+    echo $this->Form->input('title',array('type' => 'hidden'));
+    echo $this->Form->input('type_id',array('type' => 'hidden'));
+    echo $this->Form->input('user_id',array('type' => 'hidden'));
+    echo $this->Form->input('matter_id',array('type' => 'hidden')); ?> 
                         <div class="box-body">
                             <div class="form-group">
                                 <label for="inputAddress3" class="col-sm-2 control-label">Status</label>
                                 <div class="col-sm-10">
-                                    <select class="form-control" id="sel1" >
-                                        <option>Não avaliada</option>
-                                        <option>Aprovada</option>
-                                        <option>Reprovada</option>
-                                        <option>Imprópria</option>
-                                    </select>
+                                    <?php echo $this->Form->input('status',array('type' => 'select','class' => 'form-control','options' => array('Não avaliada','Aprovada','Reprovada','Imprópria'),'label' => false)); ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputAddress3" class="col-sm-2 control-label"> Texto da avaliação</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" rows="5" placeholder="Avaliação..."> </textarea>
+                                    <?php echo $this->Form->textarea('text_review',array('class' => 'form-control','rows' => '10','placeholder'=> 'Avaliação...','label' => false)); ?>
                                 </div>
                             </div>
                         </div><!-- /.box-body -->
                         <div class="box-footer">
                             <div class="col-sm-4 col-sm-offset-4">
                                 <div class="btn-group" role="group">
-                                    <button type="submit" class="btn btn-default">Cancelar</button>
-                                    <button type="submit" class="btn btn-info">Avaliar</button>
+                                    <?php
+                                        echo $this->Html->link('Cancelar', 
+                          array('controller' => 'publications', 'action' => 'index'), 
+                  array('class' => 'btn btn-default','div' => 'false'));
+                                    $options = array('label' => 'Avaliar', 'class' => 'btn btn-primary','div' => false);
+                        echo $this->Form->end($options);
+                                    ?>
                                 </div>
                             </div>    
                         </div><!-- /.box-footer -->
-                    </form>
                 </div><!-- /.box -->
                 <!-- general form elements disabled -->
 
@@ -58,3 +63,7 @@
         </div>   <!-- /.row -->
     </section><!-- /.content -->
 </div><!-- /.content-wrapper -->
+                    <?php 
+            echo $this->Html->script('jquery',array('inline' => 'false'));
+            echo $this->Js->writeBuffer(array('cache' => FALSE));
+        ?>

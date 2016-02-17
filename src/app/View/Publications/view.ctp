@@ -50,32 +50,12 @@
                                     </span>
                                 </div>
                             </li>
-                            <li>
-                                <span class="mailbox-attachment-icon has-img"><img src="../../dist/img/photo1.png" alt="Attachment"></span>
-                                <div class="mailbox-attachment-info">
-                                    <a href="#" class="mailbox-attachment-name"><i class="fa fa-camera"></i> photo1.png</a>
-                                    <span class="mailbox-attachment-size">
-                                        2.67 MB
-                                        <a href="#" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
-                                    </span>
-                                </div>
-                            </li>
-                            <li>
-                                <span class="mailbox-attachment-icon has-img"><img src="../../dist/img/photo2.png" alt="Attachment"></span>
-                                <div class="mailbox-attachment-info">
-                                    <a href="#" class="mailbox-attachment-name"><i class="fa fa-camera"></i> photo2.png</a>
-                                    <span class="mailbox-attachment-size">
-                                        1.9 MB
-                                        <a href="#" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
-                                    </span>
-                                </div>
-                            </li>
                         </ul>
-                    </div><!-- /.box-footer -->
+                    </div><!-- /.box-footer-->
                     <div class="box-footer">
-                  <?php if($this->Session->read('Auth.User.role') == 1){ 
-                      echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-pencil')).'Avaliar', 
-                          array('controller' => 'publications', 'action' => 'review',$publication['Publication']['id']), 
+                  <?php if($teacher['Teacher']['matter_id'] == $publication['Publication']['matter_id']){
+                      echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-pencil')).'Avaliar',
+                          array('controller' => 'publications', 'action' => 'review',$publication['Publication']['id']),
                   array('class' => 'btn btn-default','escape' => false)); } ?>
                     <?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-star')).'1', array('controller' => 'ratings', 'action' => 'add'), array('escape' => false));?>
                     <?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-star')).'2', array('controller' => 'ratings', 'action' => 'add'), array('escape' => false));?>

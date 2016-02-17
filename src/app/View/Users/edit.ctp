@@ -3,21 +3,25 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Perfil
+            Editar Perfil
           </h1>
           <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Perfil</a></li>
-            <li class="active">Alterar Perfil</li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active"><a href="#">Perfil</a></li>
+            
           </ol>
         </section>
 
         <!-- Main content -->
         <section class="content">
-          <div class="row">            
-            <!-- right column -->
-            <div class="box box-primary">
+
+          <div class="row">
+            
+                    <div class="box box-primary">
                 </div><!-- /.box-header -->
-            <div class="col-md-8 col-md-offset-2">
+              <!-- Profile Image -->
+              <div>
+               <div class="col-md-8 col-md-offset-2">
              <div class="box box-success">
                 <div class="box-header with-border">
                   <h3 class="box-title"> Alterar Perfil</h3>
@@ -68,7 +72,10 @@
                     );                                              
                    echo $this->Form->end($options); 
                         ?> 
-                     
+                               <?php 
+            echo $this->Html->script('jquery',array('inline' => 'false'));
+            echo $this->Js->writeBuffer(array('cache' => FALSE));
+        ?>
                     
                   </div><!-- /.box-footer -->
                 
@@ -76,6 +83,13 @@
               <!-- general form elements disabled -->
               
             </div><!--/.col (right) -->
-          </div>   <!-- /.row -->
+             
+
+                   </div><!-- /.box -->
+           
+           
+
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
+
+

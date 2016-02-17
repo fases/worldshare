@@ -54,21 +54,17 @@ class UsersController extends AppController {
         }
         $options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
         $this->set('user', $this->User->find('first', $options));
-
         $this->set('users', $this->User->find('all', array('conditions' => array('User.id' => $this->Auth->user('id')))));
 
+        $this->loadModel('Teacher');
+        $this->loadModel('Matter');
+        $options = array('conditions' => array('Teacher.user_id' => $id));
+        $teacher = $this->Teacher->find('first', $options);
+        $this->set('matters', $this->Matter->find('first', array('conditions' => array('Matter.id' => $teacher['Teacher']['matter_id']))));
         if ($this->Auth->user('id') == $id) {
-            $this->loadModel('Teacher');
-            $this->loadModel('Matter');
-            $options = array('conditions' => array('Teacher.user_id' => $this->Auth->user('id')));
-            $teacher = $this->Teacher->find('first', $options);
-            if ($this->Auth->user('role') == 1) {
-                $this->set('matter', $this->Matter->find('first', array('conditions' => array('Matter.id' => $teacher['Teacher']['matter_id']))));
-            }
             $this->loadModel('Publication');
             //todas as publicações sem filtro
             if ($filter == null) {
-
                 $conditions = array('Publication.user_id' => $this->Auth->user('id'));
                 //todas as publicações Não avaliadas
             } else if ($filter == 0) {
@@ -87,22 +83,27 @@ class UsersController extends AppController {
                  $conditions = array('Publication.user_id' => $this->Auth->user('id'), 'Publication.status' => 3);
             }
         } else {
-            $this->Session->setFlash(__('Você não tem permissão para ver o perfil privado dados de outro usuário.'));
-            return $this->redirect(array('controller' => 'publications', 'action' => 'index'));
+                 $conditions = array('Publication.user_id' => $id , 'Publication.status' => 1);
+            //$this->Session->setFlash(__('Você não tem permissão para ver o perfil privado dados de outro usuário.'));
+            //return $this->redirect(array('controller' => 'publications', 'action' => 'index'));
+
         }
         $this->set('users', $this->User->find('first', array('conditions' => array('User.id' => $this->Auth->user('id')))));
-        
-        
+
+
         $options = array(
             'conditions' => array( $conditions),
-            'order' => array('Publication.registration' => 'DESC'),
-            'limit' => 30
+            'order' => array('Publication.registration' => 'DESC')
         );
         $this->paginate = $options;
         // Consulta com resultados paginados
         $publications = $this->paginate('Publication');
         // Envia os dados pra view
         $this->set('publications', $publications);
+
+        $this->loadModel('Comment');
+        $comment = $this->Comment->find('all');
+        $this->set('comments', $comment);
     }
 
     /**
@@ -168,7 +169,7 @@ class UsersController extends AppController {
         $this->User->id = $id;
         if (!$this->User->exists()) {
             $this->Session->setFlash("Usuário escolhido é inválido!");
-            $this->redirect(array('action' => 'index'));
+            $this->redirect(array('controller' => 'publications','action' => 'index'));
         }
         if ($this->request->is('get')) {
             $this->request->data = $this->User->findById($id);
@@ -176,15 +177,15 @@ class UsersController extends AppController {
             if ($this->Auth->user('id') == $id) {
                 if ($this->User->save($this->request->data)) {
                     $this->Session->setFlash('A edição foi realizada com sucesso!');
-                    $this->redirect(array('action' => 'index'));
+                    $this->redirect(array('action' => 'view',$id));
                 }
             } else {
                 $this->Session->setFlash(__('Você não tem permissão para modificar dados de outro usuário.'));
-                return $this->redirect(array('action' => 'index'));
+                return $this->redirect(array('action' => 'view',$this->Auth->user('id')));
             }
         }
 
-        $this->set('users', $this->User->find('all', array('conditions' => array('User.id' => $this->Auth->user('id')))));
+        $this->set('users', $this->User->find('first', array('conditions' => array('User.id' => $this->Auth->user('id')))));
     }
 
     /**
@@ -221,7 +222,7 @@ class UsersController extends AppController {
                 if ($this->Auth->login()) {
                     $this->redirect($this->Auth->redirect());
                 } else {
-                    $this->Session->setFlash(__('Email ou senha invalida.'));
+                    $this->Session->setFlash('Email ou senha invalida.' );
                 }
             }
         }

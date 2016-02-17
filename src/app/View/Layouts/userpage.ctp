@@ -9,7 +9,7 @@
     <!-- Bootstrap 3.3.5 -->
       
     <?php echo $this->Html->css('bootstrap'); ?>
-    <?php echo $this->Html->css('bootstrap.min'); ?>
+    <?php echo $this->Html->css('bootstrap.min.css'); ?>
     <?php echo $this->Html->css('AdminLTE'); ?>
     <?php echo $this->Html->css('AdminLTE.min'); ?>
     <?php echo $this->Html->css('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'); ?>
@@ -43,7 +43,7 @@
     
     </div><!-- ./wrapper -->
 
-      <?php echo $this->Html->script('plugins/jQuery/jQuery-2.1.4.min.js'); ?> 
+      <?php //echo $this->Html->script('plugins/jQuery/jQuery-2.1.4.min.js'); ?> 
     
    
     <?php echo $this->Html->script('https://code.jquery.com/ui/1.11.4/jquery-ui.min.js') ?>
@@ -52,8 +52,8 @@
       $.widget.bridge('uibutton', $.ui.button);
     </script>
     <!-- Bootstrap 3.3.5 -->
-    <?php echo $this->Html->script('bootstrap.min.js')?>
-    <?php echo $this->Html->script('jquery.js')?>
+    <?php echo $this->Html->script('bootstrap.min.js');?>
+    <?php echo $this->Html->script('jquery'); ?>
     <!-- Morris.js charts -->
     <?php echo $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js'); ?>
     <?php echo $this->Html->script('plugins/morris/morris.min.js') ?>

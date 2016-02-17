@@ -15,7 +15,8 @@ class RatingsController extends AppController {
      *
      * @var array
      */
-    public $components = array('RequestHandler', 'Paginator');
+    public $helpers = array('Html', 'Form', 'Js' => array('jquery'));
+    public $components = array('Paginator','RequestHandler');
 
     /**
      * index method
@@ -35,19 +36,23 @@ class RatingsController extends AppController {
      *
      * @return void
      */
-    public function add() {
+    public function add($publication_id = null) {
         if ($this->request->is('ajax')) {
+            
             $this->Rating->create();
-            if ($this->Rating->save($this->request->data)) {
-                $this->Session->setFlash(__('The rating has been saved.'));
-                return $this->redirect(array('action' => 'index'));
-            } else {
-                $this->Session->setFlash(__('The rating could not be saved. Please, try again.'));
-            }
+            $this->request->data['Rating']['publication_id'] = $publication_id;
+            $this->request->data['Rating']['user_id'] = $this->Auth->user('id');
+            $this->request->data['Rating']['stars'] = 1;
+            $this->Rating->save($this->request->data);    
+            // }else{
+            //     $this->Rating->updateAll(array('Rating.stars' => 0),array('Rating.publication_id' => $publication_id));    
+            // }
+            $this->layout = 'ajax';
+            $rating = $this->Rating->find('all',array('conditions' => array('Rating.publication_id' => $publication_id)));
+            $this->set('ratings',$rating);
+            
         }
-        $users = $this->Rating->User->find('list');
-        $publications = $this->Rating->Publication->find('list');
-        $this->set(compact('users', 'publications'));
+
     }
 
     /**

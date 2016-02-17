@@ -54,7 +54,7 @@ public function isAuthorized($user) {
 }
 function beforeRender () {
        $this->_setErrorLayout();
-} 
+}
 function _setErrorLayout() {
     if($this->name == 'CakeError') {
         $this->layout = 'default';

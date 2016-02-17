@@ -1,23 +1,13 @@
-<div class="ratings form">
-<?php echo $this->Form->create('Rating'); ?>
-	<fieldset>
-		<legend><?php echo __('Add Rating'); ?></legend>
-	<?php
-		echo $this->Form->input('user_id');
-		echo $this->Form->input('publication_id');
-		echo $this->Form->input('stars');
-	?>
-	</fieldset>
-<?php echo $this->Form->end(__('Submit')); ?>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-
-		<li><?php echo $this->Html->link(__('List Ratings'), array('action' => 'index')); ?></li>
-		<li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Publications'), array('controller' => 'publications', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Publication'), array('controller' => 'publications', 'action' => 'add')); ?> </li>
-	</ul>
-</div>
+<?php
+// 	$div = '#rating'.$ratings['Rating']['publication_id'];
+// 	 echo $this->Js->submit('Gostei', array('url' => array('controller' => 'ratings',
+//                                             'action' => 'add',$ratings['Rating']['publication_id']),
+//                                                         'update' => $div,'class' => 'btn btn-info btn-xs'));
+	foreach ($ratings as $rating) {
+		echo $rating['Rating']['id'];
+	}
+         ?>
+                  <button class='btn btn-primary btn-xs'><i class='fa fa-share'></i> Post completo</button> 
+        <?php 
+            echo $this->Js->writeBuffer(array('cache' => FALSE));
+        ?>                                                   

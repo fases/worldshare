@@ -45,8 +45,7 @@
                 <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <?php echo $this->Html->image('theme/user2-160x160.jpg' , array('class' =>'user-image')); ?>
-                  <span class="hidden-xs"> 
-                      
+                  <span class="hidden-xs">                     
                        <?php echo $this->Session->read('Auth.User.name'); ?></span>
                 </a>
                 
