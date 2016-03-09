@@ -15,7 +15,7 @@ class UsersController extends AppController {
      *
      * @var array
      */
-    public $components = array('Paginator');
+    public $components = array('Paginator','Upload');
 
     public function beforeFilter() {
         //parent::beforeFilter();
@@ -60,7 +60,10 @@ class UsersController extends AppController {
         $this->loadModel('Matter');
         $options = array('conditions' => array('Teacher.user_id' => $id));
         $teacher = $this->Teacher->find('first', $options);
-        $this->set('matters', $this->Matter->find('first', array('conditions' => array('Matter.id' => $teacher['Teacher']['matter_id']))));
+        if(!empty($teacher)){
+            $this->set('matters', $this->Matter->find('first', array('conditions' => array('Matter.id' => $teacher['Teacher']['matter_id']))));    
+        }
+        
         if ($this->Auth->user('id') == $id) {
             $this->loadModel('Publication');
             //todas as publicações sem filtro
@@ -117,6 +120,7 @@ class UsersController extends AppController {
             if ($this->User->save($this->request->data)) {
                 $this->Session->setFlash('O usuário foi cadastrado com sucesso!', 'success');
                 //Login automático após o cadastro
+                $this->saveField('photo',$arquivo);
                 $this->Auth->login();
                 //Adicionar esse if após a verificação do email
                 if (isset($this->data['User']['role'])) {
@@ -126,6 +130,29 @@ class UsersController extends AppController {
                         $this->redirect(array('controller' => 'publications', 'action' => 'index'));
                     }
                 }
+            }
+        }
+    }
+    
+    public function upload($id = null) {
+        $this->layout = 'userpage';
+        if($this->Auth->user('id') != $id){
+            $this->Session->setFlash('A funcionalidade não é acessível!','error');
+            return $this->redirect(array('controller' => 'publications','action' => 'index'));
+        }
+        $this->User->id = $id;
+        if (!$this->User->exists()) {
+            $this->Session->setFlash('Usuário inexistente!', 'error');
+            return $this->redirect(array('action' => 'index'));
+        }
+        if (!empty($this->request->data)) {
+            
+            if (!is_null($this->request->data['User']['photo'])) {
+                $arquivo = $this->Upload->upload($this->request->data['User']['photo'],$id);
+//                $this->request->data['User']['photo'] = $arquivo;
+                $this->User->saveField('photo',$arquivo);
+                $this->Session->setFlash('Foto alterada com sucesso','success');
+            return $this->redirect(array('controller' => 'publications','action' => 'index'));
             }
         }
     }

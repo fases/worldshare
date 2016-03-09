@@ -54,7 +54,9 @@
                   <?php if($user['User']['role'] == 1){ ?>
     <strong><i class="fa fa-file-text-o"></i> Matéria </strong>
                   <p class="text-muted">
-                    <?php echo $matters['Matter']['name']; ?>
+                    <?php if(isset($matters['Matter']['name'])){
+                        echo $matters['Matter']['name'];
+                      } ?>
                   </p>
                     <?php    }   ?>
                 <?php

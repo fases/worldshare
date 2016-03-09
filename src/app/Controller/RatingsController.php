@@ -38,7 +38,11 @@ class RatingsController extends AppController {
      */
     public function add($publication_id = null) {
         if ($this->request->is('ajax')) {
-            
+            $this->layout = 'ajax';
+            $result = $this->Rating->find('count',array('conditions' => array('Rating.user_id' => $this->Auth->user('id'),
+                'Rating.publication_id' => $publication_id)));
+
+            if($result == 0){
             $this->Rating->create();
             $this->request->data['Rating']['publication_id'] = $publication_id;
             $this->request->data['Rating']['user_id'] = $this->Auth->user('id');
@@ -47,9 +51,9 @@ class RatingsController extends AppController {
             // }else{
             //     $this->Rating->updateAll(array('Rating.stars' => 0),array('Rating.publication_id' => $publication_id));    
             // }
-            $this->layout = 'ajax';
-            $rating = $this->Rating->find('all',array('conditions' => array('Rating.publication_id' => $publication_id)));
-            $this->set('ratings',$rating);
+            $rating = $this->Rating->find('first',array('conditions' => array('Rating.publication_id' => $publication_id)));
+            $this->set('ratings',$rating);    
+            }
             
         }
 

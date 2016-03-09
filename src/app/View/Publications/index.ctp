@@ -78,10 +78,8 @@ $('html, body').animate({ scrollTop: deslocamento }, 'slow');
                     <div class="pull-right">
                     <div id="<?php echo '#rating'.$publication['Publication']['id']; ?>">
                     <?php
-                    echo $this->Js->link('Curtir', array('controller'=>'ratings', 'action'=>'add'),
-                      array('update'=>'#rating'.$publication['Publication']['id']));
-                    echo $this->Html->script('jquery',array('inline' => 'false'));
-            echo $this->Js->writeBuffer(array('cache' => FALSE));
+                    echo $this->Js->submit('Curtir',array('url' => array('controller'=>'ratings', 'action'=>'add',$publication['Publication']['id']),'update' => '#rating'.$publication['Publication']['id'],'class' => 'btn bg-blue btn-box-tool'));
+                   
                     ?>
                     </div>
                     </div>

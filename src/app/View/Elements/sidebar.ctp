@@ -5,15 +5,26 @@
           <!-- Sidebar user panel -->
           <div class="user-panel">
             <div class="pull-left image">
-
-                    <?php echo $this->Html->image('theme/user2-160x160.jpg' , array('class' =>'img-circle')); ?>
-
+              <?php
+              $path = $user['User']['photo'];
+              if(is_null($user['User']['photo'])){
+                echo $this->Html->image('theme/user2-160x160.jpg', array('class' => 'img-circle'));   
+              }else{
+                echo $this->Html->image('anexos/'.$path, array('class' => 'img-circle')); 
+              }
+                ?>
             </div>
             <div class="pull-left info">
               <p>
-                          <?php echo $this->Session->read('Auth.User.name'); ?></span></p>
-              <a href="#"> <?php echo ($this->Session->read('Auth.User.role') == 0?"<i class='fa fa-user text-success'></i>Estudante":"<i class='fa fa-graduation-cap text-warning'></i>Professor"); ?> </span></a>
-            </div>
+                          <?php echo $this->Session->read('Auth.User.name'); ?></span>
+              -
+               <a href="#"> <?php echo ($this->Session->read('Auth.User.role') == 0?"Aluno":"Prof."); ?> </span></a>  
+            </p>
+           <?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-edit')).'<span>Editar Imagem</span>',
+                array('controller' => 'users', 'action' => 'upload',$this->Session->read('Auth.User.id')), array('escape' => false));?>
+         
+            
+          </div>
 </div>
          <br />
           <!-- sidebar menu: : style can be found in sidebar.less -->

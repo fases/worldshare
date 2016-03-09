@@ -27,7 +27,7 @@
         
         
               <?php echo $this->Session->flash(); ?>
-              <?php echo $this->Form->create('User');
+              <?php echo $this->Form->create('User',array('type' => 'file', 'novalidate'));
 		
 		echo $this->Form->input('ativo', array('type' => 'hidden','value'=>'0'));
           ?>

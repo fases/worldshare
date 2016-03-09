@@ -44,7 +44,14 @@
               
                 <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <?php echo $this->Html->image('theme/user2-160x160.jpg' , array('class' =>'user-image')); ?>
+                            <?php
+                              $path = $user['User']['photo'];
+              if(is_null($user['User']['photo'])){
+                echo $this->Html->image('theme/user2-160x160.jpg', array('class' => 'user-image'));   
+              }else{
+                echo $this->Html->image('anexos/'.$path, array('class' => 'user-image')); 
+              }
+              ?>  
                   <span class="hidden-xs">                     
                        <?php echo $this->Session->read('Auth.User.name'); ?></span>
                 </a>
@@ -52,8 +59,14 @@
                   <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                      
-                    <?php echo $this->Html->image('theme/user2-160x160.jpg' , array('class' =>'img-circle')); ?>
+                  <?php
+                              $path = $user['User']['photo'];
+              if(is_null($user['User']['photo'])){
+                echo $this->Html->image('theme/user2-160x160.jpg', array('class' => 'img-circle'));   
+              }else{
+                echo $this->Html->image('anexos/'.$path, array('class' => 'img-circle')); 
+              }
+              ?>  
                     
                     <p>
                       <?php echo $this->Session->read('Auth.User.name');?>

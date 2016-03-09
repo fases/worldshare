@@ -7,9 +7,11 @@
                        <?php echo $this->Html->link($comment['User']['name'],array('controller' => 'users','action' => 'view',$comment['User']['id'])); ?>
                        <div class='box-tools pull-right'>
                     <?php                                          
+                                if($comment['Comment']['user_id'] == $this->Session->read('Auth.User.id')){ 
                                  echo $this->Js->submit('Excluir',array('url' => array('controller' => 'comments',
                                             'action' => 'delete',$comment['Comment']['id'],$publications['Publication']['id']),
-                                                        'update' => '#'.$publications['Publication']['id'],'class' => 'btn bg-red btn-box-tool'));    
+                                                        'update' => '#'.$publications['Publication']['id'],'class' => 'btn bg-red btn-box-tool')); 
+                               }
                     ?>
                   </div><!-- /.box-tools -->
                       </span><!-- /.username -->

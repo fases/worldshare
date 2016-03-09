@@ -54,6 +54,9 @@ public function isAuthorized($user) {
 }
 function beforeRender () {
        $this->_setErrorLayout();
+       $this->loadModel('User');
+       $user = $this->User->find('first',array('conditions' => array('User.id' => $this->Auth->user('id'))));
+       $this->set('user',$user);
 }
 function _setErrorLayout() {
     if($this->name == 'CakeError') {
