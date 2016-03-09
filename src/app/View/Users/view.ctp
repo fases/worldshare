@@ -21,7 +21,16 @@
               <!-- Profile Image -->
               <div class="box box-primary">
                 <div class="box-body box-profile">
-                  <?php echo $this->Html->image('theme/user2-160x160.jpg' , array('class' =>'profile-user-img img-responsive img-circle')); ?>
+                    
+                  <?php 
+                                    $path = $user['User']['photo'];
+              if(is_null($user['User']['photo'])){
+                echo $this->Html->image('theme/pessoa-sem-foto.jpg', array('class' => 'profile-user-img img-responsive img-circle'));   
+              }else{
+                echo $this->Html->image('anexos/'.$path, array('class' => 'profile-user-img img-responsive img-circle')); 
+              }
+              ?>  
+                    
                   <h3 class="profile-username text-center"><?php echo h($user['User']['name']); ?></h3>
                   <p class="text-muted text-center"><?php echo ($user['User']['role'] == 0?"<i class='fa  fa-user text-success'></i>Estudante":"<i class='fa fa-graduation-cap text-warning'></i>Professor"); ?> </p>
                 </div><!-- /.box-body -->
@@ -87,7 +96,7 @@
                        <!-- Box Comment -->
               <div class="box box-widget">
                 <?php
-                  if(($this->Session->read('Auth.User.id') == $user['User']['id'])){
+                  if(($this->Session->read('Auth.User.id') == $user['User']['id']) && ($this->Session->read('Auth.User.role') == 0)){
                 ?>
                    <div class='box-header with-border'>
                   <div class='user-block'>
@@ -107,7 +116,15 @@
                   ?>
                 <div class='box-header with-border'>
                   <div class='user-block'>
-                    <img class='img-circle' src='dist/img/user1-128x128.jpg' alt='user image'>
+                       <?php 
+                                    $path = $publication['User']['photo'];
+              if(is_null($publication['User']['photo'])){
+                echo $this->Html->image('theme/pessoa-sem-foto.jpg', array('class' => 'img-circle'));   
+              }else{
+                echo $this->Html->image('anexos/'.$path, array('class' => 'img-circle')); 
+              }
+              ?>   
+                    
                     <span class='username'><a href="#"> <?php echo ($publication['User']['name']); ?></a></span>
                     <span class='description'><?php echo ($publication['Publication']['registration']); ?></span>
                   </div><!-- /.user-block -->
@@ -158,7 +175,15 @@
                     <?php if($publication['Publication']['id'] == $comment['Comment']['publication_id']){ ?>
                   <div class='box-comment'>
                     <!-- User image -->
-                  <?php echo $this->Html->image('theme/user2-160x160.jpg' , array('class' =>'img-circle')); ?>
+                      <?php 
+                                    $path = $comment['User']['photo'];
+              if(is_null($comment['User']['photo'])){
+                echo $this->Html->image('theme/pessoa-sem-foto.jpg', array('class' => 'img-circle'));   
+              }else{
+                echo $this->Html->image('anexos/'.$path, array('class' => 'img-circle')); 
+              }
+              ?>         
+                  <?php //echo $this->Html->image('theme/user2-160x160.jpg' , array('class' =>'img-circle')); ?>
                     <div class='comment-text'>
                       <span class="username">
                         <?php echo $this->Html->link($comment['User']['name'],array('controller' => 'users','action' => 'view',$comment['User']['id'])); ?>

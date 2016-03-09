@@ -129,7 +129,7 @@ class PublicationsController extends AppController {
             }
             $this->request->data['Publication']['registration'] = date('Y-m-d H:i:s');
             if ($this->Publication->save($this->request->data)) {
-                $this->Session->setFlash(__('The publication has been saved.'));
+                $this->Session->setFlash('Publicação criada com sucesso, esperando avaliação de um professor da área', 'success');
                 return $this->redirect(array('action' => 'index'));
             } else {
                 $this->Session->setFlash(__('The publication could not be saved. Please, try again.'));
@@ -244,7 +244,7 @@ class PublicationsController extends AppController {
         if ($this->request->is(array('post', 'put'))) {
             $status = $this->request->data['Publication']['status'];
             if ($this->Publication->save($this->request->data)) {
-                    $this->Session->setFlash('Publicação realizada com sucesso.','success');
+                    $this->Session->setFlash('Publicação avaliada com sucesso.','success');
                     return $this->redirect(array('action' => 'index'));
             } else {
                 $this->Session->setFlash(__('The publication could not be saved. Please, try again.'));

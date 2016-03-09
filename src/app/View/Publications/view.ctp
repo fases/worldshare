@@ -28,6 +28,7 @@
                     <?php echo h($publication['Publication']['text_publication'])?>
                         </div><!-- /.mailbox-read-message -->
                     </div><!-- /.box-body -->
+<!--
                     <div class="box-footer">
                         <ul class="mailbox-attachments clearfix">
                             <li>
@@ -51,7 +52,8 @@
                                 </div>
                             </li>
                         </ul>
-                    </div><!-- /.box-footer-->
+                    </div> /.box-footer
+-->
                     <div class="box-footer">
                   <?php if($teacher['Teacher']['matter_id'] == $publication['Publication']['matter_id']){
                       echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-pencil')).'Avaliar',

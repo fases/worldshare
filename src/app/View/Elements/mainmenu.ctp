@@ -47,7 +47,7 @@
                             <?php
                               $path = $user['User']['photo'];
               if(is_null($user['User']['photo'])){
-                echo $this->Html->image('theme/user2-160x160.jpg', array('class' => 'user-image'));   
+                echo $this->Html->image('theme/pessoa-sem-foto.jpg', array('class' => 'user-image'));   
               }else{
                 echo $this->Html->image('anexos/'.$path, array('class' => 'user-image')); 
               }
@@ -62,7 +62,7 @@
                   <?php
                               $path = $user['User']['photo'];
               if(is_null($user['User']['photo'])){
-                echo $this->Html->image('theme/user2-160x160.jpg', array('class' => 'img-circle'));   
+                echo $this->Html->image('theme/pessoa-sem-foto.jpg', array('class' => 'img-circle'));   
               }else{
                 echo $this->Html->image('anexos/'.$path, array('class' => 'img-circle')); 
               }
