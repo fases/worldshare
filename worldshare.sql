@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 17-Fev-2016 às 02:27
+-- Generation Time: 09-Mar-2016 às 03:36
 -- Versão do servidor: 5.5.39
 -- PHP Version: 5.4.31
 
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `publication_id` int(11) NOT NULL,
   `schedule` datetime NOT NULL,
   `text` varchar(500) COLLATE latin1_general_ci NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=30 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=38 ;
 
 --
 -- Extraindo dados da tabela `comments`
@@ -56,7 +56,12 @@ INSERT INTO `comments` (`id`, `user_id`, `publication_id`, `schedule`, `text`) V
 (26, 8, 9, '2016-02-17 02:20:34', 'Concordo com Edmilson'),
 (27, 5, 6, '2016-02-17 02:23:10', 'Desastre terrÃ­vel, o ecossistema nÃ£o serÃ¡ recuperado com essas planos'),
 (28, 5, 1, '2016-02-17 02:24:20', 'Ã“tima ferramenta, muito rÃ¡pida'),
-(29, 5, 3, '2016-02-17 02:25:47', 'Queria aprender espanhol...');
+(29, 5, 3, '2016-02-17 02:25:47', 'Queria aprender espanhol...'),
+(30, 8, 8, '2016-03-09 02:29:30', 'COMENTAR'),
+(31, 8, 1, '2016-03-09 02:35:43', 'nÃ£p'),
+(32, 8, 1, '2016-03-09 02:38:09', 'nunca'),
+(36, 8, 6, '2016-03-09 02:51:03', 'comentar'),
+(37, 8, 9, '2016-03-09 02:59:03', 'discordo');
 
 -- --------------------------------------------------------
 
@@ -134,18 +139,18 @@ CREATE TABLE IF NOT EXISTS `ratings` (
   `user_id` int(11) NOT NULL,
   `publication_id` int(11) NOT NULL,
   `stars` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=84 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=95 ;
 
 --
 -- Extraindo dados da tabela `ratings`
 --
 
 INSERT INTO `ratings` (`id`, `user_id`, `publication_id`, `stars`) VALUES
-(79, 1, 1, 1),
-(80, 1, 1, 1),
-(81, 1, 8, 1),
-(82, 1, 8, 1),
-(83, 1, 9, 1);
+(90, 8, 1, 1),
+(91, 8, 6, 1),
+(92, 8, 3, 1),
+(93, 8, 4, 1),
+(94, 8, 9, 1);
 
 -- --------------------------------------------------------
 
@@ -210,27 +215,28 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(255) COLLATE latin1_general_ci NOT NULL,
   `name` varchar(255) COLLATE latin1_general_ci NOT NULL,
   `registration` datetime NOT NULL,
-  `role` int(11) NOT NULL
+  `role` int(11) NOT NULL,
+  `photo` varchar(255) COLLATE latin1_general_ci DEFAULT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=14 ;
 
 --
 -- Extraindo dados da tabela `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `password`, `name`, `registration`, `role`) VALUES
-(1, 'pio.antas@ifrn.edu.br', 'e04ec20910b3ef5600fbbe59a6dc86ca2818d087', 'Pio Antas', '2016-02-11 10:26:00', 1),
-(2, 'erika.moreira@ifrn.edu.br', 'e04ec20910b3ef5600fbbe59a6dc86ca2818d087', 'Erika Moreira', '2016-02-11 10:38:00', 1),
-(3, 'cesimar.Xavier@ifrn.edu.br', 'e04ec20910b3ef5600fbbe59a6dc86ca2818d087', 'Cesimar Xavier', '2016-02-15 11:34:00', 1),
-(4, 'diego.costa@ifrn.edu.br', 'e04ec20910b3ef5600fbbe59a6dc86ca2818d087', 'Diego Costa', '2016-01-27 11:34:00', 1),
-(5, 'alba.lopes@ifrn.edu.br', 'e04ec20910b3ef5600fbbe59a6dc86ca2818d087', 'Alba Lopes', '2016-01-27 11:34:00', 1),
-(6, 'edmilson.campos@ifrn.edu.br', 'e04ec20910b3ef5600fbbe59a6dc86ca2818d087', 'Edmilson Campos', '2016-01-27 11:35:00', 1),
-(7, 'claudio.junior@academico.ifrn.edu.br', 'e04ec20910b3ef5600fbbe59a6dc86ca2818d087', 'Claudio JÃºnior', '2016-01-27 11:36:00', 0),
-(8, 'arthur.barros@academico.ifrn.edu.br', 'e04ec20910b3ef5600fbbe59a6dc86ca2818d087', 'Arthur Barros', '2016-01-27 11:37:00', 0),
-(9, 'fernando.alves@academico.ifrn.edu.br', 'e04ec20910b3ef5600fbbe59a6dc86ca2818d087', 'Fernando Alves', '2016-01-27 11:39:00', 0),
-(10, 'bruno.Willian@academico.ifrn.edu.br', 'e04ec20910b3ef5600fbbe59a6dc86ca2818d087', 'Bruno Willian', '2016-01-27 11:39:00', 0),
-(11, 'pedro.victor@academico.ifrn.edu.br', 'e04ec20910b3ef5600fbbe59a6dc86ca2818d087', 'Pedro Victor', '2016-01-27 11:39:00', 0),
-(12, 'thiago.valentim@academico.ifrn.edu.br', 'e04ec20910b3ef5600fbbe59a6dc86ca2818d087', 'Thiago Valentim', '2016-01-27 11:39:00', 1),
-(13, 'ailton.torres@academico.ifrn.edu.br', 'e04ec20910b3ef5600fbbe59a6dc86ca2818d087', 'Ailton Torres', '2016-01-27 11:39:00', 1);
+INSERT INTO `users` (`id`, `email`, `password`, `name`, `registration`, `role`, `photo`) VALUES
+(1, 'pio.antas@ifrn.edu.br', 'e04ec20910b3ef5600fbbe59a6dc86ca2818d087', 'Pio Antas', '2016-02-11 10:26:00', 1, '1.jpg'),
+(2, 'erika.moreira@ifrn.edu.br', 'e04ec20910b3ef5600fbbe59a6dc86ca2818d087', 'Erika Moreira', '2016-02-11 10:38:00', 1, NULL),
+(3, 'cesimar.Xavier@ifrn.edu.br', 'e04ec20910b3ef5600fbbe59a6dc86ca2818d087', 'Cesimar Xavier', '2016-02-15 11:34:00', 1, NULL),
+(4, 'diego.costa@ifrn.edu.br', 'e04ec20910b3ef5600fbbe59a6dc86ca2818d087', 'Diego Costa', '2016-01-27 11:34:00', 1, NULL),
+(5, 'alba.lopes@ifrn.edu.br', 'e04ec20910b3ef5600fbbe59a6dc86ca2818d087', 'Alba Lopes', '2016-01-27 11:34:00', 1, NULL),
+(6, 'edmilson.campos@ifrn.edu.br', 'e04ec20910b3ef5600fbbe59a6dc86ca2818d087', 'Edmilson Campos', '2016-01-27 11:35:00', 1, NULL),
+(7, 'claudio.junior@academico.ifrn.edu.br', 'e04ec20910b3ef5600fbbe59a6dc86ca2818d087', 'Claudio JÃºnior', '2016-01-27 11:36:00', 0, NULL),
+(8, 'arthur.barros@academico.ifrn.edu.br', 'e04ec20910b3ef5600fbbe59a6dc86ca2818d087', 'Arthur Barros', '2016-01-27 11:37:00', 0, '8.png'),
+(9, 'fernando.alves@academico.ifrn.edu.br', 'e04ec20910b3ef5600fbbe59a6dc86ca2818d087', 'Fernando Alves', '2016-01-27 11:39:00', 0, NULL),
+(10, 'bruno.Willian@academico.ifrn.edu.br', 'e04ec20910b3ef5600fbbe59a6dc86ca2818d087', 'Bruno Willian', '2016-01-27 11:39:00', 0, NULL),
+(11, 'pedro.victor@academico.ifrn.edu.br', 'e04ec20910b3ef5600fbbe59a6dc86ca2818d087', 'Pedro Victor', '2016-01-27 11:39:00', 0, NULL),
+(12, 'thiago.valentim@academico.ifrn.edu.br', 'e04ec20910b3ef5600fbbe59a6dc86ca2818d087', 'Thiago Valentim', '2016-01-27 11:39:00', 1, NULL),
+(13, 'ailton.torres@academico.ifrn.edu.br', 'e04ec20910b3ef5600fbbe59a6dc86ca2818d087', 'Ailton Torres', '2016-01-27 11:39:00', 1, NULL);
 
 --
 -- Indexes for dumped tables
@@ -292,7 +298,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=30;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=38;
 --
 -- AUTO_INCREMENT for table `matters`
 --
@@ -307,7 +313,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 -- AUTO_INCREMENT for table `ratings`
 --
 ALTER TABLE `ratings`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=84;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=95;
 --
 -- AUTO_INCREMENT for table `teachers`
 --
